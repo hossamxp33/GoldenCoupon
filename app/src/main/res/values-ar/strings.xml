@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Golden Coupon</string>
+    <string name="main">الرئيسية</string>
+    <string name="favourite">المفضلة</string>
+    <string name="menu">القائمة</string>
+    <string name="offers">العروض</string>
+
+    <string name="enjoy"> أستمتع \u0020</string>
+    <string name="title"> بأكبر مجموعة من الخصومات والعروض</string>
+    <string name="best_brands">تصفح اقوي البراندات عندنا</string>
+
+    <string name="best_Coupon">تصفح اقوي الكوبونات لدينا</string>
+
+    <string name="searchForBrand">قم بالبحث عن البراند المفضل</string>
+    <string name="copy_code">نسخ كود</string>
+    <string name="visit_site">ذهاب للمتجر</string>
+    <string name="times_of_use">مرات الاستخدام</string>
+    <string name="buy">شراء</string>
+    <string name="account">حسابي</string>
+    <string name="rateApp"> قيم التطبيق</string>
+    <string name="myAccount">حسابي / انشاء حساب</string>
+    <string name="deals">صفقات</string>
+    <string name="aboutUs">عن الكوبون الذهبي</string>
+    <string name="terms">شروط الاستخدام</string>
+    <string name="privacy">سياسة الخصوصية</string>
+    <string name="attention">Attention!</string>
+
+</resources>
