@@ -5,9 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.codes_roots.golden_coupon.R
-import com.codes_roots.golden_coupon.presentation.MainActivity
-
-import kotlinx.android.synthetic.main.bottom_nav_content.*
+import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 
 class ClickHandler {
 

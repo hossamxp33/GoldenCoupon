@@ -7,7 +7,9 @@
     <string name="enjoy">Enjoy \u0020 </string>
     <string name="title"> the largest selection of discounts and offers</string>
     <string name="best_brands">Browse our best brands</string>
+    <string name="best_products">Browse our best products</string>
     <string name="best_Coupon">Browse our best Coupon</string>
+    <string name="coupon">Coupon</string>
     <string name="searchForBrand">Search for your fav brand</string>
     <string name="copy_code">copy code</string>
     <string name="visit_site">visit store</string>
@@ -21,5 +23,7 @@
     <string name="terms">Terms of use</string>
     <string name="privacy">Privacy policy</string>
     <string name="attention">Attention!</string>
+    <string name="noBrandFound">No Brands Found</string>
+    <string name="filter">filter</string>
 
 </resources>

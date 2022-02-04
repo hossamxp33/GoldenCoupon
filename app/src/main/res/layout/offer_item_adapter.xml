@@ -8,7 +8,10 @@
     <data>
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.MainActivity" />
+            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+        <variable
+            name="productData"
+            type="com.codes_roots.golden_coupon.entites.products.Product" />
 
     </data>
 
@@ -23,13 +26,11 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView3"
             android:layout_width="80dp"
-            android:layout_height="0dp"
+            android:layout_height="80dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
             android:scaleType="fitXY"
-            android:src="@drawable/test"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:imageResourcee="@{productData.img}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="@android:color/transparent" />
@@ -41,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="@string/app_name"
+            android:text="@{productData.name}"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
             app:layout_constraintTop_toTopOf="parent" />
@@ -53,8 +54,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/app_name"
+            android:maxLines="2"
+            android:text="@{productData.description}"
             android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/time_of_use"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
             app:layout_constraintTop_toBottomOf="@+id/brand_name" />
 
@@ -89,7 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/appCompatImageView3">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatTextView
                 style="@style/HomeTitles"

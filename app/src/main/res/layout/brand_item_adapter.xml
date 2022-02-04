@@ -8,7 +8,7 @@
     <data>
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.MainActivity" />
+            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
 
         <variable
             name="data"
@@ -25,20 +25,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/appCompatImageView3"
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView1"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@drawable/circle_bk"
-            android:padding="@dimen/dimen_8"
-            app:imageResource="@{data.image}"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:padding="@dimen/dimen_4"
+            app:cardCornerRadius="@dimen/dimen_64"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearance="@android:color/transparent" />
+            app:shapeAppearance="@android:color/transparent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/appCompatImageView3"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:imageResource="@{data.image}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/brand_name"
@@ -48,8 +58,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:text="@{Html.fromHtml(String.format(data.name))}"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
-            app:layout_constraintTop_toTopOf="@+id/appCompatImageView3" />
+            app:layout_constraintStart_toEndOf="@+id/cardView1"
+            app:layout_constraintTop_toTopOf="@+id/cardView1" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/coupon_num"
@@ -58,8 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="@string/app_name"
-            app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
+            app:layout_constraintStart_toEndOf="@+id/cardView1"
             app:layout_constraintTop_toBottomOf="@+id/brand_name" />
 
 
@@ -67,9 +76,9 @@
             android:id="@+id/time_of_use"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="12dp"
             android:padding="@dimen/dimen_8"
             android:src="@drawable/star_out"
             app:layout_constraintBottom_toBottomOf="parent"

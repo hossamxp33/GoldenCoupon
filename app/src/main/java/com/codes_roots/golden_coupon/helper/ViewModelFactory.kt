@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
+import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
 
 import dagger.Binds
 import dagger.MapKey
@@ -84,6 +85,10 @@ abstract class FragmentFactoryModule {
     @IntoMap
     @FragmentKey(HomeFragment::class)
     abstract fun bindMainFragment(fragment : HomeFragment) : Fragment
+    @Binds
+    @IntoMap
+    @FragmentKey(ProductOffersFragment::class)
+    abstract fun bindProductOffersFragment(fragment : ProductOffersFragment) : Fragment
 
 
 }

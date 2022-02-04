@@ -15,8 +15,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GoldenCoupon.NoActionBar">
         <activity
-            android:name="com.codes_roots.golden_coupon.presentation.MainActivity"
-            android:exported="true">
+            android:name="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -10,6 +10,8 @@
     <string name="best_brands">تصفح اقوي البراندات عندنا</string>
 
     <string name="best_Coupon">تصفح اقوي الكوبونات لدينا</string>
+    <string name="coupon">كوبون</string>
+    <string name="best_products">تصفح اقوي المنتجات لدينا</string>
 
     <string name="searchForBrand">قم بالبحث عن البراند المفضل</string>
     <string name="copy_code">نسخ كود</string>
@@ -24,5 +26,7 @@
     <string name="terms">شروط الاستخدام</string>
     <string name="privacy">سياسة الخصوصية</string>
     <string name="attention">Attention!</string>
+    <string name="noBrandFound">لا يوجد براندات</string>
+    <string name="filter">تصفية</string>
 
 </resources>

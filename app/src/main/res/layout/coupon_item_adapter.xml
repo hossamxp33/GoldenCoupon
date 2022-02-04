@@ -8,7 +8,13 @@
     <data>
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.MainActivity" />
+            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+
+        <variable
+            name="data"
+            type="com.codes_roots.golden_coupon.entites.brandsmodel.Brand" />
+
+        <import type="android.text.Html"/>
 
     </data>
 

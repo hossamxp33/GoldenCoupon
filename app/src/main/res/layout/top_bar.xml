@@ -7,14 +7,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 <data>
     <variable
         name="context"
-        type="com.codes_roots.golden_coupon.presentation.MainActivity" />
+        type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
 
 </data>
 
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    >
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -107,6 +109,28 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
             app:selectedColor="#009688"
             app:strokeWidth="0dp"
             app:unselectedColor="#FF888888" />
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:duration="800"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title">
+
+            <!-- Adding 3 rows of placeholders -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <include layout="@layout/shimmer_viewpager" />
+
+
+            </LinearLayout>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

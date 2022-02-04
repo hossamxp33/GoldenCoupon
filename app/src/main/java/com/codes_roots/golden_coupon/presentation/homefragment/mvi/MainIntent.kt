@@ -7,5 +7,6 @@ sealed class MainIntent(open val viewState: MainViewState? = null) {
     data class Initialize(override val viewState: MainViewState) : MainIntent()
 
     data class ErrorDisplayed(override val viewState: MainViewState) : MainIntent()
+    data  class SearchByName(override val viewState: MainViewState?, val Name:String? = null): MainIntent()
 
 }

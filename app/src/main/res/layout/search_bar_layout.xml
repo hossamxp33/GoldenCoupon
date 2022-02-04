@@ -7,7 +7,7 @@
     <data>
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.MainActivity" />
+            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
 
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
@@ -43,7 +43,7 @@
             android:layout_marginEnd="24dp"
             android:background="@android:color/transparent"
             android:hint="@string/searchForBrand"
-            android:minHeight="48dp"
+            android:minHeight="36dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView"

@@ -8,7 +8,7 @@
     <data>
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.MainActivity" />
+            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout

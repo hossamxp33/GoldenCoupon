@@ -6,6 +6,7 @@
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-hdpi/coupon_bg.xml" value="0.178125" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-hdpi/ic_launcher_foreground.xml" value="0.178125" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-hdpi/red_bg.xml" value="0.2537037037037037" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-hdpi/red_cat_bg.xml" value="0.21481481481481482" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-hdpi/search_bar_bg.xml" value="0.178125" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-hdpi/shadowbackground.xml" value="0.2222222222222222" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-hdpi/views_bg.xml" value="0.2537037037037037" />
@@ -13,15 +14,20 @@
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-v24/circle_bk.xml" value="0.178125" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-xdpi/ic_launcher_foreground.xml" value="0.178125" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-xxdpi/ic_launcher_foreground.xml" value="0.178125" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-xxhdpi/shimmer_pagerl_layout.xml" value="0.20092592592592592" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable-xxxhdpi/ic_launcher_foreground.xml" value="0.178125" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/button_enabled.xml" value="0.2537037037037037" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/circle_bk.xml" value="0.178125" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/circle_layout.xml" value="0.20092592592592592" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/color.xml" value="0.24444444444444444" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/copy_button.xml" value="0.2537037037037037" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/coupon_bg.xml" value="0.178125" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/gold_button_enabled.xml" value="0.2537037037037037" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/gold_circle_bk.xml" value="0.2537037037037037" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/green_progress.xml" value="0.2101851851851852" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/light_gray_bg.xml" value="0.178125" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/red_cat_bg.xml" value="0.21481481481481482" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/shimmer_pager_layout.xml" value="0.20092592592592592" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/site_button.xml" value="0.2537037037037037" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/views_bg.xml" value="0.2537037037037037" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/drawable/views_text_bg.xml" value="0.2537037037037037" />
@@ -34,13 +40,16 @@
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/coupon_item_adapter.xml" value="0.1925925925925926" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/deals_adapter.xml" value="0.25" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/deals_fragment.xml" value="0.25" />
-        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/home_fragment.xml" value="0.19444444444444445" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/home_fragment.xml" value="0.18" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/main_frame_content.xml" value="0.16197916666666667" />
-        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/menu_fragment.xml" value="0.25" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/menu_fragment.xml" value="0.2" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/offer_item_adapter.xml" value="0.2824074074074074" />
-        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/offers_fragment.xml" value="0.25" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/offers_fragment.xml" value="0.20903954802259886" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/search_bar_layout.xml" value="0.25" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/shimmer_round_item.xml" value="0.22407407407407406" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/shimmer_viewpager.xml" value="0.22407407407407406" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/top_bar.xml" value="0.22" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/viewpagerslide_home1.xml" value="0.22407407407407406" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/menu/bottom_menu.xml" value="0.16197916666666667" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/menu/popup_menu.xml" value="0.16197916666666667" />
       </map>

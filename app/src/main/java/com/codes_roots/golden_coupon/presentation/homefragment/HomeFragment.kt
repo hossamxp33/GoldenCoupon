@@ -3,38 +3,31 @@ package com.codes_roots.golden_coupon.presentation.homefragment
 import android.app.Activity
 import android.content.ActivityNotFoundException
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.speech.RecognizerIntent
-import android.speech.SpeechRecognizer
-import android.speech.tts.TextToSpeech
-import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.view.isVisible
+import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentFactory
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.HomeFragmentBinding
 import com.codes_roots.golden_coupon.helper.BaseApplication
-import com.codes_roots.golden_coupon.presentation.MainActivity
+import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.homefragment.adapter.BrandsAdapter
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.UserError
 
 import kotlinx.android.synthetic.main.bottom_nav_content.*
+import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.coroutines.flow.collect
-import org.jetbrains.anko.support.v4.startActivityForResult
 import java.util.*
 import javax.inject.Inject
 
@@ -50,7 +43,6 @@ open class HomeFragment @Inject constructor() : Fragment(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //   childFragmentManager.fragmentFactory = fragmentFactory!!
-
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
@@ -80,6 +72,13 @@ open class HomeFragment @Inject constructor() : Fragment(){
 
         brandsRecycleView()
        getAllData()
+
+
+        //  view.searchBar.setError("assad")
+        view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
+            viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,text.toString()))
+        }
+
          view.searchLayout.microphone.setOnClickListener {
 
                  val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -100,7 +99,6 @@ open class HomeFragment @Inject constructor() : Fragment(){
 
 
 
-        myView()
 
         return view.root
     }
@@ -109,7 +107,6 @@ open class HomeFragment @Inject constructor() : Fragment(){
         brandsAdapter = BrandsAdapter(requireContext())
         view.brandsRecycleView.apply {
            layoutManager = LinearLayoutManager(context) // default orientation is vertical
-
             adapter = brandsAdapter;
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
@@ -131,21 +128,8 @@ open class HomeFragment @Inject constructor() : Fragment(){
         }
     }
 
-    fun myView() {
 
-//        getAllData()
 
-  //      offersRecycleView()
-    }
-
-//    fun offersRecycleView() {
-//        newOffersAdapter = New_Offers_Adapter()
-//        view.offersRecycleView.apply {
-//            adapter = newOffersAdapter;
-//            setNestedScrollingEnabled(false)
-//            setHasFixedSize(true)
-//        }
-//    }
 
     fun getAllData() {
         lifecycleScope.launchWhenStarted {
@@ -167,20 +151,10 @@ open class HomeFragment @Inject constructor() : Fragment(){
 
                  else {
                         if (it.progress == true) {
-                           // shimmer_view_container.startShimmerAnimation()
+                          shimmer_view_container.startShimmerAnimation()
                             viewModel.intents.send(MainIntent.Initialize(it))
                         } else {
-                            brandsAdapter.submitList(it.homepagedata?.brands)
-
-                            //////// Slider viewPager
-//                            view.pager.adapter = it.homepagedata?.maindata?.sliders.let { it ->
-//                                SliderAdapter(requireContext(), it!!)
-//                            }
-//
-//                            it.homepagedata?.maindata?.sliders.let { itS ->
-//                                Permissions().init(itS?.size, context as MainActivity, view)
-//                            }
-//                            view.indicator.setViewPager(view.pager)
+                            brandsAdapter.submitList(it.filteredData)
                             stopLoadingShimmer()
                         }
 
@@ -197,8 +171,8 @@ open class HomeFragment @Inject constructor() : Fragment(){
 
 
     fun stopLoadingShimmer() {
-//        shimmer_view_container?.setVisibility(View.GONE)
-//        shimmer_view_container?.stopShimmerAnimation()
+        shimmer_view_container?.visibility = View.GONE
+       shimmer_view_container?.stopShimmerAnimation()
     }
 
 }

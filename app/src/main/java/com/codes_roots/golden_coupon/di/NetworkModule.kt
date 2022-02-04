@@ -1,6 +1,5 @@
 package com.codes_roots.golden_coupon.di
 
-import android.app.Notification
 import android.content.Context
 import com.codes_roots.golden_coupon.data_layer.APIServices
 import com.codes_roots.golden_coupon.helper.ActivityBuildersModule
@@ -9,7 +8,7 @@ import com.codes_roots.golden_coupon.helper.FragmentFactoryModule
 import com.codes_roots.golden_coupon.helper.ViewModelBuilderModule
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
-import com.codes_roots.golden_coupon.presentation.offersfragment.OffersFragment
+import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
 
 
 import dagger.BindsInstance
@@ -41,6 +40,7 @@ import javax.inject.Singleton
         FragmentFactoryModule::class,
         MainModule::class,
         ActivityBuildersModule::class,
+
         FragmentFactoryModule::class,
         ViewModelBuilderModule::class,
     ]
@@ -56,7 +56,7 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
     }
 
     fun inject(app: HomeFragment)
-    fun inject(app: OffersFragment)
+    fun inject(app: ProductOffersFragment)
     fun inject(app: MenuFragment)
 
 }

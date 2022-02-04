@@ -71,6 +71,27 @@ fun setImageResource(imageView: AppCompatImageView, resource: String?) {
         .apply(requestOptions)
         .into(imageView)
 }
+@BindingAdapter("app:imageResourcee")
+fun imageResourcee(imageView: AppCompatImageView, resource: String?) {
+    val requestOptions = RequestOptions()
+    requestOptions.error(R.drawable.noimg)
+    Glide.with(imageView.context)
+        .load((resource))
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .apply(requestOptions)
+        .into(imageView)
+}
+
+@BindingAdapter("app:imageResourcee")
+fun setSliderImageResource(imageView: AppCompatImageView, resource: String?) {
+    val requestOptions = RequestOptions()
+    requestOptions.error(R.drawable.noimg)
+    Glide.with(imageView.context)
+        .load((resource))
+        .transition(DrawableTransitionOptions.withCrossFade())
+        .apply(requestOptions)
+        .into(imageView)
+}
 
 
 @BindingAdapter("app:datetext")
