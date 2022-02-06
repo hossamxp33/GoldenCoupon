@@ -2,6 +2,7 @@ package com.codes_roots.golden_coupon.repo.brands
 
 import com.codes_roots.golden_coupon.di.IoDispatcher
 import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
+import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -27,5 +28,7 @@ class DataRepo @Inject constructor(
             .catch {
                      throwable ->  emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
+
+
 }
 

@@ -6,6 +6,8 @@ import com.codes_roots.golden_coupon.helper.ActivityBuildersModule
 import com.codes_roots.golden_coupon.helper.Constants.Companion.BASE_URL
 import com.codes_roots.golden_coupon.helper.FragmentFactoryModule
 import com.codes_roots.golden_coupon.helper.ViewModelBuilderModule
+import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
+import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
@@ -58,6 +60,8 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
     fun inject(app: HomeFragment)
     fun inject(app: ProductOffersFragment)
     fun inject(app: MenuFragment)
+    fun inject(app: CouponsFragment)
+    fun inject(app: FavoriteFragment)
 
 }
 

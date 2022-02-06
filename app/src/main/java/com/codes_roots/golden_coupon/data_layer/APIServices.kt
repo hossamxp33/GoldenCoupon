@@ -2,11 +2,10 @@ package com.codes_roots.golden_coupon.data_layer
 
 import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
 import com.codes_roots.golden_coupon.entites.category.AllCategoryModel
+import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.entites.products.ProductsModel
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.GET
-import retrofit2.http.POST
+import retrofit2.Response
+import retrofit2.http.*
 
 
 interface APIServices {
@@ -21,5 +20,7 @@ interface APIServices {
     @POST("products.json")
     suspend fun getProductData(@Field("Filter[cat_id]") cat_id: Int?): ProductsModel
 
+    @GET("items/index/{brandid}.json")
+    suspend fun getCouponsData(@Path("brandid") brandid: Int): Response<CouponsModel>
 
 }

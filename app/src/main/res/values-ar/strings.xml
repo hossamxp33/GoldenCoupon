@@ -28,5 +28,6 @@
     <string name="attention">Attention!</string>
     <string name="noBrandFound">لا يوجد براندات</string>
     <string name="filter">تصفية</string>
+    <string name="copied">تم نسخ الكود</string>
 
 </resources>

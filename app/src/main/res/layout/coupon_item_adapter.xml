@@ -12,8 +12,11 @@
 
         <variable
             name="data"
-            type="com.codes_roots.golden_coupon.entites.brandsmodel.Brand" />
+            type="com.codes_roots.golden_coupon.entites.coupons.CouponItem" />
 
+        <variable
+            name="listener"
+            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
         <import type="android.text.Html"/>
 
     </data>
@@ -28,8 +31,8 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView3"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:background="@drawable/circle_bk"
@@ -45,10 +48,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:text="@string/app_name"
+            android:layout_marginTop="8dp"
+            android:text="@{data.discount_code}"
             android:textSize="18sp"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
-            app:layout_constraintTop_toBottomOf="@+id/time_of_use" />
+            app:layout_constraintTop_toTopOf="@+id/appCompatImageView3" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/coupon_num"
@@ -65,7 +69,8 @@
             android:id="@+id/time_of_use"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/views_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -73,8 +78,9 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
                 android:background="@drawable/views_text_bg"
-                android:padding="4dp"
+                android:padding="2dp"
                 android:text="255"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen_8"
@@ -83,13 +89,13 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/eye"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="40dp"
+                android:layout_height="35dp"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:layout_marginEnd="4dp"
-                android:layout_marginBottom="4dp"
-                android:padding="@dimen/dimen_8"
+                android:layout_marginBottom="2dp"
+                android:padding="2dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/visibility"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -102,28 +108,30 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/copy_button"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="4dp"
             android:background="@drawable/copy_button"
+            android:onClick="@{()->listener.setClipboard(context,data.discount_code)}"
             android:text="@string/copy_code"
             android:textColor="@color/white"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/code"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView3" />
+            app:layout_constraintTop_toTopOf="@+id/code" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/code"
             style="@style/blackText"
-            android:layout_width="70dp"
-            android:layout_height="60dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="65dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
             android:background="@drawable/gold_circle_bk"
             android:gravity="center"
             android:padding="@dimen/dimen_8"
-            android:text="12345"
+            android:text="@{data.discount_code}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/visit_site_button"
             app:layout_constraintStart_toEndOf="@+id/copy_button"
             app:layout_constraintTop_toBottomOf="@+id/appCompatImageView3"
             app:shapeAppearance="@android:color/transparent" />
@@ -133,15 +141,14 @@
             android:id="@+id/visit_site_button"
             style="@style/blackText"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="4dp"
             android:background="@drawable/site_button"
             android:text="@string/visit_site"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/code"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatImageView3" />
+            app:layout_constraintBottom_toBottomOf="@+id/code"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/code" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

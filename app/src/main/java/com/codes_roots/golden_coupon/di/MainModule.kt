@@ -2,6 +2,7 @@ package com.codes_roots.golden_coupon.di
 
 import androidx.lifecycle.ViewModel
 import com.codes_roots.golden_coupon.helper.ViewModelKey
+import com.codes_roots.golden_coupon.presentation.couponsfragment.viewmodel.CouponsViewModel
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
 
@@ -26,6 +27,11 @@ interface MainModule {
     @IntoMap
     @ViewModelKey(ProductsViewModel::class)
     fun bindProductsViewModel(mainViewModel: ProductsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CouponsViewModel::class)
+    fun bindCouponsViewModel(mainViewModel: CouponsViewModel): ViewModel
 
 
 

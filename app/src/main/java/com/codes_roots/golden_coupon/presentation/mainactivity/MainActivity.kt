@@ -44,12 +44,16 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import java.util.*
 import javax.inject.Inject
 
-import android.app.Activity
 
-
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.codes_roots.golden_coupon.data_layer.OnBackPressedListener
+import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
+    var integerDeque: Deque<Int> = LinkedList()
+    var doubleBackToExitPressedOnce: Boolean = false
 
     private var bottomNavigationView: BottomNavigationView? = null
     var navHostFragment: NavHostFragment? = null
@@ -74,7 +78,10 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
         setContentView(R.layout.activity_main)
         if (savedInstanceState == null) {
-
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(0, 0, 0, 0)
+                .replace(R.id.main_frame, HomeFragment())
+                .addToBackStack(null).commit()
             topicTitle()
             getAllData()
         }
@@ -86,23 +93,95 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 else include?.visibility = View.VISIBLE
             })
 
+        bottom_nav_bar.setOnNavigationItemSelectedListener {
+            val id = it.itemId
+            if (integerDeque.contains(id)) {
+
+                if (id == R.id.home) {
+                    if (integerDeque.size != 0) {
+                        if (flag) {
+                            integerDeque.addFirst(R.id.home)
+                            flag = false
+                        }
+
+                    }
+                }
+                integerDeque.remove(id)
+            }
+            integerDeque.push(id)
+            //    ClickHandler().switchFragment(this, BottomNav().getFragment(this, it.itemId))
+            with(bottom_nav_bar) {
+                when (it.itemId) {
+                    R.id.homeFragment -> {
+                        menu.getItem(0).isChecked = true
+                        ClickHandler().switchFragment(this@MainActivity, HomeFragment())
+                    }
+
+                    R.id.offer -> {
+                        menu.getItem(1).isChecked = true
+                        ClickHandler().switchFragment(this@MainActivity, ProductOffersFragment())
+
+                    }
+                    R.id.fav -> {
+                        menu.getItem(2).isChecked = true
+                        ClickHandler().switchFragment(this@MainActivity, FavoriteFragment())
+                    }
+
+                    R.id.menu -> {
+                        menu.getItem(3).isChecked = true
+                        ClickHandler().switchFragment(this@MainActivity, MenuFragment())
+
+                    }
+                    else -> {
+                        menu.getItem(0).isChecked = true
+                        ClickHandler().switchFragment(this@MainActivity, HomeFragment())
+                    }
+                }
 
 
-        setupNavigation()
+            }
 
-    }
 
-    private fun setupNavigation() {
-        val layoutParams = bottom_nav_bar.layoutParams as CoordinatorLayout.LayoutParams
-        layoutParams.behavior = BottomNavigationBehavior()
-        navHostFragment =
-            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
-        bottomNavigationView = findViewById(R.id.bottom_nav_bar)
-        if (navHostFragment != null) {
-            NavigationUI.setupWithNavController(bottomNavigationView!!,
-                navHostFragment!!.navController)
+            true
+
         }
+
+
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        integerDeque.poll()
+        if (!integerDeque.isNullOrEmpty()) {
+            ClickHandler().switchFragment(
+                this,
+                BottomNav().getFragment(this, integerDeque.peek()!!)
+            )
+        } else if (doubleBackToExitPressedOnce)
+            finish()
+
+        else if (fragmentManager.backStackEntryCount == 0) {
+            bottom_nav_bar.selectedItemId = R.id.homeFragment
+            doubleBackToExitPressedOnce = true
+        }
+
+
+//       Handler(Looper.getMainLooper()).postDelayed(Runnable {  }, 2000)
+
+    }
+
+//
+//    private fun setupNavigation() {
+//        val layoutParams = bottom_nav_bar.layoutParams as CoordinatorLayout.LayoutParams
+//        layoutParams.behavior = BottomNavigationBehavior()
+//        navHostFragment =
+//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment?
+//        bottomNavigationView = findViewById(R.id.bottom_nav_bar)
+//        if (navHostFragment != null) {
+//            NavigationUI.setupWithNavController(bottomNavigationView!!,
+//                navHostFragment!!.navController)
+//        }
+//    }
 
 
     private fun topicTitle() {
@@ -128,25 +207,22 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                                 UserError.ValidationFailed -> "Validation failed"
                             }
                         }
-                        viewModel?.intents.send(MainIntent.ErrorDisplayed(it))
+                        viewModel.intents.send(MainIntent.ErrorDisplayed(it))
                     } else {
+
                         if (it.progress == true) {
                             shimmer_view_container.startShimmerAnimation()
                             viewModel.intents.send(MainIntent.Initialize(it))
                         } else {
-
-
                             //////// Slider viewPager
                             pager.adapter = it.homepagedata?.sliders?.let { it ->
-                                SliderAdapter(this@MainActivity, it!!)
+                                SliderAdapter(this@MainActivity, it)
                             }
-
                             it.homepagedata?.sliders?.let { itS ->
-                                Permissions().init(itS?.size, this@MainActivity, this@MainActivity)
+                                Permissions().init(itS.size, this@MainActivity, this@MainActivity)
                             }
                             indicator.setViewPager(pager)
                             stopLoadingShimmer()
-
                         }
 
                     }
@@ -165,5 +241,10 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     fun stopLoadingShimmer() {
         shimmer_view_container?.visibility = View.GONE
         shimmer_view_container?.stopShimmerAnimation()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        getAllData()
     }
 }

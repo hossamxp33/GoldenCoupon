@@ -25,5 +25,6 @@
     <string name="attention">Attention!</string>
     <string name="noBrandFound">No Brands Found</string>
     <string name="filter">filter</string>
+    <string name="copied">copied</string>
 
 </resources>

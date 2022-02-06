@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.BrandItemAdapterBinding
 import com.codes_roots.golden_coupon.entites.brandsmodel.Brand
+import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewState
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
@@ -74,7 +75,7 @@ class ViewHolder(
 
     fun bind(context: Context?, data: Brand) {
 
-        //    binding.listener = ClickHandler()
+         binding.listener = ClickHandler()
         binding.data = data
         binding.context = context as MainActivity?
     }

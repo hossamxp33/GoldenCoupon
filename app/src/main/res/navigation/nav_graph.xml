@@ -16,16 +16,26 @@
         android:id="@+id/offer"
         android:name="com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment"
         android:label="fragment_courses_stagged"
-        tools:layout="@layout/offers_fragment" />
+        tools:layout="@layout/offers_fragment" >
+
+        <action
+            android:id="@+id/action_offer_to_coupons"
+            app:destination="@id/coupons" />
+    </fragment>
     <fragment
         android:id="@+id/fav"
         android:name="com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment"
         android:label="fragment_matches_courses"
         tools:layout="@layout/menu_fragment" />
     <fragment
-
         android:id="@+id/menu"
         android:name="com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment"
         android:label="fragment_matches_courses"
         tools:layout="@layout/menu_fragment" />
+    <fragment
+        android:id="@+id/coupons"
+        android:name="com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment"
+        android:label="fragment_matches_courses"
+        tools:layout="@layout/coupon_item_adapter" />
+
 </navigation>

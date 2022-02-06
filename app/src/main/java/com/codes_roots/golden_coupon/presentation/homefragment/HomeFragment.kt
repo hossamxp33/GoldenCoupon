@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.HomeFragmentBinding
 import com.codes_roots.golden_coupon.helper.BaseApplication
+import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.homefragment.adapter.BrandsAdapter
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainIntent
@@ -32,8 +33,8 @@ import java.util.*
 import javax.inject.Inject
 
 
-open class HomeFragment @Inject constructor() : Fragment(){
- private  val REQUEST_CODE_STT = 102
+open class HomeFragment @Inject constructor() : Fragment() {
+    private val REQUEST_CODE_STT = 102
     lateinit var brandsAdapter: BrandsAdapter
 
     @Inject
@@ -54,48 +55,48 @@ open class HomeFragment @Inject constructor() : Fragment(){
 //    lateinit var MainAdapter: Main_Adapter
 
 
-
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View? {
 
         view = DataBindingUtil.inflate(inflater, R.layout.home_fragment, container, false)
 
         view.searchLayout.context = context as MainActivity
 
-     //   view.searchLayout.listener = ClickHandler()
+        //   view.searchLayout.listener = ClickHandler()
 
         view.context = context as MainActivity
-      //  view.listener = ClickHandler()
-      //  view.searchLayout.pref = (context as MainActivity).Pref
+        //  view.searchLayout.pref = (context as MainActivity).Pref
 
         brandsRecycleView()
-       getAllData()
+        getAllData()
 
 
         //  view.searchBar.setError("assad")
         view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
-            viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,text.toString()))
+            viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
+                text.toString()))
         }
 
-         view.searchLayout.microphone.setOnClickListener {
+        view.searchLayout.microphone.setOnClickListener {
 
-                 val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-                 sttIntent.putExtra(
-                     RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                     RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-                 )
-                 sttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
-                 sttIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now!")
+            val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+            sttIntent.putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            sttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            sttIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now!")
 
-                 try {
-                     startActivityForResult(sttIntent, REQUEST_CODE_STT)
-                 } catch (e: ActivityNotFoundException) {
-                     e.printStackTrace()
-                     Toast.makeText(requireContext(), "Your device does not support STT.", Toast.LENGTH_LONG).show()
-                 }
-             }
+            try {
+                startActivityForResult(sttIntent, REQUEST_CODE_STT)
+            } catch (e: ActivityNotFoundException) {
+                e.printStackTrace()
+                Toast.makeText(requireContext(),
+                    "Your device does not support STT.",
+                    Toast.LENGTH_LONG).show()
+            }
+        }
 
 
 
@@ -106,7 +107,7 @@ open class HomeFragment @Inject constructor() : Fragment(){
     fun brandsRecycleView() {
         brandsAdapter = BrandsAdapter(requireContext())
         view.brandsRecycleView.apply {
-           layoutManager = LinearLayoutManager(context) // default orientation is vertical
+            layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = brandsAdapter;
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
@@ -129,8 +130,6 @@ open class HomeFragment @Inject constructor() : Fragment(){
     }
 
 
-
-
     fun getAllData() {
         lifecycleScope.launchWhenStarted {
             viewModel?.state?.collect {
@@ -146,12 +145,10 @@ open class HomeFragment @Inject constructor() : Fragment(){
                                 UserError.ValidationFailed -> "Validation failed"
                             }
                         }
-                                viewModel?.intents.send(MainIntent.ErrorDisplayed(it))
-                    }
-
-                 else {
+                        viewModel?.intents.send(MainIntent.ErrorDisplayed(it))
+                    } else {
                         if (it.progress == true) {
-                          shimmer_view_container.startShimmerAnimation()
+                            shimmer_view_container.startShimmerAnimation()
                             viewModel.intents.send(MainIntent.Initialize(it))
                         } else {
                             brandsAdapter.submitList(it.filteredData)
@@ -160,19 +157,15 @@ open class HomeFragment @Inject constructor() : Fragment(){
 
                     }
                 }
-                    }
-
-                }
             }
 
-
-
-
+        }
+    }
 
 
     fun stopLoadingShimmer() {
         shimmer_view_container?.visibility = View.GONE
-       shimmer_view_container?.stopShimmerAnimation()
+        shimmer_view_container?.stopShimmerAnimation()
     }
 
 }
