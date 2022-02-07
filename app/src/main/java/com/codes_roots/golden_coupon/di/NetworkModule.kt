@@ -5,6 +5,7 @@ import com.codes_roots.golden_coupon.data_layer.APIServices
 import com.codes_roots.golden_coupon.helper.ActivityBuildersModule
 import com.codes_roots.golden_coupon.helper.Constants.Companion.BASE_URL
 import com.codes_roots.golden_coupon.helper.FragmentFactoryModule
+import com.codes_roots.golden_coupon.helper.ResourceUtil
 import com.codes_roots.golden_coupon.helper.ViewModelBuilderModule
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
@@ -79,7 +80,13 @@ class APIModule constructor() {
                 val originalRequest = chain.request()
             //     var Pref = PreferenceHelper(context)
                 val builder = originalRequest.newBuilder()
-             //   builder.addHeader("Accept", "application/json")
+
+                if (ResourceUtil().getCurrentLanguage(context)!!.contains("ar"))
+                    builder.addHeader("lang", "ar")
+                else
+                    builder.addHeader("lang", "en")
+
+                //   builder.addHeader("Accept", "application/json")
               builder.addHeader("Content-Type", "application/json")
           //     builder.addHeader("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0NjQ4MDY1MX0.UreCRAhFIZL7enQRKBRwYAhdkTPGHvVWWctA6LyaJSI")
 //                Log.d("token",Pref.token!!)

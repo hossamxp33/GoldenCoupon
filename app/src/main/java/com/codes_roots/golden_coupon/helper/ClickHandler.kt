@@ -11,8 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.codes_roots.golden_coupon.R
+import com.codes_roots.golden_coupon.entites.products.Product
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.web_view.WebViewActivity
 
 class ClickHandler {
 
@@ -23,12 +25,12 @@ class ClickHandler {
         val bundle = Bundle()
         bundle.putInt("brandId", brandId)
         fragment.arguments = bundle
-        switchFragment(context,fragment)
+        switchFragment(context, fragment)
 
     }
 
-     fun setClipboard(context: Context, text: String) {
-         context as MainActivity
+    fun setClipboard(context: Context, text: String) {
+        context as MainActivity
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             val clipboard =
                 context.getSystemService(Context.CLIPBOARD_SERVICE) as android.text.ClipboardManager
@@ -40,20 +42,31 @@ class ClickHandler {
 
         }
 
-         Toast.makeText(context,context.getString(R.string.copied),Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, context.getString(R.string.copied), Toast.LENGTH_SHORT).show()
     }
-     fun switchFragment(context: Context, fragment: Fragment) {
+
+    fun switchFragment(context: Context, fragment: Fragment) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .setCustomAnimations(0, 0, 0, 0)
             .replace(R.id.main_frame, fragment).addToBackStack(null).commit()
 
     }
 
+    fun openWebView(context: Context,url:String?) {
+        context as MainActivity
 
-    fun switchToActivity(context: Context, activity: AppCompatActivity) {
+        if (!url.isNullOrEmpty()) {
 
-        val i = Intent(context, activity::class.java)
-        (context).startActivity(i);
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("url", url);
 
+            (context as MainActivity).startActivity(intent)
+        }
     }
-}
+        fun switchToActivity(context: Context, activity: AppCompatActivity) {
+
+            val i = Intent(context, activity::class.java)
+            (context).startActivity(i);
+
+        }
+    }

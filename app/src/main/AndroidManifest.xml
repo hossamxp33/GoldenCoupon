@@ -25,6 +25,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.codes_roots.golden_coupon.presentation.web_view.WebViewActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible"
+            >
+
+        </activity>
+
+
+
     </application>
 
 </manifest>

@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 else include?.visibility = View.VISIBLE
             })
 
+      
         bottom_nav_bar.setOnNavigationItemSelectedListener {
             val id = it.itemId
             if (integerDeque.contains(id)) {

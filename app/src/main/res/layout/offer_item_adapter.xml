@@ -13,6 +13,11 @@
             name="productData"
             type="com.codes_roots.golden_coupon.entites.products.Product" />
 
+
+        <variable
+            name="listener"
+            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+
     </data>
 
 
@@ -27,11 +32,13 @@
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/appCompatImageView3"
             android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_height="110dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             android:scaleType="fitXY"
-            app:imageResourcee="@{productData.img}"
+            app:imageResource="@{productData.img}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearance="@android:color/transparent" />
@@ -39,23 +46,24 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/brand_name"
             style="@style/blackText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@{productData.name}"
-            android:textSize="18sp"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/time_of_use"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
             app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/brand_description"
             style="@style/grayText"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:maxLines="2"
+            android:maxLines="3"
             android:text="@{productData.description}"
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/time_of_use"
@@ -67,23 +75,22 @@
             style="@style/redText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/app_name"
-            android:textSize="14sp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
             app:layout_constraintTop_toBottomOf="@+id/brand_description" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/priceWithCode"
             style="@style/redText"
-            android:textColor="@color/lightgreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:text="@string/app_name"
-            android:textSize="14sp"
+            android:textColor="@color/lightgreen"
+            android:textSize="12sp"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
             app:layout_constraintTop_toBottomOf="@+id/price" />
 
@@ -132,9 +139,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/copy_button"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:onClick="@{()->listener.setClipboard(context,productData.cpoun)}"
             android:background="@drawable/copy_button"
             android:gravity="center"
             android:padding="@dimen/dimen_8"
@@ -146,8 +154,10 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/visit_site_button"
             style="@style/blackText"
+            android:onClick="@{()->listener.openWebView(context,productData.url)}"
+
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:background="@drawable/site_button"

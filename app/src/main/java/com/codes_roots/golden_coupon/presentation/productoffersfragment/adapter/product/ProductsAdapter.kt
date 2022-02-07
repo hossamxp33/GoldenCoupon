@@ -22,6 +22,7 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import android.view.View
 import androidx.navigation.Navigation
+import com.codes_roots.golden_coupon.helper.ClickHandler
 
 
 class ProductsAdapter(var context: Context?) :
@@ -36,13 +37,17 @@ class ProductsAdapter(var context: Context?) :
             R.layout.offer_item_adapter, p0, false
         )
 
+
+
         return ViewHolder(binding)
 
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(context, currentList[position])
+    override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
+        holder.bind(context, currentList[p1])
 
+        holder.binding.price.text = (context as MainActivity).getString(R.string.price) + currentList[p1].productsizes[0].start_price + " " +currentList[p1].productsizes[0].country.code
+        holder.binding.priceWithCode.text = (context as MainActivity).getString(R.string.priceWithCode) + currentList[p1].productsizes[0].current_price + " " + currentList[p1].productsizes[0].country.code
 
 
 
@@ -74,7 +79,7 @@ class ViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(context: Context?, data: Product) {
-        //    binding.listener = ClickHandler()
+          binding.listener = ClickHandler()
         binding.productData = data
         binding.context = context as MainActivity?
     }
