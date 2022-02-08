@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.entites.products.Product
+import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.web_view.WebViewActivity
@@ -49,7 +50,6 @@ class ClickHandler {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .setCustomAnimations(0, 0, 0, 0)
             .replace(R.id.main_frame, fragment).addToBackStack(null).commit()
-
     }
 
     fun openWebView(context: Context,url:String?) {
@@ -62,6 +62,13 @@ class ClickHandler {
 
             (context as MainActivity).startActivity(intent)
         }
+    }
+
+    fun switchToMainActivity(context: Context,countryId:Int?){
+         context as CountryActivity
+        context.Pref.CountryId = countryId!!
+        switchToActivity(context,MainActivity())
+
     }
         fun switchToActivity(context: Context, activity: AppCompatActivity) {
 

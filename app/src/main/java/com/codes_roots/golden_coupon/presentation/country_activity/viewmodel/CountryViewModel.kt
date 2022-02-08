@@ -1,7 +1,8 @@
-package com.codes_roots.golden_coupon.presentation.couponsfragment.viewmodel
+package com.codes_roots.golden_coupon.presentation.country_activity.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.codes_roots.golden_coupon.entites.countries.CountryModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.repo.brands.RemoteDataSource
 
@@ -9,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.*
 import javax.inject.Inject
 
-class CouponsViewModel @Inject constructor(private val Datasources: RemoteDataSource,
+class CountryViewModel @Inject constructor(private val Datasources: RemoteDataSource,
 ) : ViewModel() {
 
 
@@ -17,25 +18,25 @@ class CouponsViewModel @Inject constructor(private val Datasources: RemoteDataSo
     var mCompositeDisposable = CompositeDisposable()
 
     var rateJob: Job? = null
-    var CouponsLD: MutableLiveData<CouponsModel>? = null
+    var CountryLD: MutableLiveData<CountryModel>? = null
 
     val errorMessage = MutableLiveData<String>()
     val loading = MutableLiveData<Boolean>()
 
 
     init {
-        CouponsLD = MutableLiveData()
+        CountryLD = MutableLiveData()
     }
 
 
 
 
-    fun getCoupons(brandid:Int?) {
+    fun getCountriesData() {
         job = CoroutineScope(Dispatchers.IO).launch {
-            val response = Datasources.getCouponsResponse(brandid!!)
+            val response = Datasources.getCountriesResponse()
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
-                    CouponsLD?.postValue(response.body())
+                    CountryLD?.postValue(response.body())
 
                 } else {
                     onError("Error : ${response.message()} ")

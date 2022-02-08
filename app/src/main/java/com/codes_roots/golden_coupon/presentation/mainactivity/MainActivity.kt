@@ -57,9 +57,11 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     private var bottomNavigationView: BottomNavigationView? = null
     var navHostFragment: NavHostFragment? = null
+
     var binding: ActivityMainBinding? = null
 
     var flag = false
+
     lateinit var fragment: Fragment
 
     @Inject

@@ -24,11 +24,13 @@ import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.FavoriteFragmentBinding
 import com.codes_roots.golden_coupon.databinding.OffersFragmentBinding
 import com.codes_roots.golden_coupon.helper.BaseApplication
+import com.codes_roots.golden_coupon.presentation.favfragment.adapter.FavoriteAdapter
+import com.codes_roots.golden_coupon.presentation.favfragment.mvi.FavViewModel
+import com.codes_roots.golden_coupon.presentation.favfragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.UserError
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
-import com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.category.CategoryAdapter
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.product.ProductsAdapter
-import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.MainIntent
+
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
 import kotlinx.coroutines.flow.collect
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.setEventListener
@@ -40,12 +42,12 @@ import javax.inject.Inject
 
 open class FavoriteFragment @Inject constructor() : Fragment() {
 
-    lateinit var favoriteAdapter: ProductsAdapter
+    lateinit var favoriteAdapter: FavoriteAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    val viewModel by viewModels<ProductsViewModel> { viewModelFactory }
+    val viewModel by viewModels<FavViewModel> { viewModelFactory }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -86,14 +88,14 @@ open class FavoriteFragment @Inject constructor() : Fragment() {
 
     fun myView() {
 
-       // getAllData()
+       getAllData()
         favoriteRecycleView()
     }
 
 
 
     fun favoriteRecycleView() {
-        favoriteAdapter = ProductsAdapter(requireContext())
+        favoriteAdapter = FavoriteAdapter(requireContext())
         view.favRecycle.apply {
             layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = favoriteAdapter
@@ -104,42 +106,42 @@ open class FavoriteFragment @Inject constructor() : Fragment() {
 
     }
 
-//    fun getAllData() {
-//        lifecycleScope.launchWhenStarted {
-//            viewModel.state.collect {
-//                if (it != null) {
-//                    if (it.error != null) {
-//                        it.error?.let {
-//                            when (it) {
-//                                is UserError.InvalidId -> "Invalid id"
-//                                is UserError.NetworkError -> it.throwable.message
-//                                UserError.ServerError -> "Server error"
-//                                UserError.Unexpected -> "Unexpected error"
-//                                is UserError.UserNotFound -> "User not found"
-//                                UserError.ValidationFailed -> "Validation failed"
-//                            }
-//                        }
-//                        viewModel.intents.send(MainIntent.ErrorDisplayed(it))
-//                    } else {
-//                        if (it.progress == true) {
-//                                view.progress.isVisible = it.progress
-//                            viewModel.intents.send(MainIntent.InitializeData(it, 0))
-//                        } else {
+    fun getAllData() {
+        lifecycleScope.launchWhenStarted {
+            viewModel.state.collect {
+                if (it != null) {
+                    if (it.error != null) {
+                        it.error?.let {
+                            when (it) {
+                                is UserError.InvalidId -> "Invalid id"
+                                is UserError.NetworkError -> it.throwable.message
+                                UserError.ServerError -> "Server error"
+                                UserError.Unexpected -> "Unexpected error"
+                                is UserError.UserNotFound -> "User not found"
+                                UserError.ValidationFailed -> "Validation failed"
+                            }
+                        }
+                        viewModel.intents.send(MainIntent.ErrorDisplayed(it))
+                    } else {
+                        if (it.progress == true) {
+                                view.progress.isVisible = it.progress
+                            viewModel.intents.send(MainIntent.Initialize(it))
+                        } else {
+
+                          favoriteAdapter.submitList(it.data!!.data)
+                     //       productsAdapter.submitList(it.filteredData)
 //
-//                            //      productsAdapter.submitList(it.filterDataByCategory)
-//                     //       productsAdapter.submitList(it.filteredData)
-////
-////
-//                            view.progress.isVisible = false
 //
-//                        }
-//
-//                    }
-//                }
-//            }
-//
-//        }
-//    }
+                            view.progress.isVisible = false
+
+                        }
+
+                    }
+                }
+            }
+
+        }
+    }
 
 
     fun stopLoadingShimmer() {

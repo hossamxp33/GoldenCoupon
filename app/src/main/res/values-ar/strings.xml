@@ -31,5 +31,6 @@
     <string name="copied">تم نسخ الكود</string>
     <string name="price">"السعر :\u0020"</string>
     <string name="priceWithCode">"السعر باستخدام الكود:\u0020 "</string>
+    <string name="choseCountry">أختار دولتك</string>
 
 </resources>

@@ -30,7 +30,8 @@ suspend fun mapIntentToViewState(
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
     is MainIntent.SearchByName -> searchByName(intent, intent.Name!!)
     is MainIntent.SortProducts -> TODO()
-    is MainIntent.FilterDataByCategory -> filterData(intent,intent.cat_id!!)
+    is MainIntent.FilterDataByCategory -> filterDataByCatId(intent,intent.cat_id!!)
+    is MainIntent.FilterDataBySubCategory ->filterDataBySubCategoryId(intent,intent.subcategory_id!!)
 }
 
 
@@ -69,13 +70,23 @@ private suspend fun proceedWithInitialize(
 
 
 
-private  fun filterData(intent: MainIntent, catId: Int): MainViewState
+private  fun filterDataByCatId(intent: MainIntent, catId: Int): MainViewState
 {
-    val filterDataArray = filterProductByCategoryId(catId,intent.viewState?.filteredData!!)
+    val filterDataArray = filterProductByCategoryId(catId,intent.viewState?.productsData!!.brands)
     return intent.viewState!!.copy(filteredData = filterDataArray as ArrayList<Product>)
 }
 fun filterProductByCategoryId(catId: Int, productArray:  ArrayList<Product>?) =
     productArray!!.filter { data -> data.cat_id == catId }
+
+
+
+private  fun filterDataBySubCategoryId(intent: MainIntent, sub_catId: Int): MainViewState
+{
+    val filterDataArray = filterProductBySubCategoryId(sub_catId,intent.viewState?.productsData!!.brands)
+    return intent.viewState!!.copy(filteredData = filterDataArray as ArrayList<Product>)
+}
+fun filterProductBySubCategoryId(sub_catId: Int, productArray:  ArrayList<Product>?) =
+    productArray!!.filter { data -> data.subcat_id == sub_catId }
 
 
 

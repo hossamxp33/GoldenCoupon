@@ -3,7 +3,9 @@ package com.codes_roots.golden_coupon.repo.brands
 
 import com.codes_roots.golden_coupon.data_layer.APIServices
 import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
+import com.codes_roots.golden_coupon.entites.countries.CountryModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
+import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import retrofit2.Response
 
 import javax.inject.Inject
@@ -17,6 +19,16 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
 
     override suspend fun getCouponsResponse(brandid:Int): Response<CouponsModel> {
        return ApiService.getCouponsData(brandid)
+    }
+
+    override suspend fun getCountriesResponse(): Response<CountryModel> {
+        return ApiService.getCountries()
+
+    }
+
+    override suspend fun getFavoritesResponse(): FavouritModel {
+        return ApiService.getFavorite()
+
     }
 
 

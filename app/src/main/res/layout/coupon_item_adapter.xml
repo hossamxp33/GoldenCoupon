@@ -143,7 +143,7 @@
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_marginEnd="4dp"
-            android:onClick="@{()->listener.openWebView(context,productData.url)}"
+            android:onClick="@{()->listener.openWebView(context,data.url)}"
 
             android:background="@drawable/site_button"
             android:text="@string/visit_site"

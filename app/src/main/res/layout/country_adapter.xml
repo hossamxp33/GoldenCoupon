@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+
+
+    <variable
+        name="context"
+        type="com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity" />
+
+    <variable
+        name="data"
+        type="com.codes_roots.golden_coupon.entites.countries.Country" />
+
+    <variable
+        name="listener"
+        type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+    <import type="android.text.Html"/>
+</data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/Mview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/coupon_bg"
+    android:animateLayoutChanges="true"
+    android:onClick="@{()->listener.switchToMainActivity(context,data.id)}"
+    tools:context=".presentation.mainactivity.MainActivity">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        style="@style/HomeTitles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@{data.name}"
+        app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView4"
+        app:layout_constraintStart_toEndOf="@+id/appCompatImageView4"
+        app:layout_constraintTop_toTopOf="@+id/appCompatImageView4" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/appCompatImageView4"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        app:imageResource="@{data.image}"
+        android:src="@drawable/red_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

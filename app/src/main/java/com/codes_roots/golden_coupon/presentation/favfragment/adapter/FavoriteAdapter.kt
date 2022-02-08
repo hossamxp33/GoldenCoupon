@@ -1,4 +1,4 @@
-package com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.product
+package com.codes_roots.golden_coupon.presentation.favfragment.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -22,19 +22,21 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import android.view.View
 import androidx.navigation.Navigation
+import com.codes_roots.golden_coupon.databinding.FavItemAdapterBinding
+import com.codes_roots.golden_coupon.entites.fav.FavoriteData
 import com.codes_roots.golden_coupon.helper.ClickHandler
 
 
-class ProductsAdapter(var context: Context?) :
-    ListAdapter<Product, ViewHolder>(DiffCallback()) {
+class FavoriteAdapter(var context: Context?) :
+    ListAdapter<FavoriteData, ViewHolder>(DiffCallback()) {
     var Intent: Channel<MainIntent>?=null
     var viewModel: MutableStateFlow<MainViewState?>?=null
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        val binding: OfferItemAdapterBinding = DataBindingUtil.inflate(
+        val binding: FavItemAdapterBinding = DataBindingUtil.inflate(
             LayoutInflater.from(p0.context),
-            R.layout.offer_item_adapter, p0, false
+            R.layout.fav_item_adapter, p0, false
         )
 
 
@@ -47,9 +49,6 @@ class ProductsAdapter(var context: Context?) :
     override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
         holder.bind(context, currentList[p1])
 try {
-    holder.binding.price.text = (context as MainActivity).getString(R.string.price) + currentList[p1].productsizes!![0].start_price + " " +currentList[p1].productsizes!![0].country!!.code
-    holder.binding.priceWithCode.text = (context as MainActivity).getString(R.string.priceWithCode) + currentList[p1].productsizes!![0].current_price + " " + currentList!![p1].productsizes!![0].country!!.code
-
 
 }catch (e:Exception){}
 
@@ -63,26 +62,26 @@ fun onClick(view: View?) {
     Navigation.findNavController(view!!).navigate(R.id.action_offer_to_coupons)
 }
 
-private class DiffCallback : DiffUtil.ItemCallback<Product>() {
+private class DiffCallback : DiffUtil.ItemCallback<FavoriteData>() {
 
     override fun areItemsTheSame(
-        oldItem: Product, newItem: Product,
+        oldItem: FavoriteData, newItem: FavoriteData,
     ) =
         oldItem.id == newItem.id
 
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(
-        oldItem: Product, newItem: Product,
+        oldItem: FavoriteData, newItem: FavoriteData,
     ) =
         oldItem == newItem
 }
 
 
 class ViewHolder(
-    val binding: OfferItemAdapterBinding,
+    val binding: FavItemAdapterBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(context: Context?, data: Product) {
+    fun bind(context: Context?, data: FavoriteData) {
           binding.listener = ClickHandler()
         binding.productData = data
         binding.context = context as MainActivity?

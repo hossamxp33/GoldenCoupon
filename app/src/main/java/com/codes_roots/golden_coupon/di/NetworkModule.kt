@@ -36,19 +36,18 @@ import javax.inject.Singleton
 @Singleton
 @Component(
     modules =
-    [   DispatcherModule::class,
+    [
+        DispatcherModule::class,
         AndroidInjectionModule::class,
         APIModule::class,
         AppModule::class,
         FragmentFactoryModule::class,
         MainModule::class,
         ActivityBuildersModule::class,
-
         FragmentFactoryModule::class,
         ViewModelBuilderModule::class,
     ]
 )
-
 
 
 interface AppComponent : AndroidInjector<DaggerApplication> {
@@ -78,7 +77,7 @@ class APIModule constructor() {
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .addInterceptor { chain: Interceptor.Chain ->
                 val originalRequest = chain.request()
-            //     var Pref = PreferenceHelper(context)
+                //     var Pref = PreferenceHelper(context)
                 val builder = originalRequest.newBuilder()
 
                 if (ResourceUtil().getCurrentLanguage(context)!!.contains("ar"))
@@ -87,8 +86,9 @@ class APIModule constructor() {
                     builder.addHeader("lang", "en")
 
                 //   builder.addHeader("Accept", "application/json")
-              builder.addHeader("Content-Type", "application/json")
-          //     builder.addHeader("Authorization", "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTY0NjQ4MDY1MX0.UreCRAhFIZL7enQRKBRwYAhdkTPGHvVWWctA6LyaJSI")
+                builder.addHeader("Content-Type", "application/json")
+                builder.addHeader("Authorization",
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQyODAsImV4cCI6MTY1MDI5OTExNX0.0GpgR_zKeVMkt0drMG0uX-_5m1T2IO0RZFwe4nqEWzI")
 //                Log.d("token",Pref.token!!)
                 val newRequest = builder.build()
                 chain.proceed(newRequest)
@@ -105,7 +105,7 @@ class APIModule constructor() {
     @Provides
     fun provideRetrofit(
         okHttpClient: OkHttpClient,
-        gsonConverterFactory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory,
     ): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)

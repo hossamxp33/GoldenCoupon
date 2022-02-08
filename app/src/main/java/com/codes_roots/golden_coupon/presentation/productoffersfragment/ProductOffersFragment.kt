@@ -27,6 +27,7 @@ import com.codes_roots.golden_coupon.presentation.homefragment.mvi.UserError
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.category.CategoryAdapter
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.product.ProductsAdapter
+import com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.sub.SubCategoryAdapter
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
 import kotlinx.coroutines.flow.collect
@@ -40,6 +41,7 @@ import javax.inject.Inject
 open class ProductOffersFragment @Inject constructor() : Fragment() {
     private val REQUEST_CODE_STT = 102
     lateinit var categoryAdapter: CategoryAdapter
+    lateinit var subcategoryAdapter: SubCategoryAdapter
     lateinit var productsAdapter: ProductsAdapter
 
     @Inject
@@ -133,6 +135,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         getAllData()
         categoryRecycleView()
         productsRecycleView()
+        subcategoryRecycleView()
     }
 
     fun categoryRecycleView() {
@@ -144,6 +147,20 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                 false
             ) // default orientation is vertical
             adapter = categoryAdapter;
+            isNestedScrollingEnabled = false
+            setHasFixedSize(true)
+        }
+
+    }
+    fun subcategoryRecycleView() {
+        subcategoryAdapter = SubCategoryAdapter(requireContext(), viewModel)
+        view.subCategoryRecycleView.apply {
+            layoutManager = LinearLayoutManager(
+                context,
+                RecyclerView.HORIZONTAL,
+                false
+            ) // default orientation is vertical
+            adapter = subcategoryAdapter;
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
@@ -180,15 +197,17 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                         viewModel.intents.send(MainIntent.ErrorDisplayed(it))
                     } else {
                         if (it.progress == true) {
+
                                 view.progress.isVisible = it.progress
                             viewModel.intents.send(MainIntent.InitializeData(it, 0))
                         } else {
-
+                             view.subCategoryRecycleView.isVisible = it.subcategoryVisibility!!
                             //      productsAdapter.submitList(it.filterDataByCategory)
                             productsAdapter.submitList(it.filteredData)
 //
                             categoryAdapter.submitList(it.categoryData!!.categories)
 //
+                            subcategoryAdapter.submitList(it.categoryData!!.categories!![it.category_position!!].subcats)
                             view.progress.isVisible = false
 
                         }

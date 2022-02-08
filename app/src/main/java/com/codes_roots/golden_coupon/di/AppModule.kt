@@ -3,7 +3,9 @@ package com.codes_roots.golden_coupon.di
 
 
 
+import android.content.Context
 import com.codes_roots.golden_coupon.data_layer.APIServices
+import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.repo.brands.DataSource
 import com.codes_roots.golden_coupon.repo.brands.RemoteDataSource
 import com.codes_roots.golden_coupon.repo.products.ProductsDataSource
@@ -30,9 +32,9 @@ class AppModule() {
         return RemoteProductsDataSource(apiService)
     }
 
-//    @Provides
-//    fun providePreferenceHelper(context: Context): PreferenceHelper {
-//        return PreferenceHelper(context)
-//    }
+    @Provides
+    fun providePreferenceHelper(context: Context): PreferenceHelper {
+        return PreferenceHelper(context)
+    }
 
 }

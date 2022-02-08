@@ -19,6 +19,20 @@
             android:exported="true"
             android:windowSoftInputMode="stateVisible"
             >
+
+        </activity>
+        <activity
+            android:name="com.codes_roots.golden_coupon.presentation.web_view.WebViewActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible"
+            >
+
+        </activity>
+        <activity
+            android:name="com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity"
+            android:exported="true"
+            android:windowSoftInputMode="stateVisible"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.codes_roots.golden_coupon.presentation.web_view.WebViewActivity"
+            android:name="com.codes_roots.golden_coupon.presentation.splash.SplashScreen"
             android:exported="true"
             android:windowSoftInputMode="stateVisible"
             >

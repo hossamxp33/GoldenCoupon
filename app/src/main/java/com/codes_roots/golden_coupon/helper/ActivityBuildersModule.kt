@@ -2,7 +2,9 @@ package com.codes_roots.golden_coupon.helper
 
 import com.codes_roots.golden_coupon.di.ActivityScope
 import com.codes_roots.golden_coupon.di.MainModule
+import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.splash.SplashScreen
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -17,6 +19,14 @@ interface ActivityBuildersModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
     fun contributeMainActivity(): MainActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
+    fun contributeSplashScreen(): SplashScreen
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
+    fun contributeCountryActivity(): CountryActivity
 
 
 

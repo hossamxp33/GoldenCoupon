@@ -1,10 +1,10 @@
 package com.codes_roots.golden_coupon.entites.fav
 
 data class Pagination(
-    var count: Int,
-    var current_page: Int,
-    var has_next_page: Boolean,
-    var has_prev_page: Boolean,
-    var limit: Any,
-    var page_count: Int
+    var count: Int?=null,
+    var current_page: Int?=null,
+    var has_next_page: Boolean?=null,
+    var has_prev_page: Boolean?=null,
+    var limit: Any?=null,
+    var page_count: Int?=null
 )

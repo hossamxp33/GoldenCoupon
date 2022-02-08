@@ -1,12 +1,12 @@
 package com.codes_roots.golden_coupon.helper
 
 
-
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
+import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
 
@@ -24,7 +24,7 @@ import kotlin.reflect.KClass
  * @author juan.saravia
  */
 class ViewModelFactory @Inject constructor(
-    private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>
+    private val creators: @JvmSuppressWildcards Map<Class<out ViewModel>, Provider<ViewModel>>,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         var creator: Provider<out ViewModel>? = creators[modelClass]
@@ -53,7 +53,7 @@ abstract class ViewModelBuilderModule {
 
     @Binds
     abstract fun bindViewModelFactory(
-        factory: ViewModelFactory // Extends ViewModelProvider.Factory
+        factory: ViewModelFactory, // Extends ViewModelProvider.Factory
     ): ViewModelProvider.Factory // Android Lifecycle ViewModel
 
 }
@@ -67,37 +67,44 @@ abstract class ViewModelBuilderModule {
 annotation class ViewModelKey(val value: KClass<out ViewModel>)
 
 class MyFragmentFactory @Inject constructor(
-    private val creator : Map<Class<out Fragment>, @JvmSuppressWildcards Provider<Fragment>>
+    private val creator: Map<Class<out Fragment>, @JvmSuppressWildcards Provider<Fragment>>,
 ) : FragmentFactory() {
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
-        val fragmentClass = loadFragmentClass(classLoader,className)
+        val fragmentClass = loadFragmentClass(classLoader, className)
         return creator[fragmentClass]?.get() ?: super.instantiate(classLoader, className)
     }
 
 }
+
 @Module
 abstract class FragmentFactoryModule {
 
     @Binds
-    abstract fun bindFragmentFactroy(factory : MyFragmentFactory) : FragmentFactory
+    abstract fun bindFragmentFactroy(factory: MyFragmentFactory): FragmentFactory
 
     @Binds
     @IntoMap
     @FragmentKey(HomeFragment::class)
-    abstract fun bindMainFragment(fragment : HomeFragment) : Fragment
+    abstract fun bindMainFragment(fragment: HomeFragment): Fragment
+
     @Binds
     @IntoMap
     @FragmentKey(ProductOffersFragment::class)
-    abstract fun bindProductOffersFragment(fragment : ProductOffersFragment) : Fragment
+    abstract fun bindProductOffersFragment(fragment: ProductOffersFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(CouponsFragment::class)
+    abstract fun bindCouponsFragment(fragment: CouponsFragment): Fragment
 
    @Binds
     @IntoMap
-    @FragmentKey(CouponsFragment::class)
-    abstract fun bindCouponsFragment(fragment : CouponsFragment) : Fragment
+    @FragmentKey(FavoriteFragment::class)
+    abstract fun bindFavoriteFragment(fragment: FavoriteFragment): Fragment
 
 
 }
 
 @MapKey
-annotation class FragmentKey(val clazz : KClass<out Fragment>)
+annotation class FragmentKey(val clazz: KClass<out Fragment>)
