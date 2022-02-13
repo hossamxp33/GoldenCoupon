@@ -31,5 +31,10 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
 
     }
 
+    override suspend fun addFavorites(brand_id: Int, UserId: Int): Boolean {
+        return ApiService.addFavorite(brand_id, UserId)
+
+    }
+
 
 }

@@ -32,5 +32,8 @@
     <string name="price">"السعر :\u0020"</string>
     <string name="priceWithCode">"السعر باستخدام الكود:\u0020 "</string>
     <string name="choseCountry">أختار دولتك</string>
+    <string name="bestDiscount">Best Discounts</string>
+    <string name="name">Name</string>
+    <string name="sort" />
 
 </resources>

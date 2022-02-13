@@ -21,7 +21,8 @@
         <item name="android:layout_marginLeft">12dp</item>
     </style>
 
-    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+    <style name="BottomNavigationView.Active"
+        parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:fontFamily">@font/cocon_next_arabic</item>
         <item name="android:textSize">12sp</item>
         <item name="android:layout_marginRight">12dp</item>
@@ -35,6 +36,7 @@
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/white</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:fontFamily">@font/cocon_next_arabic</item>
 
     </style>
     <style name="SearchTextStyle">

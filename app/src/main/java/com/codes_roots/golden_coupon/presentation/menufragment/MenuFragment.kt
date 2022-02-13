@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.MenuFragmentBinding
 import com.codes_roots.golden_coupon.helper.BaseApplication
+import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 
 import kotlinx.android.synthetic.main.bottom_nav_content.*
@@ -44,7 +45,7 @@ open class MenuFragment @Inject constructor() : Fragment(){
      //   view.searchLayout.listener = ClickHandler()
 
         view.context = context as MainActivity
-      //  view.listener = ClickHandler()
+        view.listener = ClickHandler()
       //  view.searchLayout.pref = (context as MainActivity).Pref
 
 

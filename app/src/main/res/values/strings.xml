@@ -29,5 +29,9 @@
     <string name="price">"Price : \u0020 "</string>
     <string name="priceWithCode">"Price With Code : \u0020 "</string>
     <string name="choseCountry">Chose country</string>
+    <string name="sortby">Sort by</string>
+    <string name="bestDiscount">Best Discounts</string>
+    <string name="name">Name</string>
+    <string name="sort" />
 
 </resources>

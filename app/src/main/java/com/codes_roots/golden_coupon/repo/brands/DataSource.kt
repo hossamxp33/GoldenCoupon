@@ -12,11 +12,12 @@ interface DataSource {
 
     suspend fun getBrandsResponse(): BrandsModel
 
-    suspend fun getCouponsResponse(brandid:Int): Response<CouponsModel>
+    suspend fun getCouponsResponse(brandid: Int): Response<CouponsModel>
 
 
     suspend fun getCountriesResponse(): Response<CountryModel>
- suspend fun getFavoritesResponse(): FavouritModel
+    suspend fun getFavoritesResponse(): FavouritModel
+    suspend fun addFavorites(brand_id: Int, UserId: Int): Boolean
 
 //
 }

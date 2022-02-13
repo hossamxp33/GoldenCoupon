@@ -16,11 +16,14 @@ suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
     loadMainData: suspend () -> Flow<Result<BrandsModel>> = { Datarepo.getMainData },
+    AddFavorite: suspend () ->  Flow<Result<Boolean>> = {
+        Datarepo.addFavouriteData(intent.brand_id!!, intent.user_id!!)
+    }
 ) = when (intent) {
     is MainIntent.Initialize -> proceedWithInitialize(loadMainData, intent)
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
     is MainIntent.SearchByName -> searchByName(intent, intent.Name!!)
-
+    is MainIntent.AddToFavorite -> proceedAddFavorite(AddFavorite,intent)
 }
 
 
@@ -28,8 +31,8 @@ private suspend fun proceedWithInitialize(
     loadCart: suspend () -> Flow<Result<BrandsModel>>,
     intent: MainIntent
 ): MainViewState {
-    var response = loadCart()
-    var data = response.first()
+    val response = loadCart()
+    val data = response.first()
     return runCatching {
         intent.viewState!!.copy(
             homepagedata = (data.getOrThrow()),
@@ -44,6 +47,19 @@ private suspend fun proceedWithInitialize(
         }
 
 
+}
+private suspend fun proceedAddFavorite( AddFavorite : suspend () -> Flow<Result<Boolean>>   ,intent: MainIntent
+): MainViewState
+{
+    val response =  AddFavorite().first()
+
+    return runCatching {
+
+        return intent.viewState!!.copy(IsFave = true)
+    }.getOrElse {
+        intent.viewState!!.copy(error = UserError.NetworkError(it))
+
+    }
 }
 
 private fun searchByName(intent: MainIntent, Name: String): MainViewState {

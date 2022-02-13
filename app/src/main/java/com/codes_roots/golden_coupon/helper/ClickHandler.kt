@@ -1,11 +1,10 @@
 package com.codes_roots.golden_coupon.helper
 
-import android.content.ClipData
-import android.content.ClipboardManager
-import android.content.Context
-import android.content.Intent
+import android.content.*
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -15,7 +14,10 @@ import com.codes_roots.golden_coupon.entites.products.Product
 import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.ratefragment.RateFragment
+import com.codes_roots.golden_coupon.presentation.sortfragment.SortFragment
 import com.codes_roots.golden_coupon.presentation.web_view.WebViewActivity
+import com.google.android.play.core.review.ReviewManagerFactory
 
 class ClickHandler {
 
@@ -29,7 +31,29 @@ class ClickHandler {
         switchFragment(context, fragment)
 
     }
+    fun openSortFragment(context: Context) {
+        val frag = SortFragment()
+        frag.apply {
+            show((context as MainActivity).supportFragmentManager, SortFragment.TAG)
+        }
 
+    }
+
+    fun rateApp(context: Context){
+        context as MainActivity
+            val reviewManager = ReviewManagerFactory.create(context)
+            val requestReviewFlow = reviewManager.requestReviewFlow()
+            requestReviewFlow.addOnCompleteListener { request ->
+                if (request.isSuccessful) {
+                    val reviewInfo = request.result
+                    val flow = reviewManager.launchReviewFlow(context, reviewInfo)
+                    flow.addOnCompleteListener {
+                    }
+                } else {
+                    Log.d("Error: ", request.exception.toString())
+                }
+            }
+    }
     fun setClipboard(context: Context, text: String) {
         context as MainActivity
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {

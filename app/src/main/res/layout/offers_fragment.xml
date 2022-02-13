@@ -11,7 +11,9 @@
         <variable
             name="context"
             type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
-
+        <variable
+            name="listener"
+            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -113,6 +115,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            android:onClick="@{() -> listener.openSortFragment(context)}"
             android:background="@drawable/shadowbackground"
             android:padding="6dp"
             app:layout_constraintBottom_toBottomOf="parent"

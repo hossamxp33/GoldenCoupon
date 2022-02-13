@@ -13,18 +13,21 @@ import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.BrandItemAdapterBinding
 import com.codes_roots.golden_coupon.entites.brandsmodel.Brand
 import com.codes_roots.golden_coupon.helper.ClickHandler
+import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainIntent
+import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewState
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
 
-class BrandsAdapter(var context: Context?) :
+class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
     ListAdapter<Brand, ViewHolder>(DiffCallback()) {
     var Intent: Channel<MainIntent>?=null
-    var viewModel: MutableStateFlow<MainViewState?>?=null
-
+    @Inject
+    lateinit var Pref: PreferenceHelper
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val binding: BrandItemAdapterBinding = DataBindingUtil.inflate(
             LayoutInflater.from(p0.context),
@@ -37,12 +40,30 @@ class BrandsAdapter(var context: Context?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(context, currentList[position])
+        val viewState = viewModel.state.value
+
+        if (!currentList[position].favourite_items.isNullOrEmpty())
+            holder.binding.favoriteIcon.setImageResource(R.drawable.star)
+        else
+            holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
 
         try {
             val couponText = context!!.getString(R.string.coupon)
             val num = currentList[position].items?.get(0)?.sum.toString()
             holder.binding.couponNum.text = "$num $couponText"
+
+            holder.binding.favoriteIcon.setOnClickListener {
+                viewModel.intents.trySend(
+                    MainIntent
+                        .AddToFavorite(
+                            viewModel.state.value!!,
+                            currentList[position].id,
+                            4280
+                        )
+                )
+            }
             notifyItemChanged(position)
+
 
         } catch (e: Exception) {
         }

@@ -46,13 +46,7 @@ class CountriesAdapter(var context: Context?) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(context, currentList[position])
-        holder.binding.Mview.setOnClickListener {
-            row_index = position
 
-            notifyDataSetChanged()
-            notifyItemChanged(position)
-
-        }
 
     }
 

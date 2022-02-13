@@ -23,8 +23,6 @@ class ResourceUtil {
         config.locale = myLocale
         context.resources.updateConfiguration(config, context.resources.displayMetrics)
         saveLocale(lang, context)
-
-
     }
 
 

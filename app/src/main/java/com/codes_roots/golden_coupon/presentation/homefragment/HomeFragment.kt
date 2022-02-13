@@ -105,7 +105,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
     }
 
     fun brandsRecycleView() {
-        brandsAdapter = BrandsAdapter(requireContext())
+        brandsAdapter = BrandsAdapter(requireContext(),viewModel)
         view.brandsRecycleView.apply {
             layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = brandsAdapter;

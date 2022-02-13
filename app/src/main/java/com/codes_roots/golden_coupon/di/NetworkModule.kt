@@ -2,16 +2,14 @@ package com.codes_roots.golden_coupon.di
 
 import android.content.Context
 import com.codes_roots.golden_coupon.data_layer.APIServices
-import com.codes_roots.golden_coupon.helper.ActivityBuildersModule
+import com.codes_roots.golden_coupon.helper.*
 import com.codes_roots.golden_coupon.helper.Constants.Companion.BASE_URL
-import com.codes_roots.golden_coupon.helper.FragmentFactoryModule
-import com.codes_roots.golden_coupon.helper.ResourceUtil
-import com.codes_roots.golden_coupon.helper.ViewModelBuilderModule
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
+import com.codes_roots.golden_coupon.presentation.sortfragment.SortFragment
 
 
 import dagger.BindsInstance
@@ -62,6 +60,7 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
     fun inject(app: MenuFragment)
     fun inject(app: CouponsFragment)
     fun inject(app: FavoriteFragment)
+    fun inject(app: SortFragment)
 
 }
 
@@ -77,18 +76,15 @@ class APIModule constructor() {
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .addInterceptor { chain: Interceptor.Chain ->
                 val originalRequest = chain.request()
-                //     var Pref = PreferenceHelper(context)
+                    var Pref = PreferenceHelper(context)
                 val builder = originalRequest.newBuilder()
 
-                if (ResourceUtil().getCurrentLanguage(context)!!.contains("ar"))
-                    builder.addHeader("lang", "ar")
-                else
-                    builder.addHeader("lang", "en")
+                    builder.addHeader("lang", Pref.lang!!)
 
                 //   builder.addHeader("Accept", "application/json")
                 builder.addHeader("Content-Type", "application/json")
                 builder.addHeader("Authorization",
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQyODAsImV4cCI6MTY1MDI5OTExNX0.0GpgR_zKeVMkt0drMG0uX-_5m1T2IO0RZFwe4nqEWzI")
+                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQyODAsImV4cCI6MTY1MDY1MTExOX0.LcAEb3REI49NIzCJGbEudYicJRmQg4ntIBh-6Z7k9Fs")
 //                Log.d("token",Pref.token!!)
                 val newRequest = builder.build()
                 chain.proceed(newRequest)

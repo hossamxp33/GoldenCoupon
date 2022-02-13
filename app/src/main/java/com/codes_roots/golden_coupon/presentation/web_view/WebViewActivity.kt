@@ -9,7 +9,7 @@ import android.view.View
 import com.codes_roots.golden_coupon.R
 
 
-class WebViewActivity: AppCompatActivity() {
+class WebViewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.web_view)
@@ -21,8 +21,7 @@ class WebViewActivity: AppCompatActivity() {
         val extras = intent.extras
 
 
-      val url = extras?.getString("url")
-
+        val url = extras?.getString("url")
 
 
         val webview = findViewById<View>(R.id.webView) as WebView
@@ -31,7 +30,7 @@ class WebViewActivity: AppCompatActivity() {
 
 
 
-      webview.loadUrl("https://www.goldencouponz.com/")
+        webview.loadUrl("https://www.goldencouponz.com/")
 
         webView.requestFocus();
 

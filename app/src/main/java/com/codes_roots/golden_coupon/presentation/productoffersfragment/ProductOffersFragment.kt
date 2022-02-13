@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.OffersFragmentBinding
 import com.codes_roots.golden_coupon.helper.BaseApplication
+import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.UserError
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.category.CategoryAdapter
@@ -71,7 +72,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         //   view.searchLayout.listener = ClickHandler()
 
         view.context = context as MainActivity
-        //  view.listener = ClickHandler()
+         view.listener = ClickHandler()
         //  view.searchLayout.pref = (context as MainActivity).Pref
 
         //  view.searchBar.setError("assad")

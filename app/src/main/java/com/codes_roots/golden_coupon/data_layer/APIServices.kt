@@ -31,5 +31,12 @@ interface APIServices {
     @GET("FavouriteItems/index.json")
     suspend fun getFavorite(): FavouritModel
 
+    @FormUrlEncoded
+    @POST("FavouriteItems/add.json")
+    suspend fun addFavorite(@Field("brand_id") brand_id: Int?,
+                            @Field("user_id") UserId: Int
+    ): Boolean
+
+
     //
 }

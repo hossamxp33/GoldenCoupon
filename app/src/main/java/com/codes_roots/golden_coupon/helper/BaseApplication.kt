@@ -1,9 +1,12 @@
 package com.codes_roots.golden_coupon.helper
 
+import android.preference.PreferenceManager
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import com.codes_roots.golden_coupon.di.AppComponent
 import com.codes_roots.golden_coupon.di.DaggerAppComponent
+import java.net.URISyntaxException
+import java.util.*
 
 open class BaseApplication : DaggerApplication() {
 
@@ -17,7 +20,17 @@ open class BaseApplication : DaggerApplication() {
     }
     override fun onCreate() {
         super.onCreate()
+        var Pref = PreferenceHelper(this)
 
+        try {
+
+            val language =  Locale.getDefault().language
+
+            Pref.lang = language
+
+        } catch (e: URISyntaxException) {
+            throw RuntimeException(e)
+        }
         initDI()
     }
 

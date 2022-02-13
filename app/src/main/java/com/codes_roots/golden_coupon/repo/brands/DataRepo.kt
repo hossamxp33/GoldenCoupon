@@ -13,33 +13,54 @@ import javax.inject.Inject
 
 class DataRepo @Inject constructor(
     private val Datasources: DataSource,
-    @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-)  {
+    @IoDispatcher private val ioDispatcher: CoroutineDispatcher,
+) {
 
     // // انا كنت ناسي اعمل emit في الcatch عشان كدا كان بيرجع هنا نفس الrespone في الحالتين
     // استخدمت Result في ال follow عشان بترجع الobject , error في نفس الclass وده مش بيحصل في ال sealed
-     val getMainData:Flow<Result<BrandsModel>> =
+    val getMainData: Flow<Result<BrandsModel>> =
         flow {
             emit(Datasources.getBrandsResponse())
-             }
+        }
             .map { Result.success(it) }
-            .retry(retries = 4) { t -> (t is IOException).also { if (it) {
-                delay(1000 )
-            }}}
-            .catch {
-                     throwable ->  emit(Result.failure(throwable)) }
+            .retry(retries = 4) { t ->
+                (t is IOException).also {
+                    if (it) {
+                        delay(1000)
+                    }
+                }
+            }
+            .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
-     val getFavouriteData:Flow<Result<FavouritModel>> =
+    val getFavouriteData: Flow<Result<FavouritModel>> =
         flow {
             emit(Datasources.getFavoritesResponse())
-             }
+        }
             .map { Result.success(it) }
-            .retry(retries = 4) { t -> (t is IOException).also { if (it) {
-                delay(1000 )
-            }}}
-            .catch {
-                     throwable ->  emit(Result.failure(throwable)) }
+            .retry(retries = 4) { t ->
+                (t is IOException).also {
+                    if (it) {
+                        delay(1000)
+                    }
+                }
+            }
+            .catch { throwable -> emit(Result.failure(throwable)) }
+            .flowOn(ioDispatcher)
+
+    fun addFavouriteData(brand_id: Int, UserId: Int): Flow<Result<Boolean>> =
+        flow {
+            emit(Datasources.addFavorites(brand_id, UserId))
+        }
+            .map { Result.success(it) }
+            .retry(retries = 4) { t ->
+                (t is IOException).also {
+                    if (it) {
+                        delay(1000)
+                    }
+                }
+            }
+            .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
 
