@@ -22,8 +22,10 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.OffersFragmentBinding
+import com.codes_roots.golden_coupon.di.WARN_MotionToast
 import com.codes_roots.golden_coupon.helper.BaseApplication
 import com.codes_roots.golden_coupon.helper.ClickHandler
+import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.UserError
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.category.CategoryAdapter
@@ -61,7 +63,8 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
 
     private lateinit var view: OffersFragmentBinding
 
-
+    @Inject
+    lateinit var Pref: PreferenceHelper
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
@@ -73,6 +76,8 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
 
         view.context = context as MainActivity
          view.listener = ClickHandler()
+        view.viewModel = viewModel
+
         //  view.searchLayout.pref = (context as MainActivity).Pref
 
         //  view.searchBar.setError("assad")
@@ -162,7 +167,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                 false
             ) // default orientation is vertical
             adapter = subcategoryAdapter;
-            isNestedScrollingEnabled = false
+          isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
 
@@ -200,17 +205,27 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                         if (it.progress == true) {
 
                                 view.progress.isVisible = it.progress
-                            viewModel.intents.send(MainIntent.InitializeData(it, 0))
+                            viewModel.intents.send(MainIntent.InitializeData(it,
+                                "" ,0,Pref.CountryId))
                         } else {
                              view.subCategoryRecycleView.isVisible = it.subcategoryVisibility!!
                             //      productsAdapter.submitList(it.filterDataByCategory)
+                         try {
+
+
                             productsAdapter.submitList(it.filteredData)
 //
                             categoryAdapter.submitList(it.categoryData!!.categories)
 //
-                            subcategoryAdapter.submitList(it.categoryData!!.categories!![it.category_position!!].subcats)
+                            subcategoryAdapter.submitList(it.categoryData!!.categories!![it.category_position].subcats)
+
                             view.progress.isVisible = false
 
+                             view.productData= it.filteredData!![0]
+
+                         }catch (e:Exception){
+                          WARN_MotionToast("not found",requireActivity())
+                         }
                         }
 
                     }

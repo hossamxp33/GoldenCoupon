@@ -2,6 +2,7 @@ package com.codes_roots.golden_coupon.di
 
 import androidx.lifecycle.ViewModel
 import com.codes_roots.golden_coupon.helper.ViewModelKey
+import com.codes_roots.golden_coupon.presentation.auth.viewmodel.AuthViewModel
 import com.codes_roots.golden_coupon.presentation.country_activity.viewmodel.CountryViewModel
 import com.codes_roots.golden_coupon.presentation.couponsfragment.viewmodel.CouponsViewModel
 import com.codes_roots.golden_coupon.presentation.favfragment.mvi.FavViewModel
@@ -43,6 +44,11 @@ interface MainModule {
     @IntoMap
     @ViewModelKey(FavViewModel::class)
     fun bindFavViewModel(mainViewModel: FavViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AuthViewModel::class)
+    fun bindAuthViewModel(mainViewModel: AuthViewModel): ViewModel
 
 
 

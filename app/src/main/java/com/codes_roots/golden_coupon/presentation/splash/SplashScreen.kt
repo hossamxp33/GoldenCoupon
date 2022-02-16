@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.helper.ResourceUtil
+import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 
 import dagger.android.AndroidInjection
@@ -39,18 +40,18 @@ class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
 
 
         Handler().postDelayed({
-//             if (Pref.token != "")
-//             {
+             if (Pref.token != "")
+             {
                  val mainIntent = Intent(this, MainActivity::class.java)
                  startActivity(mainIntent)
                  finish()
 
-         //    }
-//             else{
-//                 val mainIntent = Intent(this, LoginAsActivity::class.java)
-//                 startActivity(mainIntent)
-//                 finish()
-//             }
+             }
+             else{
+                 val mainIntent = Intent(this, RegisterActivity::class.java)
+                 startActivity(mainIntent)
+                 finish()
+             }
 
         }, SPLASH_DISPLAY_LENGTH.toLong())
     }

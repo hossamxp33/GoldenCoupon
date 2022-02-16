@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.BrandItemAdapterBinding
 import com.codes_roots.golden_coupon.databinding.CategoryItemAdapterBinding
+import com.codes_roots.golden_coupon.di.WARN_MotionToast
 import com.codes_roots.golden_coupon.entites.brandsmodel.Brand
 import com.codes_roots.golden_coupon.entites.category.Category
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewState
@@ -42,18 +43,20 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?) 
         holder.bind(context, currentList[position])
 
         holder.binding.Mview.setOnClickListener {
-            row_index = position
-            val viewState = viewModel?.state?.value
-            viewModel!!.intents.trySend(
-                MainIntent.FilterDataByCategory(
-                    viewState!!.copy(category_position = position,subcategoryVisibility = true),
-                    currentList[position].id
-                )
-            )
+  if (!currentList.isNullOrEmpty()) {
+      row_index = position
+      val viewState = viewModel?.state?.value
+      viewModel!!.intents.trySend(
+          MainIntent.FilterDataByCategory(
+              viewState!!.copy(category_position = position, subcategoryVisibility = true),
+              currentList[position].id
+          )
+      )
 
-            notifyDataSetChanged()
-            notifyItemChanged(position)
-
+      notifyDataSetChanged()
+      notifyItemChanged(position)
+  }else
+      WARN_MotionToast("",context as MainActivity)
         }
 /// Text  underLine  when selected
         if (row_index == position) {

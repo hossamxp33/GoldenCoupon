@@ -9,7 +9,7 @@ interface ProductsDataSource {
 
     suspend fun getCategoryResponse(): AllCategoryModel
 
-    suspend fun getProductsResponse(cat_id: Int?): ProductsModel
+    suspend fun getProductsResponse(country_id: Int?,sort:String?,cat_id: Int?): ProductsModel
 
 
 }

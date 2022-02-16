@@ -16,10 +16,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.HomeFragmentBinding
+import com.codes_roots.golden_coupon.entites.brandsmodel.Brand
 import com.codes_roots.golden_coupon.helper.BaseApplication
 import com.codes_roots.golden_coupon.helper.ClickHandler
+import com.codes_roots.golden_coupon.presentation.favfragment.mvi.MainViewState
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.homefragment.adapter.BrandsAdapter
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainIntent
@@ -31,11 +34,13 @@ import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.coroutines.flow.collect
 import java.util.*
 import javax.inject.Inject
+import kotlin.collections.ArrayList
 
 
 open class HomeFragment @Inject constructor() : Fragment() {
     private val REQUEST_CODE_STT = 102
     lateinit var brandsAdapter: BrandsAdapter
+    var filteredData =  ArrayList<Brand>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -47,8 +52,10 @@ open class HomeFragment @Inject constructor() : Fragment() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
+
         }
     }
+    internal var page = 1
 
     private lateinit var view: HomeFragmentBinding
 //    lateinit var newOffersAdapter: New_Offers_Adapter
@@ -104,12 +111,28 @@ open class HomeFragment @Inject constructor() : Fragment() {
         return view.root
     }
 
+
     fun brandsRecycleView() {
+        page = 1
         brandsAdapter = BrandsAdapter(requireContext(),viewModel)
         view.brandsRecycleView.apply {
+            addOnScrollListener(object :RecyclerView.OnScrollListener(){
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                val lastVisibleItem =
+                    (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    if (lastVisibleItem == brandsAdapter.itemCount-1) {
+                        page++
+                        viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!.copy(progress = true),page))
+
+                    }
+            }
+
+            })
             layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = brandsAdapter;
-            isNestedScrollingEnabled = false
+          //  isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
     }
@@ -132,7 +155,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
 
     fun getAllData() {
         lifecycleScope.launchWhenStarted {
-            viewModel?.state?.collect {
+            viewModel.state.collect {
                 if (it != null) {
                     if (it.error != null) {
                         it.error?.let {
@@ -145,14 +168,17 @@ open class HomeFragment @Inject constructor() : Fragment() {
                                 UserError.ValidationFailed -> "Validation failed"
                             }
                         }
-                        viewModel?.intents.send(MainIntent.ErrorDisplayed(it))
+                        viewModel.intents.send(MainIntent.ErrorDisplayed(it))
                     } else {
                         if (it.progress == true) {
                             shimmer_view_container.startShimmerAnimation()
-                            viewModel.intents.send(MainIntent.Initialize(it))
+                            viewModel.intents.send(MainIntent.Initialize(it,page))
                         } else {
-                            brandsAdapter.submitList(it.filteredData)
-                            stopLoadingShimmer()
+                            filteredData.addAll(it.filteredData!!)
+
+                            brandsAdapter.submitList(filteredData)
+
+                           stopLoadingShimmer()
                         }
 
                     }

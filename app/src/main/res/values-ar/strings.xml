@@ -33,7 +33,15 @@
     <string name="priceWithCode">"السعر باستخدام الكود:\u0020 "</string>
     <string name="choseCountry">أختار دولتك</string>
     <string name="bestDiscount">Best Discounts</string>
-    <string name="name">Name</string>
-    <string name="sort" />
-
+    <string name="name">بالاسم</string>
+    <string name="sortby">تصفية بواسطه</string>
+    <string name="sort">تصفية</string>
+    <string name="sortbyName" >بالاسم</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="login">تسجيل دخول</string>
+    <string name="register">حساب جديد</string>
+    <string name="username">اسم المستخدم</string>
+    <string name="password">كلمة المرور</string>
+    <string name="mobile">موبايل</string>
+    <string name="email">البريد الالكتروني</string>
 </resources>

@@ -215,7 +215,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
                         if (it.progress == true) {
                             shimmer_view_container.startShimmerAnimation()
-                            viewModel.intents.send(MainIntent.Initialize(it))
+                            viewModel.intents.send(MainIntent.Initialize(it,1))
                         } else {
                             //////// Slider viewPager
                             pager.adapter = it.homepagedata?.sliders?.let { it ->

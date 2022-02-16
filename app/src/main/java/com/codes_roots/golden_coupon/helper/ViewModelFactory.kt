@@ -9,6 +9,7 @@ import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragmen
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
+import com.codes_roots.golden_coupon.presentation.sortfragment.SortFragment
 
 import dagger.Binds
 import dagger.MapKey
@@ -103,6 +104,11 @@ abstract class FragmentFactoryModule {
     @FragmentKey(FavoriteFragment::class)
     abstract fun bindFavoriteFragment(fragment: FavoriteFragment): Fragment
 
+//
+//    @Binds
+//    @IntoMap
+//    @FragmentKey(SortFragment::class)
+//    abstract fun bindSortFragment(fragment: SortFragment): Fragment
 
 }
 

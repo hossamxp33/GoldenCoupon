@@ -10,12 +10,16 @@ import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.Prod
 import com.codes_roots.golden_coupon.presentation.sortfragment.SortFragment
 
 
-class Sort_List_Adapter (var viewModel: ProductsViewModel, var context : SortFragment?, var data:List<String>) : RecyclerView.Adapter<CustomViewHolders>() {
+class Sort_List_Adapter(
+    var viewModel: ProductsViewModel,
+    var context: SortFragment?,
+    var data: List<String>,
+) : RecyclerView.Adapter<CustomViewHolders>() {
 
-    var row_index : Int ? = -1
+    var row_index: Int? = -1
 
     override fun getItemCount(): Int {
-        return  data.size
+        return data.size
     }
 
 
@@ -25,29 +29,29 @@ class Sort_List_Adapter (var viewModel: ProductsViewModel, var context : SortFra
 
         p0.binding.checkBox.setOnClickListener {
             row_index = position
-context!!.SelectedSortOption = position
-
+            context!!.selectedSortOption = position
         }
         p0.binding.checkBox.isChecked = row_index == position
 
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CustomViewHolders {
-        val  binding: SortListBinding = DataBindingUtil.inflate (LayoutInflater.from(p0.context),
-          R.layout.sort_list,p0,false)
+        val binding: SortListBinding = DataBindingUtil.inflate(LayoutInflater.from(p0.context),
+            R.layout.sort_list, p0, false)
 
 
-        return  CustomViewHolders(binding)
+        return CustomViewHolders(binding)
     }
 
 
 }
-class CustomViewHolders (
-     var binding:SortListBinding
-) : RecyclerView.ViewHolder(binding.root){
 
-    fun bind(data:String) {
-        binding.data= data
+class CustomViewHolders(
+    var binding: SortListBinding,
+) : RecyclerView.ViewHolder(binding.root) {
+
+    fun bind(data: String) {
+        binding.data = data
     }
 
 }

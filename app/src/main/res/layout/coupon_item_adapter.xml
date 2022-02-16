@@ -111,7 +111,7 @@
             android:layout_height="30dp"
             android:layout_marginStart="4dp"
             android:background="@drawable/copy_button"
-            android:onClick="@{()->listener.setClipboard(context,data.discount_code)}"
+            android:onClick="@{()->listener.setClipboard(context,data.discount_code,data.discount_code)}"
             android:text="@string/copy_code"
             android:textColor="@color/white"
             android:textSize="14sp"

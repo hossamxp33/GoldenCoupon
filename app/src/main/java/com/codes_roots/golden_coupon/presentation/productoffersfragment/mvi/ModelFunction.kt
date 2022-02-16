@@ -9,6 +9,8 @@ import com.codes_roots.golden_coupon.repo.products.DataRepo
 
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 /**
@@ -18,7 +20,7 @@ suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
     loadCategoryData: suspend () -> Flow<Result<AllCategoryModel>> = { Datarepo.getCategoryData },
-    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = { Datarepo.getProductsData(intent.cat_id!!) },
+    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = { Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.cat_id!!) },
 
     //getProductsData
 ) = when (intent) {
@@ -29,7 +31,7 @@ suspend fun mapIntentToViewState(
     )
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
     is MainIntent.SearchByName -> searchByName(intent, intent.Name!!)
-    is MainIntent.SortProducts -> TODO()
+ //   is MainIntent.SortProductsByName -> sortByName(intent)
     is MainIntent.FilterDataByCategory -> filterDataByCatId(intent,intent.cat_id!!)
     is MainIntent.FilterDataBySubCategory ->filterDataBySubCategoryId(intent,intent.subcategory_id!!)
 }
@@ -39,7 +41,7 @@ private suspend fun proceedWithInitialize(
     categoryData: suspend () -> Flow<Result<AllCategoryModel>>,
     productsData: suspend () -> Flow<Result<ProductsModel>>,
 
-    intent: MainIntent
+    intent: MainIntent,
 ): MainViewState {
     val categoryDataResponse = categoryData()
 
@@ -53,7 +55,7 @@ private suspend fun proceedWithInitialize(
     return runCatching {
         intent.viewState!!.copy(
             productsData = productsData.getOrThrow(),
-            categoryData = (categoryData.getOrThrow()),
+            categoryData = categoryData.getOrThrow(),
             filteredData = productsData.map { it.brands }.getOrThrow(),
             error = null,
             progress = false,
@@ -103,6 +105,17 @@ fun SearchProductByname(Name: String, brandsArray: ArrayList<Product>?) =
         data.name!!.contains(Name)
     }
 
+//
+//private  fun sortByName(intent:MainIntent):MainViewState
+//{
+//    val filterData = sortBranchesByName(intent.viewState?.productsData!!.brands)
+//    return intent.viewState!!.copy(filteredData =  filterData)
+//
+//}
+//fun sortBranchesByName(branch: ArrayList<Product>?) =
+//    branch?.sortedBy { it.name }
+//
+//
 
 
 

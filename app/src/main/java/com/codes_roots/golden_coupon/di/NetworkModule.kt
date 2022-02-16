@@ -4,7 +4,10 @@ import android.content.Context
 import com.codes_roots.golden_coupon.data_layer.APIServices
 import com.codes_roots.golden_coupon.helper.*
 import com.codes_roots.golden_coupon.helper.Constants.Companion.BASE_URL
+import com.codes_roots.golden_coupon.presentation.auth.loginfragment.LoginFragment
+import com.codes_roots.golden_coupon.presentation.auth.signupfragment.SignUpFragment
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
+import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
@@ -61,6 +64,10 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
     fun inject(app: CouponsFragment)
     fun inject(app: FavoriteFragment)
     fun inject(app: SortFragment)
+    fun inject(app: DealsFragment)
+    fun inject(app: SignUpFragment)
+    fun inject(app: LoginFragment)
+
 
 }
 
@@ -84,7 +91,7 @@ class APIModule constructor() {
                 //   builder.addHeader("Accept", "application/json")
                 builder.addHeader("Content-Type", "application/json")
                 builder.addHeader("Authorization",
-                    "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjQyODAsImV4cCI6MTY1MDY1MTExOX0.LcAEb3REI49NIzCJGbEudYicJRmQg4ntIBh-6Z7k9Fs")
+                    "Bearer"+Pref.UserToken)
 //                Log.d("token",Pref.token!!)
                 val newRequest = builder.build()
                 chain.proceed(newRequest)

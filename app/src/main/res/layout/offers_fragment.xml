@@ -14,6 +14,14 @@
         <variable
             name="listener"
             type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+        <variable
+            name="viewModel"
+            type="com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel" />
+
+        <variable
+            name="productData"
+            type="com.codes_roots.golden_coupon.entites.products.Product" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -115,7 +123,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:onClick="@{() -> listener.openSortFragment(context)}"
+            android:onClick="@{() -> listener.openSortFragment(context,viewModel,productData)}"
             android:background="@drawable/shadowbackground"
             android:padding="6dp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.first
 suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
-    loadMainData: suspend () -> Flow<Result<BrandsModel>> = { Datarepo.getMainData },
+    loadMainData: suspend () -> Flow<Result<BrandsModel>> = { Datarepo.getMainData(intent.page) },
     AddFavorite: suspend () ->  Flow<Result<Boolean>> = {
         Datarepo.addFavouriteData(intent.brand_id!!, intent.user_id!!)
     }

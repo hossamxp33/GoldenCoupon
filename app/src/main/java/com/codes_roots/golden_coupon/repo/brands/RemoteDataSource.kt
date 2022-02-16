@@ -5,6 +5,7 @@ import com.codes_roots.golden_coupon.data_layer.APIServices
 import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
 import com.codes_roots.golden_coupon.entites.countries.CountryModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
+import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import retrofit2.Response
 
@@ -13,8 +14,12 @@ import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(private val ApiService: APIServices) : DataSource {
 
-    override suspend fun getBrandsResponse(): BrandsModel =
-        runCatching { ApiService.getBrandsData() }
+    override suspend fun getBrandsResponse(page: Int?): BrandsModel =
+        runCatching { ApiService.getBrandsData(page)}
+            .getOrElse { throw it }
+
+    override suspend fun getDealsResponse(page: Int?): DealsModel =
+        runCatching { ApiService.getDealsData(page)}
             .getOrElse { throw it }
 
     override suspend fun getCouponsResponse(brandid:Int): Response<CouponsModel> {

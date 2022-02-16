@@ -18,7 +18,6 @@ import javax.inject.Inject
 class ProductsViewModel @Inject constructor(
     private val DateRepoCompnay: DataRepo,
 
-
     ) : BaseViewModel<MainViewState>() {
 
     val intents: Channel<MainIntent> = Channel<MainIntent>(Channel.UNLIMITED)
