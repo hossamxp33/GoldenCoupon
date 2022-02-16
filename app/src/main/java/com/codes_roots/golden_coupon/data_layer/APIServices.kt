@@ -28,9 +28,9 @@ interface APIServices {
     @FormUrlEncoded
     @POST("products/index/{country_id}.json")
     suspend fun getProductData(
-        @Path("country_id") country_id: Int?=null,
-        @Query("sort=cat_id") sort: String?=null,
-        @Field("Filter[cat_id]") cat_id: Int?=null,
+        @Path("country_id") country_id: Int?,
+        @Query("sort=cat_id") sort: String?,
+        @Field("Filter[cat_id]") cat_id: Int?,
     ): ProductsModel
 
     @GET("items/index/{brandid}.json")

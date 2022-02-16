@@ -20,7 +20,7 @@ import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.Prod
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
 
-class SortFragment @Inject constructor(var viewModel: ProductsViewModel,var data:Product) :
+class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var data: Product) :
     BottomSheetDialogFragment() {
 
     companion object {
@@ -47,20 +47,26 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel,var data
         view.context = context as MainActivity
         val viewState = viewModel.state.value
         view.ButtonClick.setOnClickListener {
-            if(data.productsizes!!.isNotEmpty()){
-            if (selectedSortOption == 0) {
-                viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,sort = "name",country_id =2,cat_id = 0))
-            } else if (selectedSortOption == 1) {
-                viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,sort = "price",country_id = 8,cat_id = 4))
-            }
-            //            else if (SelectedSortOption == 2) {
+            if (data.productsizes!!.isNotEmpty()) {
+                if (selectedSortOption == 0) {
+                    viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,
+                        sort = "name",
+                        country_id = data.productsizes!![0].country_id,
+                        cat_id = data.cat_id))
+                } else if (selectedSortOption == 1) {
+                    viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,
+                        sort = "price",
+                        country_id = 8,
+                        cat_id = 4))
+                }
+                //            else if (SelectedSortOption == 2) {
 //                viewmodel.intents.trySend(MainIntent.SortByDeliveryCost(viewstate))
 //            } else if (SelectedSortOption == 3) {
 //                viewmodel.intents.trySend(MainIntent.SortByDeliveryRating(viewstate))
-        //    }
-            this.dismiss()
-        }else{
-WARN_MotionToast("er",requireActivity())
+                //    }
+                this.dismiss()
+            } else {
+                WARN_MotionToast("er", requireActivity())
             }
 
         }
