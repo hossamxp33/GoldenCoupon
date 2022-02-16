@@ -29,12 +29,8 @@ class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
         AndroidInjection.inject(this@SplashScreen)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+         Pref.lang
 
-        if (ResourceUtil().getCurrentLanguage(this@SplashScreen)!!.contains("ar")
-        )
-            ResourceUtil().changeLang("ar", this@SplashScreen)
-        else
-            ResourceUtil().changeLang("en", this@SplashScreen)
 
 
 

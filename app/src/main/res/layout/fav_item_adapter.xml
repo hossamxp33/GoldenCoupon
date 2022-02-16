@@ -17,6 +17,12 @@
         <variable
             name="listener"
             type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+        <variable
+            name="pref"
+            type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
+
+
+
         <import type="android.text.Html"/>
 
     </data>
@@ -60,7 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="@{Html.fromHtml(String.format(productData.brand.name))}"
+
+            android:text="@{Html.fromHtml(String.format(pref.lang == `ar`? productData.brand.name : productData.brand.name_en))}"
             app:layout_constraintStart_toEndOf="@+id/cardView1"
             app:layout_constraintTop_toTopOf="@+id/cardView1" />
 

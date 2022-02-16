@@ -3,6 +3,7 @@ package com.codes_roots.golden_coupon.helper
 import android.app.Activity
 import android.content.Context
 import android.content.res.Configuration
+import android.os.Build
 import java.util.*
 
 class ResourceUtil {
@@ -16,13 +17,19 @@ class ResourceUtil {
 
 
     fun changeLang(lang: String, context: Context) {
-        if (lang.equals("", ignoreCase = true)) return
-        myLocale = Locale(lang)
-        Locale.setDefault(myLocale)
-        val config = Configuration()
-        config.locale = myLocale
-        context.resources.updateConfiguration(config, context.resources.displayMetrics)
-        saveLocale(lang, context)
+        val config = context.resources.configuration
+        val locale = Locale(lang)
+        Locale.setDefault(locale)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
+            config.setLocale(locale)
+        else
+            config.locale = locale
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+            context. createConfigurationContext(config)
+        context. resources.updateConfiguration(config, context.resources.displayMetrics)
+
+
     }
 
 

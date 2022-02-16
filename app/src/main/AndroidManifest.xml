@@ -13,7 +13,7 @@
         android:name=".helper.BaseApplication"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.GoldenCoupon.NoActionBar">
+        android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity"
             android:exported="true"
@@ -40,18 +40,18 @@
             android:exported="true"
             android:windowSoftInputMode="stateVisible"
             >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.codes_roots.golden_coupon.presentation.splash.SplashScreen"
             android:exported="true"
             android:windowSoftInputMode="stateVisible"
             >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
 

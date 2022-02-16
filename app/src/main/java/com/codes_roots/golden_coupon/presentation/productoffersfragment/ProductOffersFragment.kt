@@ -214,9 +214,9 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
 
 
                             productsAdapter.submitList(it.filteredData)
-//
+
                             categoryAdapter.submitList(it.categoryData!!.categories)
-//
+
                             subcategoryAdapter.submitList(it.categoryData!!.categories!![it.category_position].subcats)
 
                             view.progress.isVisible = false

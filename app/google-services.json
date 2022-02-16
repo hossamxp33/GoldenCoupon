@@ -1,62 +1,41 @@
 {
   "project_info": {
-    "project_number": "777956349889",
-    "project_id": "my-post-6412f",
-    "storage_bucket": "my-post-6412f.appspot.com"
+    "project_number": "278997993002",
+    "project_id": "golden-coupon",
+    "storage_bucket": "golden-coupon.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:777956349889:android:24898f542589f1732a0140",
+        "mobilesdk_app_id": "1:278997993002:android:84f4cf37aeb164324fe553",
         "android_client_info": {
-          "package_name": "com.codes_roots.goldencoupon"
+          "package_name": "com.codes_roots.golden_coupon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "777956349889-rlm7gctvdl4slhe4q5u8pftilt8aep2a.apps.googleusercontent.com",
+          "client_id": "278997993002-80d0p9qu0j5nsm756go2n7bt8pjp906g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codes_roots.golden_coupon",
+            "certificate_hash": "b55b730052512905a04c5fb3eebf8e65f36fe4e2"
+          }
+        },
+        {
+          "client_id": "278997993002-bqctguckvlgacriv9cnsql5ur7becs37.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBD1B2cD7YvXgmhLrnMxDoZV7GGLi2-7K4"
+          "current_key": "AIzaSyB6O_7ILiKrWfCEIgbMjAa-8oEcHgcFOlQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "777956349889-rlm7gctvdl4slhe4q5u8pftilt8aep2a.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:777956349889:android:06823feb7083af332a0140",
-        "android_client_info": {
-          "package_name": "com.tarweej.mypost"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "777956349889-rlm7gctvdl4slhe4q5u8pftilt8aep2a.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBD1B2cD7YvXgmhLrnMxDoZV7GGLi2-7K4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "777956349889-rlm7gctvdl4slhe4q5u8pftilt8aep2a.apps.googleusercontent.com",
+              "client_id": "278997993002-bqctguckvlgacriv9cnsql5ur7becs37.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

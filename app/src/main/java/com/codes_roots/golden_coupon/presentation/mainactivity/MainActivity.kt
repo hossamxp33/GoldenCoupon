@@ -48,6 +48,7 @@ import javax.inject.Inject
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codes_roots.golden_coupon.data_layer.OnBackPressedListener
+import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 
 
@@ -62,10 +63,13 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     var flag = false
 
+
     lateinit var fragment: Fragment
 
     @Inject
     lateinit var fragmentFactory: FragmentFactory
+  @Inject
+    lateinit var preferenceHelper: PreferenceHelper
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory

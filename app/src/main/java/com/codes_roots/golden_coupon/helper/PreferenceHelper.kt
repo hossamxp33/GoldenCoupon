@@ -91,6 +91,13 @@ class PreferenceHelper(private val context: Context) {
         }
 
 
+    var photo : String?
+        get() = app_prefs!!.getString("photo", "photo")
+        set(photo) {
+            val edit = app_prefs!!.edit()
+            edit.putString("photo", photo)
+            edit.apply()
+        }
 
 
 

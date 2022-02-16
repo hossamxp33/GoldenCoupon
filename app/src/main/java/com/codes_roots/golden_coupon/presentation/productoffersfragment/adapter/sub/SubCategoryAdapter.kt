@@ -96,6 +96,8 @@ class ViewHolder(
         //    binding.listener = ClickHandler()
         binding.data = data
         binding.context = context as MainActivity?
+        binding.pref = (context as MainActivity).preferenceHelper
+
     }
 
 

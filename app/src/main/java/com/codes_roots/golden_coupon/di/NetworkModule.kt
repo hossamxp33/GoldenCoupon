@@ -85,6 +85,8 @@ class APIModule constructor() {
                 val originalRequest = chain.request()
                     var Pref = PreferenceHelper(context)
                 val builder = originalRequest.newBuilder()
+
+
                 //   builder.addHeader("Accept", "application/json")
                 builder.addHeader("Content-Type", "application/json")
                 builder.addHeader("Authorization",

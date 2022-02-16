@@ -174,11 +174,17 @@ open class HomeFragment @Inject constructor() : Fragment() {
                             shimmer_view_container.startShimmerAnimation()
                             viewModel.intents.send(MainIntent.Initialize(it,page))
                         } else {
+                            try {
                             filteredData.addAll(it.filteredData!!)
 
                             brandsAdapter.submitList(filteredData)
-
+                            }catch (e:Exception){
+                                Toast.makeText(requireContext(),
+                                    "There is no other coupons",
+                                    Toast.LENGTH_LONG).show()
+                            }
                            stopLoadingShimmer()
+
                         }
 
                     }

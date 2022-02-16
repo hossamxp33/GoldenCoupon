@@ -51,8 +51,8 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var dat
                 if (selectedSortOption == 0) {
                     viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,
                         sort = "name",
-                        country_id = data.productsizes!![0].country_id,
-                        cat_id = data.cat_id))
+                        country_id = 8,
+                        cat_id = 4))
                 } else if (selectedSortOption == 1) {
                     viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,
                         sort = "price",
@@ -65,7 +65,8 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var dat
 //                viewmodel.intents.trySend(MainIntent.SortByDeliveryRating(viewstate))
                 //    }
                 this.dismiss()
-            } else {
+            }
+        else {
                 WARN_MotionToast("er", requireActivity())
             }
 

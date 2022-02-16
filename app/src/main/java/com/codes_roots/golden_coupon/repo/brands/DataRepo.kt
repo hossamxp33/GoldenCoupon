@@ -30,7 +30,11 @@ class DataRepo @Inject constructor(
                         delay(1000)
                     }
                 }
-            }
+            }  .catch { throwable -> emit(Result.failure(throwable)) }
+            .flowOn(ioDispatcher)
+
+
+
     fun getDealsData(page: Int?): Flow<Result<DealsModel>> =
         flow {
             emit(Datasources.getDealsResponse(page))
@@ -43,7 +47,6 @@ class DataRepo @Inject constructor(
                     }
                 }
             }
-
 
             .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)

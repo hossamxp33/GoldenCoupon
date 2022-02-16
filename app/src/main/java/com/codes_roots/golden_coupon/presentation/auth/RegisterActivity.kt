@@ -1,7 +1,9 @@
 package com.codes_roots.golden_coupon.presentation.auth
 
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
 import android.util.Log
@@ -11,10 +13,20 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.codes_roots.golden_coupon.R
+import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.auth.viewmodel.AuthViewModel
+import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.ratefragment.RateFragment.Companion.TAG
 
 import com.facebook.*
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.SignInButton
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -25,88 +37,49 @@ import java.util.*
 import javax.inject.Inject
 
 
-class RegisterActivity: AppCompatActivity() {
-  //  var callbackManager: CallbackManager? = null
+class RegisterActivity : AppCompatActivity() {
+    //  var callbackManager: CallbackManager? = null
+    private lateinit var mGoogleSignInClient: GoogleSignInClient
+    val RC_SIGN_IN = 1000
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+
     private val viewModel by viewModels<AuthViewModel> { viewModelFactory }
+
+    @Inject
+    lateinit var pref: PreferenceHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
-        val info: PackageInfo
-        try {
-            info = packageManager.getPackageInfo(
-                "com.example.satafood",
-                PackageManager.GET_SIGNATURES
-            )
-            for (signature in info.signatures) {
-                var md: MessageDigest
-                md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                val something = String(Base64.encode(md.digest(), 0))
-                //String something = new String(Base64.encodeBytes(md.digest()));
-                Log.i("hash key", something)
-            }
-        } catch (e1: PackageManager.NameNotFoundException) {
-            Log.e("name not found", e1.toString())
-        } catch (e: NoSuchAlgorithmException) {
-            Log.e("no such an algorithm", e.toString())
-        } catch (e: Exception) {
-            Log.e("exception", e.toString())
-        }
 
 
         PreferenceHelper(this)
-      //  FacebookSdk.sdkInitialize(this);
+        //  FacebookSdk.sdkInitialize(this);
 
         setContentView(R.layout.register_activity)
 
 
         tab_layout.setBackgroundColor(ContextCompat.getColor(this, R.color.white))
 
-        printKeyHash()
+// Configure sign-in to request the user's ID, email address, and basic
+// profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestEmail()
+            .build()
+// Build a GoogleSignInClient with the options specified by gso.
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-//        facebook_button.setReadPermissions(listOf("user_status"))
-//        LoginManager.getInstance().logInWithReadPermissions(
-//            this,
-//            Arrays.asList("email"));
- //       LoginManager.getInstance().logOut()
-//        facebook_button.setOnClickListener {
-////
-//            callbackManager = CallbackManager.Factory.create()
-//
-//            LoginManager.getInstance().registerCallback(callbackManager,
-//                object : FacebookCallback<LoginResult?> {
-//                    override fun onSuccess(loginResult: LoginResult?) {
-//                        val image_url =
-//                            "http://graph.facebook.com/" + Profile.getCurrentProfile()!!.id
-//                                .toString() + "/picture?type=large"
-////
-////                        viewModel.facebookLogin(
-////                            User(facebook_id = loginResult!!.accessToken.userId,username = Profile.getCurrentProfile().name
-////                            ,photo=image_url)
-////
-////                        )
-//
-//                       // PreferenceHelper.setPhoto(image_url)
-//               Toast.makeText(this@RegisterActivity, "Its toast!", Toast.LENGTH_SHORT).show()
-//
-//                    }
-//
-//                    override fun onCancel() {
-//                        Toast.makeText(this@RegisterActivity, "Its onCancel!", Toast.LENGTH_SHORT).show()
-//                    }
-//
-//                    override fun onError(exception: FacebookException) {
-//                        Toast.makeText(this@RegisterActivity, "Its onError!", Toast.LENGTH_SHORT).show()
-//
-//                        // App code
-//                    }
-//                })
-//        }
+
+        google_button.setSize(SignInButton.SIZE_STANDARD)
+
+        google_button.setOnClickListener {
+
+            signIn()
+        }
 
         // Number Of Tabs
         val numberOfTabs = 2
@@ -133,8 +106,8 @@ class RegisterActivity: AppCompatActivity() {
 
                 }
                 1 -> {
-                     tab.text = this.getText(R.string.register)
-                     tab.setIcon(R.drawable.add)
+                    tab.text = this.getText(R.string.register)
+                    tab.setIcon(R.drawable.add)
                 }
             }
 
@@ -143,20 +116,46 @@ class RegisterActivity: AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
 
-    /// get Hash KEy
-    private fun printKeyHash() {
-        try {
-            val info: PackageInfo = getPackageManager()
-                .getPackageInfo(getPackageName(), PackageManager.GET_SIGNATURES)
-            for (signature in info.signatures) {
-                val md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                val hashKey = String(Base64.encode(md.digest(), 0))
-                Log.i("AppLog", "key:$hashKey=")
-            }
-        } catch (e: java.lang.Exception) {
-            Log.e("AppLog", "error:", e)
+        // Result returned from launching the Intent from GoogleSignInClient.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            // The Task returned from this call is always completed, no need to attach
+            // a listener.
+            val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
+            handleSignInResult(task)
         }
+    }
+
+    private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+           val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
+            val acct = GoogleSignIn.getLastSignedInAccount(this)
+            if (acct != null) {
+                val personName = acct.displayName
+                val personGivenName = acct.givenName
+                val personFamilyName = acct.familyName
+                val personEmail = acct.email
+                val personId = acct.id
+                val personPhoto: Uri? = acct.photoUrl
+
+                pref.photo = personPhoto.toString()
+                //      Pref.UserId = personId!!.toInt()
+
+                Toast.makeText(this, "user name is : $personGivenName", Toast.LENGTH_SHORT).show()
+            }
+            ClickHandler().switchToActivity(this, MainActivity())
+            // Signed in successfully, show authenticated UI.
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Log.w(TAG, "signInResult:failed code=" + e.statusCode)
+        }
+    }
+
+    private fun signIn() {
+        val signInIntent = mGoogleSignInClient.signInIntent
+        startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 }

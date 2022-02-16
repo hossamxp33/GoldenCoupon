@@ -16,7 +16,7 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
 
     override suspend fun getBrandsResponse(page: Int?): BrandsModel =
         runCatching { ApiService.getBrandsData(page)}
-            .getOrElse { throw it }
+            .getOrThrow()
 
     override suspend fun getDealsResponse(page: Int?): DealsModel =
         runCatching { ApiService.getDealsData(page)}

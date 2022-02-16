@@ -31,11 +31,21 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_button"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_margin="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/img_layout"
+        app:layout_constraintTop_toTopOf="parent"
         app:tabMaxWidth="0dp"
         app:tabIconTint="@color/tab_icon"
         app:tabSelectedTextColor="@color/orange"
@@ -48,8 +58,7 @@
         android:id="@+id/tabs_viewpager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/google_button"
         app:layout_constraintTop_toBottomOf="@+id/tab_layout" />
 
 

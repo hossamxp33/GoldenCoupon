@@ -17,6 +17,10 @@
         <variable
             name="listener"
             type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+        <variable
+            name="pref"
+            type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
+
 
     </data>
 
@@ -47,7 +51,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="@{productData.name}"
+            android:text="@{pref.lang == `ar`? productData.name : productData.name_en}"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/brand_icon"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"
@@ -61,7 +65,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:maxLines="3"
-            android:text="@{productData.description}"
+            android:text="@{pref.lang == `ar`? productData.description : productData.description_en}"
+
             android:textSize="14sp"
             app:layout_constraintEnd_toStartOf="@+id/brand_icon"
             app:layout_constraintStart_toEndOf="@+id/appCompatImageView3"

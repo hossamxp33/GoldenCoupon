@@ -29,7 +29,7 @@ interface APIServices {
     @POST("products/index/{country_id}.json")
     suspend fun getProductData(
         @Path("country_id") country_id: Int?,
-        @Query("sort=cat_id") sort: String?,
+        @Query("sort ") sort: String?,
         @Field("Filter[cat_id]") cat_id: Int?,
     ): ProductsModel
 
