@@ -1,24 +1,23 @@
 package com.codes_roots.golden_coupon.helper
 
 import android.content.*
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.NavHostFragment
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.entites.products.Product
+import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
 import com.codes_roots.golden_coupon.presentation.chose_language.LanguageActivity
 import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.menufragment.StaticFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
-import com.codes_roots.golden_coupon.presentation.ratefragment.RateFragment
 import com.codes_roots.golden_coupon.presentation.sortfragment.SortFragment
 import com.codes_roots.golden_coupon.presentation.web_view.WebViewActivity
 import com.google.android.play.core.review.ReviewManagerFactory
@@ -72,6 +71,12 @@ class ClickHandler {
 
         Toast.makeText(context, context.getString(R.string.copied) +
                 " "+code, Toast.LENGTH_SHORT).show()
+    }
+    fun openStaticFragment(context: Context, Item: StaticPagesItem) {
+        (context as MainActivity)
+        context.supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frame, StaticFragment(Item)).addToBackStack(null).commit()
+
     }
 fun switchToDealsFragment(context: Context){
     switchFragment(context,DealsFragment())

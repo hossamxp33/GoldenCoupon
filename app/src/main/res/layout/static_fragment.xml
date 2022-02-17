@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout">
+
+    <data>
+
+        <variable
+            name="Context"
+            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+
+        <variable
+            name="listener"
+            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+
+        <variable
+            name="data"
+            type="com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem" />
+
+        <import type="android.text.Html"/>
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dimen_12"
+        android:background="@android:color/white"
+        >
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@{Html.fromHtml(String.format(data.content))}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
+        <FrameLayout
+            android:id="@+id/progress"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+        >
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+        </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>

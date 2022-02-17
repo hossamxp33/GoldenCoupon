@@ -173,6 +173,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         }
 
 
+
 //       Handler(Looper.getMainLooper()).postDelayed(Runnable {  }, 2000)
 
     }

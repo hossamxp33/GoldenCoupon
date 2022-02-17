@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+        <variable
+            name="context"
+            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+
+        <variable
+            name="listener"
+            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+
+        <variable
+            name="pref"
+            type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
+
+        <variable
+            name="data"
+            type="com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem" />
+
+    </data>
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/contact_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:onClick="@{() -> listener.openStaticFragment(context,data)}"
+        android:background="@drawable/shadow_white_bg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/share_layout">
+
+
+
+        <TextView
+            android:id="@+id/contact"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/menuTitles"
+            android:text="@{pref.lang== `ar` ? data.name:data.name_en}"
+            app:drawableEndCompat="@drawable/left_ic"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>

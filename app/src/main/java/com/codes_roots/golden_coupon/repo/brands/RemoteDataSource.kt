@@ -7,6 +7,8 @@ import com.codes_roots.golden_coupon.entites.countries.CountryModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
+import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
+import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
 import retrofit2.Response
 
 import javax.inject.Inject
@@ -41,5 +43,8 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
 
     }
 
+    override suspend fun getStaticPages(): StaticPagesModel {
+        return ApiService.getStaticPages()
+    }
 
 }

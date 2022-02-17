@@ -11,6 +11,7 @@ import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
+import com.codes_roots.golden_coupon.presentation.menufragment.StaticFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
 import com.codes_roots.golden_coupon.presentation.sortfragment.SortFragment
 
@@ -67,6 +68,7 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
     fun inject(app: DealsFragment)
     fun inject(app: SignUpFragment)
     fun inject(app: LoginFragment)
+    fun inject(app: StaticFragment)
 
 
 }

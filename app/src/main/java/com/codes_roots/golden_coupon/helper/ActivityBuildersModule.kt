@@ -2,6 +2,7 @@ package com.codes_roots.golden_coupon.helper
 
 import com.codes_roots.golden_coupon.di.ActivityScope
 import com.codes_roots.golden_coupon.di.MainModule
+import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
 import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
 import com.codes_roots.golden_coupon.presentation.chose_language.LanguageActivity
 import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
@@ -36,6 +37,9 @@ interface ActivityBuildersModule {
 
     @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
     fun contributeLanguageActivity(): LanguageActivity
+
+//    @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
+//    fun contributeLStaticPagesActivity(): StaticPagesActivity
 
 
 

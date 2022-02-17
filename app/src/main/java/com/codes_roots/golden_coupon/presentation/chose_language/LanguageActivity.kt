@@ -37,7 +37,7 @@ class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidIn
 
     @Inject
     lateinit var Pref: PreferenceHelper
- var index = 0
+
      override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this@LanguageActivity)
         super.onCreate(savedInstanceState)

@@ -23,7 +23,7 @@ import javax.inject.Inject
 
 class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
 
-    private val SPLASH_DISPLAY_LENGTH = 3000 //splash screen will be shown for 2 seconds
+    private val SPLASH_DISPLAY_LENGTH = 2000 //splash screen will be shown for 2 seconds
 
     @Inject
     lateinit var Pref: PreferenceHelper
@@ -33,16 +33,13 @@ class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-
         Handler().postDelayed({
             if (Pref.lang != ""){
                 ResourceUtil().changeLang(Pref.lang!!, this)
                 if (Pref.token != "")
-
               ClickHandler().switchToActivity(this,MainActivity())
              else
              ClickHandler().switchToActivity(this,RegisterActivity())
-
 
             }else{
                 ClickHandler().switchToActivity(this, LanguageActivity())

@@ -5,6 +5,8 @@ import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
+import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
+import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -81,6 +83,16 @@ class DataRepo @Inject constructor(
             .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
+    fun getStaticPages(): Flow<Result<StaticPagesModel>> =
+        flow {
+            emit(Datasources.getStaticPages())
+        }
+            .map { Result.success(it) }
+            .retry(4){ t -> (t is IOException).also { if (it) {
+                delay(1000)
+            }}}
+            .catch { throwable -> emit(Result.failure(throwable)) }
+            .flowOn(ioDispatcher)
 
 }
 
