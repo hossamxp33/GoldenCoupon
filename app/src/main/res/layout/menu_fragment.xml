@@ -70,6 +70,8 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/myAccount"
                     style="@style/menuTitles"
+                    android:onClick="@{()->listener.switchToLogin(context)}"
+
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -87,6 +89,8 @@
                     style="@style/menuTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:onClick="@{()->listener.switchToDealsFragment(context)}"
+
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"

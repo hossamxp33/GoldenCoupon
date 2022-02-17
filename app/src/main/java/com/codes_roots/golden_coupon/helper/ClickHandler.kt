@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.entites.products.Product
+import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
 import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
+import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
 import com.codes_roots.golden_coupon.presentation.ratefragment.RateFragment
@@ -70,7 +72,12 @@ class ClickHandler {
         Toast.makeText(context, context.getString(R.string.copied) +
                 " "+code, Toast.LENGTH_SHORT).show()
     }
-
+fun switchToDealsFragment(context: Context){
+    switchFragment(context,DealsFragment())
+}
+    fun switchToLogin(context: Context){
+        switchToActivity(context,RegisterActivity())
+    }
     fun switchFragment(context: Context, fragment: Fragment) {
         (context as MainActivity).supportFragmentManager.beginTransaction()
             .setCustomAnimations(0, 0, 0, 0)

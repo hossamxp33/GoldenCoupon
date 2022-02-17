@@ -151,7 +151,7 @@ class RegisterActivity : AppCompatActivity() {
             // Signed in successfully, show authenticated UI.
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
-            startSignInIntent()
+        //    startSignInIntent()
             Log.w(TAG, "signInResult:failed code=" + e.statusCode)
         }
     }

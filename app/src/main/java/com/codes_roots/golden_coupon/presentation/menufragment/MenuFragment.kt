@@ -43,7 +43,6 @@ open class MenuFragment @Inject constructor() : Fragment(){
 
 
      //   view.searchLayout.listener = ClickHandler()
-
         view.context = context as MainActivity
         view.listener = ClickHandler()
       //  view.searchLayout.pref = (context as MainActivity).Pref

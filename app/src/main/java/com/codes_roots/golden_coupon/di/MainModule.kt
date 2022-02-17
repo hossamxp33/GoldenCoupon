@@ -5,6 +5,7 @@ import com.codes_roots.golden_coupon.helper.ViewModelKey
 import com.codes_roots.golden_coupon.presentation.auth.viewmodel.AuthViewModel
 import com.codes_roots.golden_coupon.presentation.country_activity.viewmodel.CountryViewModel
 import com.codes_roots.golden_coupon.presentation.couponsfragment.viewmodel.CouponsViewModel
+import com.codes_roots.golden_coupon.presentation.dealsfragment.mvi.DealsViewModel
 import com.codes_roots.golden_coupon.presentation.favfragment.mvi.FavViewModel
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
@@ -49,6 +50,10 @@ interface MainModule {
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
     fun bindAuthViewModel(mainViewModel: AuthViewModel): ViewModel
+    @Binds
+    @IntoMap
+    @ViewModelKey(DealsViewModel::class)
+    fun bindDealsViewModel(mainViewModel: DealsViewModel): ViewModel
 
 
 

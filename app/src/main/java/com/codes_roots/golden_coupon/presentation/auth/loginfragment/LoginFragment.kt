@@ -23,7 +23,7 @@ import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import javax.inject.Inject
 
 
-class LoginFragment: Fragment() {
+class LoginFragment@Inject constructor(): Fragment() {
 
 
     @Inject

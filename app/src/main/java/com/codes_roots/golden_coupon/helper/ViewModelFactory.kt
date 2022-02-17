@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.codes_roots.golden_coupon.presentation.auth.loginfragment.LoginFragment
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
+import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
@@ -99,10 +101,19 @@ abstract class FragmentFactoryModule {
     @FragmentKey(CouponsFragment::class)
     abstract fun bindCouponsFragment(fragment: CouponsFragment): Fragment
 
-   @Binds
+    @Binds
     @IntoMap
     @FragmentKey(FavoriteFragment::class)
     abstract fun bindFavoriteFragment(fragment: FavoriteFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(LoginFragment::class)
+    abstract fun bindLoginFragment(fragment: LoginFragment): Fragment
+    @Binds
+    @IntoMap
+    @FragmentKey(DealsFragment::class)
+    abstract fun bindDealsFragment(fragment: DealsFragment): Fragment
 
 //
 //    @Binds

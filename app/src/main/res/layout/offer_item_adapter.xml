@@ -109,13 +109,13 @@
                 style="@style/grayText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginRight="16dp"
                 android:layout_marginBottom="4dp"
                 android:text="@{String.valueOf(productData.percentage)}"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -143,28 +143,32 @@
             android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:onClick="@{()->listener.setClipboard(context,productData.cpoun,productData.cpoun)}"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/copy_button"
             android:gravity="center"
+            android:onClick="@{()->listener.setClipboard(context,productData.cpoun,productData.cpoun)}"
             android:padding="@dimen/dimen_8"
-            android:text="@{@string/copy_code}"
 
+            android:text="@{@string/copy_code}"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/visit_site_button"
             app:layout_constraintTop_toBottomOf="@+id/priceWithCode" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/visit_site_button"
             style="@style/blackText"
-            android:onClick="@{()->listener.openWebView(context,productData.url)}"
-
             android:layout_width="wrap_content"
+
             android:layout_height="35dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/site_button"
+            android:onClick="@{()->listener.openWebView(context,productData.url)}"
             android:text="@string/buy"
             android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/priceWithCode" />
 
