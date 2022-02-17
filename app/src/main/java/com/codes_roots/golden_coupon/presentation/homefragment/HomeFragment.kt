@@ -52,6 +52,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
+            viewModel.intents.trySend(MainIntent.Initialize(viewModel.state?.value!!.copy(progress = true),page))
 
         }
     }
@@ -81,6 +82,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
 
         //  view.searchBar.setError("assad")
         view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
+            filteredData.clear()
             viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
                 text.toString()))
         }
@@ -124,7 +126,8 @@ open class HomeFragment @Inject constructor() : Fragment() {
                     (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                     if (lastVisibleItem == brandsAdapter.itemCount-1) {
                         page++
-                        viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!.copy(progress = true),page))
+                        viewModel.intents.trySend(MainIntent.ShowProgress(viewModel.state.value!!))
+                        viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,page))
 
                     }
             }
@@ -154,6 +157,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
 
 
     fun getAllData() {
+
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
                 if (it != null) {
@@ -172,12 +176,12 @@ open class HomeFragment @Inject constructor() : Fragment() {
                     } else {
                         if (it.progress == true) {
                             shimmer_view_container.startShimmerAnimation()
-                            viewModel.intents.send(MainIntent.Initialize(it,page))
                         } else {
                             try {
-                            filteredData.addAll(it.filteredData!!)
+                                filteredData.addAll(it.filteredData!!)
+                                brandsAdapter.submitList(filteredData)
+                                brandsAdapter.notifyDataSetChanged()
 
-                            brandsAdapter.submitList(filteredData)
                             }catch (e:Exception){
                                 Toast.makeText(requireContext(),
                                     "There is no other coupons",

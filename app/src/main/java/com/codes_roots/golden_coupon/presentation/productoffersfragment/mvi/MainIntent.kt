@@ -6,8 +6,8 @@ sealed class MainIntent(
     open val cat_id: Int? = null,
     open val subcategory_id: Int? = null,
     open val country_id:Int?=null,
-    open val sort:String?=null,
-
+    open val sort:String?="name",
+    open val FilterMap:    HashMap<String, String> ? = null
 ) {
 
     data class InitializeData(override val viewState: MainViewState,override val sort: String? = null, override val cat_id: Int? = null,override val country_id: Int? = null) : MainIntent()
@@ -19,12 +19,16 @@ sealed class MainIntent(
   //  data class SortProductsByName(override val viewState: MainViewState? = null) : MainIntent()
 
 
-    data class FilterDataByCategory(
+    data class FilterData(
         override val viewState: MainViewState? = null,
-        override val cat_id: Int? = null,
-        override val country_id: Int? = null,
+        override val FilterMap:    HashMap<String, String> ? = null
+       ,
 
-    ) : MainIntent()
+        override val country_id: Int? = null,
+        override val sort:String?="name",
+
+
+        ) : MainIntent()
 
     data class FilterDataBySubCategory(
         override val viewState: MainViewState? = null,

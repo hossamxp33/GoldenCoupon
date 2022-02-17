@@ -13,7 +13,7 @@ import retrofit2.Response
 
 interface DataSource {
 
-    suspend fun getBrandsResponse(page: Int?): BrandsModel
+    suspend fun getBrandsResponse(page: Int?, filter: String): BrandsModel
     suspend fun getDealsResponse(page: Int?): DealsModel
 
     suspend fun getCouponsResponse(brandid: Int): Response<CouponsModel>

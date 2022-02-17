@@ -46,10 +46,13 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?) 
   if (!currentList.isNullOrEmpty()) {
       row_index = position
       val viewState = viewModel?.state?.value
+      viewModel?.FilterFileds?.put("Filter[cat_id]",currentList[position].id.toString())
+
       viewModel!!.intents.trySend(
-          MainIntent.FilterDataByCategory(
-              viewState!!.copy(category_position = position, subcategoryVisibility = true),
-              currentList[position].id
+          MainIntent.FilterData(
+              viewState!!,
+               viewModel?.FilterFileds,
+                       viewState!!.country_id
           )
       )
 

@@ -80,12 +80,20 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
 
         //  view.searchLayout.pref = (context as MainActivity).Pref
 
+        viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(progress = true , country_id = Pref.CountryId),
+            viewModel?.FilterFileds ,Pref.CountryId))
         //  view.searchBar.setError("assad")
         view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
+
+
+            viewModel?.FilterFileds?.put("Filter[name]",text.toString())
+
             viewModel.intents.trySend(
-                MainIntent.SearchByName(
+
+                        MainIntent.FilterData(
                     viewModel.state.value!!,
-                    text.toString()
+                            viewModel?.FilterFileds,
+                            viewModel.state.value!!.country_id
                 )
             )
         }
@@ -205,8 +213,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                         if (it.progress == true) {
 
                                 view.progress.isVisible = it.progress
-                            viewModel.intents.send(MainIntent.InitializeData(it,
-                                "" ,0,Pref.CountryId))
+
                         } else {
                              view.subCategoryRecycleView.isVisible = it.subcategoryVisibility!!
                             //      productsAdapter.submitList(it.filterDataByCategory)

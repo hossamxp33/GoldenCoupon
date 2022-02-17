@@ -2,7 +2,6 @@ package com.codes_roots.golden_coupon.repo.brands
 
 import com.codes_roots.golden_coupon.di.IoDispatcher
 import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
-import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
@@ -21,9 +20,9 @@ class DataRepo @Inject constructor(
 
     // // انا كنت ناسي اعمل emit في الcatch عشان كدا كان بيرجع هنا نفس الrespone في الحالتين
     // استخدمت Result في ال follow عشان بترجع الobject , error في نفس الclass وده مش بيحصل في ال sealed
-    fun getMainData(page: Int?): Flow<Result<BrandsModel>> =
+    fun getMainData(page: Int?,filter:String): Flow<Result<BrandsModel>> =
         flow {
-            emit(Datasources.getBrandsResponse(page))
+            emit(Datasources.getBrandsResponse(page,filter))
         }
             .map { Result.success(it) }
             .retry(retries = 4) { t ->
@@ -34,7 +33,6 @@ class DataRepo @Inject constructor(
                 }
             }  .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
-
 
 
     fun getDealsData(page: Int?): Flow<Result<DealsModel>> =

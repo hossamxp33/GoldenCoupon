@@ -20,7 +20,7 @@ suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
     loadCategoryData: suspend () -> Flow<Result<AllCategoryModel>> = { Datarepo.getCategoryData },
-    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = { Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.cat_id!!) },
+    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = { Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
 
     //getProductsData
 ) = when (intent) {
@@ -32,7 +32,11 @@ suspend fun mapIntentToViewState(
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
     is MainIntent.SearchByName -> searchByName(intent, intent.Name!!)
  //   is MainIntent.SortProductsByName -> sortByName(intent)
-    is MainIntent.FilterDataByCategory -> filterDataByCatId(intent,intent.cat_id!!)
+    is MainIntent.FilterData -> proceedWithInitialize(
+        loadCategoryData,
+        loadProductsData,
+        intent
+    )
     is MainIntent.FilterDataBySubCategory ->filterDataBySubCategoryId(intent,intent.subcategory_id!!)
 }
 

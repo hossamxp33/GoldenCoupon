@@ -29,9 +29,9 @@ class DataRepo @Inject constructor(
                      throwable ->  emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
-        suspend fun getProductsData(country_id: Int?,sort:String?,cat_id:Int?):Flow<Result<ProductsModel>> =
+        suspend fun getProductsData(country_id: Int?,sort:String?,FilterData:HashMap<String,String>):Flow<Result<ProductsModel>> =
         flow {
-            emit(Datasources.getProductsResponse(country_id,sort,cat_id))
+            emit(Datasources.getProductsResponse(country_id,FilterData,sort))
              }
             .map { Result.success(it) }
             .retry(retries = 4) { t -> (t is IOException).also { if (it) {

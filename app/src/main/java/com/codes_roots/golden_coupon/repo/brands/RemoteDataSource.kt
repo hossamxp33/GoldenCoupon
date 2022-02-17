@@ -16,8 +16,8 @@ import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(private val ApiService: APIServices) : DataSource {
 
-    override suspend fun getBrandsResponse(page: Int?): BrandsModel =
-        runCatching { ApiService.getBrandsData(page)}
+    override suspend fun getBrandsResponse(page: Int?, filter: String): BrandsModel =
+        runCatching { ApiService.getBrandsData(page,filter)}
             .getOrThrow()
 
     override suspend fun getDealsResponse(page: Int?): DealsModel =

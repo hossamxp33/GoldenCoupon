@@ -4,6 +4,7 @@ import android.content.Context
 import com.codes_roots.golden_coupon.data_layer.APIServices
 import com.codes_roots.golden_coupon.helper.*
 import com.codes_roots.golden_coupon.helper.Constants.Companion.BASE_URL
+import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
 import com.codes_roots.golden_coupon.presentation.auth.loginfragment.LoginFragment
 import com.codes_roots.golden_coupon.presentation.auth.signupfragment.SignUpFragment
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
@@ -82,6 +83,7 @@ class APIModule constructor() {
     fun provideHttpClient(context: Context): OkHttpClient {
         return OkHttpClient()
             .newBuilder()
+
             .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
             .addInterceptor { chain: Interceptor.Chain ->
                 val originalRequest = chain.request()
@@ -92,10 +94,12 @@ class APIModule constructor() {
                 //   builder.addHeader("Accept", "application/json")
                 builder.addHeader("Content-Type", "application/json")
                 builder.addHeader("Authorization",
-                    "Bearer"+Pref.UserToken)
+                    "Bearer "+Pref.UserToken)
 //                Log.d("token",Pref.token!!)
                 val newRequest = builder.build()
+
                 chain.proceed(newRequest)
+
             }
             .build()
     }
