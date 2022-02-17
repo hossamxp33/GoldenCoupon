@@ -130,7 +130,9 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
-           val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
+            val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
+
+
             val acct = GoogleSignIn.getLastSignedInAccount(this)
             if (acct != null) {
                 val personName = acct.displayName
@@ -149,11 +151,16 @@ class RegisterActivity : AppCompatActivity() {
             // Signed in successfully, show authenticated UI.
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            startSignInIntent()
             Log.w(TAG, "signInResult:failed code=" + e.statusCode)
         }
     }
-
+    private fun startSignInIntent() {
+        val signInClient = GoogleSignIn.getClient(this,
+            GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+        val intent = signInClient.signInIntent
+        startActivityForResult(intent, RC_SIGN_IN)
+    }
     private fun signIn() {
         val signInIntent = mGoogleSignInClient.signInIntent
         startActivityForResult(signInIntent, RC_SIGN_IN)
