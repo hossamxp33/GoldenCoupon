@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.codes_roots.golden_coupon.R
+import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.helper.ResourceUtil
 import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
+import com.codes_roots.golden_coupon.presentation.chose_language.LanguageActivity
+import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 
 import dagger.android.AndroidInjection
@@ -29,25 +32,17 @@ class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
         AndroidInjection.inject(this@SplashScreen)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-         Pref.lang
-
-
-
 
 
         Handler().postDelayed({
+            if (Pref.lang != ""){
              if (Pref.token != "")
-             {
-                 val mainIntent = Intent(this, MainActivity::class.java)
-                 startActivity(mainIntent)
-                 finish()
-
-             }
-             else{
-                 val mainIntent = Intent(this, RegisterActivity::class.java)
-                 startActivity(mainIntent)
-                 finish()
-             }
+              ClickHandler().switchToActivity(this,MainActivity())
+             else
+             ClickHandler().switchToActivity(this,RegisterActivity())
+            }else{
+                ClickHandler().switchToActivity(this, LanguageActivity())
+            }
 
         }, SPLASH_DISPLAY_LENGTH.toLong())
     }

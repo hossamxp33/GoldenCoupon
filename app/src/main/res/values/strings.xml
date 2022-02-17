@@ -41,5 +41,10 @@
     <string name="password">Password</string>
     <string name="mobile">mobile</string>
     <string name="email">email</string>
-    <string name="choseLanguage">chose language</string>
+    <string name="choseLanguage">choose language</string>
+    <string name="ar">عربي</string>
+    <string name="en">English</string>
+    <string name="can_change_lang">* يمكنك تغيير اللغة من قائمة حسابي "</string>
+    <string name="can_change_lang2">You can change the language from the My Account menu</string>
+    <string name="next">next</string>
 </resources>

@@ -83,7 +83,7 @@ class PreferenceHelper(private val context: Context) {
             edit.apply()
         }
     var lang : String?
-        get() = app_prefs!!.getString("lang", "ar")
+        get() = app_prefs!!.getString("lang", "")
         set(lang) {
             val edit = app_prefs!!.edit()
             edit.putString("lang", lang)
