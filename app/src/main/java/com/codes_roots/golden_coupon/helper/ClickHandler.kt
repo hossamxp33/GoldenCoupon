@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.codes_roots.golden_coupon.R
+import com.codes_roots.golden_coupon.entites.allbrands.AllBrandsModel
 import com.codes_roots.golden_coupon.entites.products.Product
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
@@ -33,8 +34,8 @@ class ClickHandler {
         switchFragment(context, fragment)
 
     }
-    fun openSortFragment(context: Context,viewModel:ProductsViewModel,data:Product?) {
-        val frag = SortFragment(viewModel,data!!)
+    fun openSortFragment(context: Context,viewModel:ProductsViewModel,data:Product?,brandsData:AllBrandsModel) {
+        val frag = SortFragment(viewModel,data!!,brandsData!!)
         frag.apply {
             show((context as MainActivity).supportFragmentManager, SortFragment.TAG)
         }

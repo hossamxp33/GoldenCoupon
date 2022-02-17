@@ -211,7 +211,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                              view.subCategoryRecycleView.isVisible = it.subcategoryVisibility!!
                             //      productsAdapter.submitList(it.filterDataByCategory)
                          try {
-
+                            view.brandsData = it.allBrandsData
 
                             productsAdapter.submitList(it.filteredData)
 

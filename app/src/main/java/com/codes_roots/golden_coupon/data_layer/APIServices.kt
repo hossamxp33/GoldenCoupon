@@ -1,5 +1,6 @@
 package com.codes_roots.golden_coupon.data_layer
 
+import com.codes_roots.golden_coupon.entites.allbrands.AllBrandsModel
 import com.codes_roots.golden_coupon.entites.auth.LoginModel
 import com.codes_roots.golden_coupon.entites.auth.User
 import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
@@ -23,6 +24,9 @@ interface APIServices {
 
     @GET("categories/getAllCats.json")
     suspend fun getCategoryData(): AllCategoryModel
+
+    @GET("brands/getall.json")
+    suspend fun getAllBrands(): AllBrandsModel
 
     @GET("OffersSliders.json")
     suspend fun getDealsData(@Query("page") page: Int?): DealsModel

@@ -7,21 +7,28 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.SortFragmentBinding
 import com.codes_roots.golden_coupon.di.WARN_MotionToast
+import com.codes_roots.golden_coupon.entites.allbrands.AllBrandsModel
 import com.codes_roots.golden_coupon.entites.products.Product
 import com.codes_roots.golden_coupon.helper.BaseApplication
 import com.codes_roots.golden_coupon.helper.ClickHandler
+import com.codes_roots.golden_coupon.presentation.homefragment.adapter.BrandsAdapter
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.productoffersfragment.adapter.category.CategoryAdapter
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import javax.inject.Inject
 
-class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var data: Product) :
+class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var data: Product,var brandsData :AllBrandsModel) :
     BottomSheetDialogFragment() {
+
+    lateinit var brandsAdapter: AllBrandsAdapter
 
     companion object {
         const val TAG = "TownBottomSheetDialogFragment"
@@ -46,7 +53,10 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var dat
         view.listener = ClickHandler()
         view.context = context as MainActivity
         val viewState = viewModel.state.value
+
+
         view.ButtonClick.setOnClickListener {
+
             if (data.productsizes!!.isNotEmpty()) {
                 if (selectedSortOption == 0) {
                     viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,
@@ -71,7 +81,6 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var dat
             }
 
         }
-
         val data = arrayListOf(getString(R.string.sortbyName),
             getString(R.string.name),
             getString(R.string.price))
@@ -79,10 +88,24 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var dat
         sortListAdapter = Sort_List_Adapter(viewModel, this, data)
 
         view.sortRecycle.apply { adapter = sortListAdapter }
-
+        brandsRecycleView()
+        brandsAdapter.submitList(brandsData.Brands)
 
         return view.root
     }
 
+    fun brandsRecycleView() {
+        brandsAdapter = AllBrandsAdapter(requireContext(), viewModel)
+        view.brandsRecycle.apply {
+            layoutManager = LinearLayoutManager(
+                context,
+                RecyclerView.HORIZONTAL,
+                false
+            ) // default orientation is vertical
+            adapter = brandsAdapter;
+            isNestedScrollingEnabled = false
+            setHasFixedSize(true)
+        }
 
+    }
 }
