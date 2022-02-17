@@ -44,4 +44,5 @@
     <string name="password">كلمة المرور</string>
     <string name="mobile">موبايل</string>
     <string name="email">البريد الالكتروني</string>
+    <string name="choseLanguage"> اختر اللغة</string>
 </resources>
