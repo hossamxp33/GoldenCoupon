@@ -1,6 +1,7 @@
 package com.codes_roots.golden_coupon.repo.products
 
 import com.codes_roots.golden_coupon.di.IoDispatcher
+import com.codes_roots.golden_coupon.entites.allbrands.AllBrandsModel
 import com.codes_roots.golden_coupon.entites.category.AllCategoryModel
 import com.codes_roots.golden_coupon.entites.products.ProductsModel
 import kotlinx.coroutines.CoroutineDispatcher
@@ -28,6 +29,20 @@ class DataRepo @Inject constructor(
             .catch {
                      throwable ->  emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
+
+
+     val getAllBrandsResponse:Flow<Result<AllBrandsModel>> =
+        flow {
+            emit(Datasources.getAllBrandsResponse())
+             }
+            .map { Result.success(it) }
+            .retry(retries = 4) { t -> (t is IOException).also { if (it) {
+                delay(1000 )
+            }}}
+            .catch {
+                     throwable ->  emit(Result.failure(throwable)) }
+            .flowOn(ioDispatcher)
+
 
         suspend fun getProductsData(country_id: Int?,sort:String?,FilterData:HashMap<String,String>):Flow<Result<ProductsModel>> =
         flow {

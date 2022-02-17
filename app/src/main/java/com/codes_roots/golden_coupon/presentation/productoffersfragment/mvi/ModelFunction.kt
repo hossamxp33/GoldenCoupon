@@ -1,6 +1,7 @@
 package com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi
 
 
+import com.codes_roots.golden_coupon.entites.allbrands.AllBrandsModel
 import com.codes_roots.golden_coupon.entites.category.AllCategoryModel
 import com.codes_roots.golden_coupon.entites.products.Product
 import com.codes_roots.golden_coupon.entites.products.ProductsModel
@@ -20,6 +21,9 @@ suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
     loadCategoryData: suspend () -> Flow<Result<AllCategoryModel>> = { Datarepo.getCategoryData },
+
+    loadAllBrandsData: suspend () -> Flow<Result<AllBrandsModel>> = { Datarepo.getAllBrandsResponse },
+
     loadProductsData: suspend () -> Flow<Result<ProductsModel>> = { Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
 
     //getProductsData
@@ -27,6 +31,7 @@ suspend fun mapIntentToViewState(
     is MainIntent.InitializeData -> proceedWithInitialize(
         loadCategoryData,
         loadProductsData,
+        loadAllBrandsData,
         intent
     )
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
@@ -35,7 +40,8 @@ suspend fun mapIntentToViewState(
     is MainIntent.FilterData -> proceedWithInitialize(
         loadCategoryData,
         loadProductsData,
-        intent
+        loadAllBrandsData,
+        intent,
     )
     is MainIntent.FilterDataBySubCategory ->filterDataBySubCategoryId(intent,intent.subcategory_id!!)
 }
@@ -44,21 +50,23 @@ suspend fun mapIntentToViewState(
 private suspend fun proceedWithInitialize(
     categoryData: suspend () -> Flow<Result<AllCategoryModel>>,
     productsData: suspend () -> Flow<Result<ProductsModel>>,
-
+    allBrandData:suspend () -> Flow<Result<AllBrandsModel>>,
     intent: MainIntent,
 ): MainViewState {
     val categoryDataResponse = categoryData()
 
     val productsDataResponse = productsData()
+val  brandsResponse =  allBrandData()
 
     val productsData = productsDataResponse.first()
 
 
     val categoryData = categoryDataResponse.first()
-
+    val allBransData =   brandsResponse.first()
     return runCatching {
         intent.viewState!!.copy(
             productsData = productsData.getOrThrow(),
+            allBrandsData = allBransData.getOrThrow(),
             categoryData = categoryData.getOrThrow(),
             filteredData = productsData.map { it.brands }.getOrThrow(),
             error = null,
