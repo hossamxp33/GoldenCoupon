@@ -15,14 +15,17 @@ import kotlinx.coroutines.flow.first
 suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
-    loadMainData: suspend () -> Flow<Result<BrandsModel>> = { Datarepo.getMainData(intent.page) },
+    loadMainData: suspend () -> Flow<Result<BrandsModel>> = { Datarepo.getMainData(intent.page,"") },
+    loadSearchByName: suspend () -> Flow<Result<BrandsModel>> = { Datarepo.getMainData(intent.page,intent.name!!) },
+
     AddFavorite: suspend () ->  Flow<Result<Boolean>> = {
         Datarepo.addFavouriteData(intent.brand_id!!, intent.user_id!!)
     }
 ) = when (intent) {
     is MainIntent.Initialize -> proceedWithInitialize(loadMainData, intent)
+    is MainIntent.ShowProgress -> intent.viewState.copy(progress = true)
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
-    is MainIntent.SearchByName -> searchByName(intent, intent.Name!!)
+    is MainIntent.SearchByName -> proceedWithInitialize(loadSearchByName, intent)
     is MainIntent.AddToFavorite -> proceedAddFavorite(AddFavorite,intent)
 }
 

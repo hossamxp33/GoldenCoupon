@@ -18,8 +18,13 @@ import retrofit2.http.*
 
 interface APIServices {
 
-    @GET("brands.json")
-    suspend fun getBrandsData(@Query("page") page: Int?): BrandsModel
+
+    @FormUrlEncoded
+    @POST("brands.json")
+    suspend fun getBrandsData(@Query("page") page: Int?,
+        @Field("Filter[name]") cat_id: String?,
+
+    ): BrandsModel
 
 
     @GET("categories/getAllCats.json")
@@ -35,8 +40,8 @@ interface APIServices {
     @POST("products/index/{country_id}.json")
     suspend fun getProductData(
         @Path("country_id") country_id: Int?,
-        @Query("sort ") sort: String?,
-        @Field("Filter[cat_id]") cat_id: Int?,
+        @FieldMap fields : HashMap<String, String> ?
+
     ): ProductsModel
 
     @GET("items/index/{brandid}.json")

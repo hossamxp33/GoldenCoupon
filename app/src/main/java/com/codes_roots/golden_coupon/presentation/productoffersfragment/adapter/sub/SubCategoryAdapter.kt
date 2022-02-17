@@ -46,11 +46,15 @@ class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel
         holder.binding.Mview.setOnClickListener {
             row_index = position
             val viewState = viewModel?.state?.value
+            viewModel?.FilterFileds?.put("Filter[subcat_id]",currentList[position].id.toString())
 
             viewModel!!.intents.trySend(
-                MainIntent.FilterDataBySubCategory(
+                MainIntent.FilterData(
                     viewState,
-                    currentList[position].id
+                    viewModel?.FilterFileds!!,
+                    viewState?.country_id
+
+
                 )
             )
 

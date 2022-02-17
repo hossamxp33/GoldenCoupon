@@ -36,9 +36,6 @@ class ProductsAdapter(var context: Context?) :
             LayoutInflater.from(p0.context),
             R.layout.offer_item_adapter, p0, false
         )
-
-
-
         return ViewHolder(binding)
 
     }
@@ -51,7 +48,9 @@ try {
     holder.binding.priceWithCode.text = (context as MainActivity).getString(R.string.priceWithCode) + currentList[p1].productsizes!![0].current_price + " " + currentList!![p1].productsizes!![0].country!!.code
 
 
-}catch (e:Exception){}
+}catch (e:Exception){
+
+}
 
 
 

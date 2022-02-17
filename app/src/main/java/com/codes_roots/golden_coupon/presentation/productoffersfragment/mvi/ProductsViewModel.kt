@@ -21,6 +21,7 @@ class ProductsViewModel @Inject constructor(
     ) : BaseViewModel<MainViewState>() {
 
     val intents: Channel<MainIntent> = Channel<MainIntent>(Channel.UNLIMITED)
+    var FilterFileds: HashMap<String, String> = HashMap()
 
     protected val uiState: MutableStateFlow<MainViewState?> = MutableStateFlow(MainViewState())
 
@@ -36,7 +37,6 @@ class ProductsViewModel @Inject constructor(
 
 
     init {
-
 
         getIntent()
 
