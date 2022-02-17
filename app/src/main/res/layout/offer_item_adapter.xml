@@ -17,6 +17,7 @@
         <variable
             name="listener"
             type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+
         <variable
             name="pref"
             type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />

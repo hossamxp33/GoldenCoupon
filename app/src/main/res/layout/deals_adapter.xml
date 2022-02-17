@@ -15,11 +15,17 @@
         <variable
             name="data"
             type="com.codes_roots.golden_coupon.entites.deals.DealsItem" />
+        <variable
+            name="listener"
+            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->listener.openWebView(context,data.discount_code)}"
         android:animateLayoutChanges="true">
 
         <androidx.appcompat.widget.AppCompatImageView

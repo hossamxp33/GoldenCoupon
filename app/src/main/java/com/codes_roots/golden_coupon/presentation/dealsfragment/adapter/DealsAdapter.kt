@@ -84,7 +84,7 @@ class ViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(context: Context?, data: DealsItem) {
-          //binding.listener = ClickHandler()
+          binding.listener = ClickHandler()
         binding.data = data
         binding.context = context as MainActivity?
     //    binding.pref = (context as MainActivity).preferenceHelper
