@@ -47,8 +47,8 @@ class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidIn
              noColoredView()
              next.isEnabled = true
              coloredView(ar_layout)
-             Pref.lang = "ar"
              ResourceUtil().changeLang("ar", this)
+             Pref.lang = "ar"
 
 
          }
@@ -57,15 +57,14 @@ class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidIn
              noColoredView()
              next.isEnabled = true
              coloredView(us_layout)
-             Pref.lang = "en"
              ResourceUtil().changeLang("en", this)
-
-
-
-
+             Pref.lang = "en"
          }
 
          next.setOnClickListener {
+             if (Pref.token!="")
+                 ClickHandler().switchToActivity(this,MainActivity())
+             else
              ClickHandler().switchToActivity(this,RegisterActivity())
          }
 

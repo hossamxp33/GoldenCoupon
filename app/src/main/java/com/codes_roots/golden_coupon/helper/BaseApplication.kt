@@ -40,15 +40,6 @@ open class BaseApplication : DaggerApplication() {
 //            resources.updateConfiguration(config, resources.displayMetrics)
 //
 
-            if (ResourceUtil().getCurrentLanguage(this)!!.contains("en")) {
-                ResourceUtil().changeLang("en", this)
-                pref.lang = "en"
-
-            } else {
-                ResourceUtil().changeLang("ar", this)
-                pref.lang = "ar"
-
-            }
         } catch (e: URISyntaxException) {
             throw RuntimeException(e)
         }

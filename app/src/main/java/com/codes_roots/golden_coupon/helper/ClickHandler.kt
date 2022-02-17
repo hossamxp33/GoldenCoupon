@@ -12,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.entites.products.Product
 import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
+import com.codes_roots.golden_coupon.presentation.chose_language.LanguageActivity
 import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
@@ -74,6 +75,8 @@ class ClickHandler {
     }
 fun switchToDealsFragment(context: Context){
     switchFragment(context,DealsFragment())
+}fun switchToLanguage(context: Context){
+    switchToActivity(context,LanguageActivity())
 }
     fun switchToLogin(context: Context){
         switchToActivity(context,RegisterActivity())
