@@ -36,12 +36,13 @@ class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
 
         Handler().postDelayed({
             if (Pref.lang != ""){
-             if (Pref.token != "")
+                ResourceUtil().changeLang(Pref.lang!!, this)
+                if (Pref.token != "")
+
               ClickHandler().switchToActivity(this,MainActivity())
              else
              ClickHandler().switchToActivity(this,RegisterActivity())
 
-         ResourceUtil().changeLang(Pref.lang!!, this)
 
             }else{
                 ClickHandler().switchToActivity(this, LanguageActivity())

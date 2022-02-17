@@ -68,7 +68,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
     lateinit var fragmentFactory: FragmentFactory
-  @Inject
+
+    @Inject
     lateinit var preferenceHelper: PreferenceHelper
 
     @Inject
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 else include?.visibility = View.VISIBLE
             })
 
-      
+        preferenceHelper.lang
         bottom_nav_bar.setOnNavigationItemSelectedListener {
             val id = it.itemId
             if (integerDeque.contains(id)) {
@@ -166,7 +167,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             )
         } else if (doubleBackToExitPressedOnce)
             finish()
-
         else if (fragmentManager.backStackEntryCount == 0) {
             bottom_nav_bar.selectedItemId = R.id.homeFragment
             doubleBackToExitPressedOnce = true
@@ -219,7 +219,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
                         if (it.progress == true) {
                             shimmer_view_container.startShimmerAnimation()
-                            viewModel.intents.send(MainIntent.Initialize(it,1))
+                            viewModel.intents.send(MainIntent.Initialize(it, 1))
                         } else {
                             //////// Slider viewPager
                             pager.adapter = it.homepagedata?.sliders?.let { it ->

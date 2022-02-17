@@ -21,6 +21,7 @@ import com.codes_roots.golden_coupon.presentation.country_activity.viewmodel.Cou
 import com.codes_roots.golden_coupon.presentation.couponsfragment.adapter.CouponsAdapter
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.splash.SplashScreen
 
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
@@ -63,7 +64,7 @@ class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidIn
 
          next.setOnClickListener {
              if (Pref.token!="")
-                 ClickHandler().switchToActivity(this,MainActivity())
+                 ClickHandler().switchToActivity(this,SplashScreen())
              else
              ClickHandler().switchToActivity(this,RegisterActivity())
          }

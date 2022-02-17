@@ -17,19 +17,14 @@ class ResourceUtil {
 
 
     fun changeLang(lang: String, context: Context) {
-        val config = context.resources.configuration
-        val locale = Locale(lang)
-        Locale.setDefault(locale)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1)
-            config.setLocale(locale)
-        else
-            config.locale = locale
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
-            context. createConfigurationContext(config)
-        context. resources.updateConfiguration(config, context.resources.displayMetrics)
-
-
+        if (lang.equals("", ignoreCase = true)) return
+        myLocale = Locale(lang)
+        Locale.setDefault(myLocale)
+        val config = Configuration()
+        config.locale = myLocale
+        context.resources.updateConfiguration(config, context.resources.displayMetrics)
+        saveLocale(lang, context)
     }
 
 
