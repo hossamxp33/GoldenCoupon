@@ -53,6 +53,7 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
             holder.binding.couponNum.text = "$num $couponText"
 
             holder.binding.favoriteIcon.setOnClickListener {
+
                 viewModel.intents.trySend(
                     MainIntent
                         .AddToFavorite(
@@ -61,6 +62,11 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
                             4280
                         )
                 )
+                if (currentList[position].favourite_items.isNullOrEmpty())
+                    holder.binding.favoriteIcon.setImageResource(R.drawable.star)
+                else
+                    holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
+
             }
             notifyItemChanged(position)
 

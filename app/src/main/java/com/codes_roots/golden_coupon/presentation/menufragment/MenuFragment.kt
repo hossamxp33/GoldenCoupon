@@ -32,6 +32,7 @@ open class MenuFragment @Inject constructor() : Fragment(){
     @Inject
     lateinit var pref: PreferenceHelper
     lateinit var staticPagesAdapter: StaticPagesAdapter
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
@@ -46,8 +47,6 @@ open class MenuFragment @Inject constructor() : Fragment(){
     }
 
     private lateinit var view: MenuFragmentBinding
-
-
 
 
 

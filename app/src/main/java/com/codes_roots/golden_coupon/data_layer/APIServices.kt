@@ -58,14 +58,15 @@ interface APIServices {
     @Headers("Accept: Application/json", "cache-control: no-cache")
     suspend fun login(@Body loginModel: User?): Response<LoginModel>
 //
-//    @POST("createUser")
-//    @Headers("Accept: Application/json", "cache-control: no-cache")
-//    suspend fun register(@Body registerModel: User?): Response<LoginModel>
 
+@POST("users/add.json")
+@Headers("Accept: Application/json", "cache-control: no-cache")
+suspend fun register(@Body registerModel: User?): Response<LoginModel>
 
     @GET("StaticPages.json")
     suspend fun getStaticPages(): StaticPagesModel
 
 
- //   http://goldencopons.codesroots.com/api/UsedCoupons/add.json
+
+    //   http://goldencopons.codesroots.com/api/UsedCoupons/add.json
 }

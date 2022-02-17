@@ -20,6 +20,10 @@ class AuthRemoteDataSource @Inject constructor(private val ApiService: APIServic
         return ApiService.login(loginModel)
     }
 
+    override suspend fun getRegisterModelResponse(registermodel: User): Response<LoginModel> {
+        return ApiService.register(registermodel)
+    }
+
 
 
 }

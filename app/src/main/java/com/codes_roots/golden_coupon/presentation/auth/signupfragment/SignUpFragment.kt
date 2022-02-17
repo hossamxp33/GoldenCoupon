@@ -14,6 +14,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.RegisterFragmentBinding
+import com.codes_roots.golden_coupon.entites.auth.User
 import com.codes_roots.golden_coupon.helper.BaseApplication
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.auth.viewmodel.AuthViewModel
@@ -105,13 +106,12 @@ class SignUpFragment : Fragment() {
     }
 
     fun registerRequest() {
-//        val registerInfo = User(email = view.email.text.toString(),
-//            user_group_id= 1,
-//            mobile = view.mobile.text.toString(),
-//            username = view.username.text.toString()
-//            , password = view.password.text.toString())
-//
-//        viewModel.register(registerInfo)
+        val registerInfo = User(username = view.username.text.toString(),
+            password= view.password.text.toString()
+            , active = 1
+            , email_required = view.email.text.toString())
+
+        viewModel.register(registerInfo)
     }
 
 }

@@ -62,22 +62,20 @@ class AuthViewModel @Inject constructor(private val Datasources: AuthRemoteDataS
         }
 
     }
-//getRegisterResponse
-//fun register(registerModel: User?) {
-//    job = CoroutineScope(Dispatchers.IO).launch {
-//        val response = Datasources.getRegisterResponse(registerModel!!)
-//        withContext(Dispatchers.Main) {
-//            if (response.isSuccessful) {
-//                authLD?.postValue(response.body())
-//
-//            } else {
-//                onError("Error : ${response.message()} ")
-//            }
-//        }
-//    }
-//
-//}
+    fun register(registerModel: User?) {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = Datasources.getRegisterModelResponse(registerModel!!)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    authLD?.postValue(response.body())
 
+                } else {
+                    onError("Error : ${response.message()} ")
+                }
+            }
+        }
+
+    }
 
 
     private fun onError(message: String) {
