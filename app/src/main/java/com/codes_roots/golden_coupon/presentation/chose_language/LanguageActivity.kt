@@ -16,6 +16,7 @@ import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.helper.ResourceUtil
 import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
+import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.country_activity.adapter.CountriesAdapter
 import com.codes_roots.golden_coupon.presentation.country_activity.viewmodel.CountryViewModel
 import com.codes_roots.golden_coupon.presentation.couponsfragment.adapter.CouponsAdapter
@@ -63,10 +64,9 @@ class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidIn
          }
 
          next.setOnClickListener {
-             if (Pref.token!="")
-                 ClickHandler().switchToActivity(this,SplashScreen())
-             else
-             ClickHandler().switchToActivity(this,RegisterActivity())
+
+                 ClickHandler().switchToActivity(this, CountryActivity())
+
          }
 
 

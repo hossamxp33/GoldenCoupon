@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
@@ -23,9 +24,10 @@ import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.Main
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.flow.collect
 import javax.inject.Inject
 
-class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var data: Product,var brandsData :AllBrandsModel) :
+class SortFragment @Inject constructor(var viewModel: ProductsViewModel) :
     BottomSheetDialogFragment() {
 
     lateinit var brandsAdapter: AllBrandsAdapter
@@ -36,7 +38,7 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var dat
 
 
     lateinit var sortListAdapter: Sort_List_Adapter
-
+var sortValue:String? = ""
     lateinit var view: SortFragmentBinding
     var selectedSortOption = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,34 +56,28 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var dat
         view.context = context as MainActivity
         val viewState = viewModel.state.value
 
-
+        viewModel.intents.trySend(MainIntent.GetBrandList(viewModel.state.value!!))
         view.ButtonClick.setOnClickListener {
 
-            if (data.productsizes!!.isNotEmpty()) {
                 if (selectedSortOption == 0) {
-                    viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,
-                        sort = "name",
-                        country_id = 8,
-                        cat_id = 4))
+                    sortValue = "name"
                 } else if (selectedSortOption == 1) {
-                    viewModel.intents.trySend(MainIntent.InitializeData(viewState!!,
-                        sort = "price",
-                        country_id = 8,
-                        cat_id = 4))
+                    sortValue = "percentage"
                 }
-                //            else if (SelectedSortOption == 2) {
-//                viewmodel.intents.trySend(MainIntent.SortByDeliveryCost(viewstate))
-//            } else if (SelectedSortOption == 3) {
-//                viewmodel.intents.trySend(MainIntent.SortByDeliveryRating(viewstate))
-                //    }
+                viewModel!!.intents.trySend(
+                    MainIntent.FilterData(
+                        viewState!!,
+                        viewModel?.FilterFileds,
+                        viewState!!.country_id, sort = sortValue
+                    )
+                )
+
                 this.dismiss()
-            }
-        else {
-                WARN_MotionToast("er", requireActivity())
-            }
+
+
 
         }
-        val data = arrayListOf(getString(R.string.sortbyName),
+        val data = arrayListOf(
             getString(R.string.name),
             getString(R.string.price))
 
@@ -89,7 +85,16 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel, var dat
 
         view.sortRecycle.apply { adapter = sortListAdapter }
         brandsRecycleView()
-        brandsAdapter.submitList(brandsData.Brands)
+        lifecycleScope.launchWhenStarted {
+            viewModel.state.collect {
+
+                brandsAdapter.submitList(it?.allBrandsData?.Brands)
+
+            }
+
+
+
+            }
 
         return view.root
     }

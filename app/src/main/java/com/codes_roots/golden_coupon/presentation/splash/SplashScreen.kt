@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import com.codes_roots.golden_coupon.R
+import com.codes_roots.golden_coupon.di.SUCCESS_MotionToast
 import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.helper.ResourceUtil
@@ -35,11 +36,20 @@ class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
 
         Handler().postDelayed({
             if (Pref.lang != ""){
+                SUCCESS_MotionToast(Pref.lang.toString(),this)
                 ResourceUtil().changeLang(Pref.lang!!, this)
-                if (Pref.token != "")
-              ClickHandler().switchToActivity(this,MainActivity())
-             else
-             ClickHandler().switchToActivity(this,RegisterActivity())
+              if (Pref.CountryId != 0){
+
+                  ClickHandler().switchToActivity(this,MainActivity())
+
+                }else {
+
+                  ClickHandler().switchToActivity(this,CountryActivity())
+
+              }
+
+
+
 
             }else{
                 ClickHandler().switchToActivity(this, LanguageActivity())

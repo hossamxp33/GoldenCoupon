@@ -16,7 +16,7 @@ sealed class MainIntent(
 
     data class SearchByName(override val viewState: MainViewState?, val Name: String? = null) : MainIntent()
 
-  //  data class SortProductsByName(override val viewState: MainViewState? = null) : MainIntent()
+    data class GetBrandList(override val viewState: MainViewState? = null) : MainIntent()
 
 
     data class FilterData(

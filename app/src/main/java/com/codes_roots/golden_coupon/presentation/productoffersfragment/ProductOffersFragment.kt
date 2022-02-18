@@ -215,7 +215,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                                 view.progress.isVisible = it.progress
 
                         } else {
-                             view.subCategoryRecycleView.isVisible = it.subcategoryVisibility!!
+                       //      view.subCategoryRecycleView.isVisible = it.subcategoryVisibility!!
                             //      productsAdapter.submitList(it.filterDataByCategory)
                          try {
                             view.brandsData = it.allBrandsData
@@ -225,7 +225,6 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                             categoryAdapter.submitList(it.categoryData!!.categories)
 
                             subcategoryAdapter.submitList(it.categoryData!!.categories!![it.category_position].subcats)
-
                             view.progress.isVisible = false
 
                              view.productData= it.filteredData!![0]

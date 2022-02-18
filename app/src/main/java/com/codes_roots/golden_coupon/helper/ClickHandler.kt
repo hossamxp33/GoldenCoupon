@@ -35,7 +35,7 @@ class ClickHandler {
 
     }
     fun openSortFragment(context: Context,viewModel:ProductsViewModel,data:Product?,brandsData:AllBrandsModel) {
-        val frag = SortFragment(viewModel,data!!,brandsData!!)
+        val frag = SortFragment(viewModel)
         frag.apply {
             show((context as MainActivity).supportFragmentManager, SortFragment.TAG)
         }

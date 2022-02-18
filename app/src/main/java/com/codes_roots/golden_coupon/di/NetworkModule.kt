@@ -94,7 +94,7 @@ class APIModule constructor() {
                 //   builder.addHeader("Accept", "application/json")
                 builder.addHeader("Content-Type", "application/json")
                 builder.addHeader("Authorization",
-                    "Bearer "+Pref.UserToken)
+                    "Bearer "+Pref.token)
 //                Log.d("token",Pref.token!!)
                 val newRequest = builder.build()
 

@@ -109,7 +109,8 @@ class SignUpFragment : Fragment() {
         val registerInfo = User(username = view.username.text.toString(),
             password= view.password.text.toString()
             , active = 1
-            , email_required = view.email.text.toString())
+            , email = view.email.text.toString()
+            , email_required =  "1")
 
         viewModel.register(registerInfo)
     }

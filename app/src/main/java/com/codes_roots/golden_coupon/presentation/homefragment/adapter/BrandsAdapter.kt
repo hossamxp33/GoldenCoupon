@@ -26,8 +26,7 @@ import javax.inject.Inject
 class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
     ListAdapter<Brand, ViewHolder>(DiffCallback()) {
     var Intent: Channel<MainIntent>?=null
-    @Inject
-    lateinit var Pref: PreferenceHelper
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val binding: BrandItemAdapterBinding = DataBindingUtil.inflate(
             LayoutInflater.from(p0.context),
@@ -59,7 +58,7 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
                         .AddToFavorite(
                             viewModel.state.value!!,
                             currentList[position].id,
-                            4280
+                            (context as MainActivity).preferenceHelper.UserId
                         )
                 )
                 if (currentList[position].favourite_items.isNullOrEmpty())
@@ -67,8 +66,10 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
                 else
                     holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
 
+
+              notifyItemChanged(position)
+
             }
-            notifyItemChanged(position)
 
 
         } catch (e: Exception) {

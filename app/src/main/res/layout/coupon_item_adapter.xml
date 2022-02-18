@@ -81,7 +81,7 @@
                 android:layout_marginStart="4dp"
                 android:background="@drawable/views_text_bg"
                 android:padding="2dp"
-                android:text="255"
+                android:text="@{``+data.used_coupons[0].sum}"
                 android:textColor="@color/white"
                 android:textSize="@dimen/dimen_8"
                 app:layout_constraintStart_toStartOf="parent"

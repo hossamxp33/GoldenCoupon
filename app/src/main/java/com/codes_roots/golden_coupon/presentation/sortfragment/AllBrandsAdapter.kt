@@ -44,7 +44,20 @@ class AllBrandsAdapter(var context: Context?, var viewModel: ProductsViewModel?)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(context, currentList[position])
 
+        holder.binding.Mview.setOnClickListener {
+            if (!currentList.isNullOrEmpty()) {
+                row_index = position
 
+                val viewState = viewModel?.state?.value
+                viewModel?.FilterFileds?.put("Filter[brand_id]",currentList[position].id.toString())
+
+
+
+                notifyDataSetChanged()
+                notifyItemChanged(position)
+            }else
+                WARN_MotionToast("",context as MainActivity)
+        }
 /// Text  underLine  when selected
         if (row_index == position) {
             holder.binding.Mview.setBackgroundDrawable(

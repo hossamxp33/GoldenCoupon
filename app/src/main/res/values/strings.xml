@@ -26,7 +26,7 @@
     <string name="noBrandFound">No Brands Found</string>
     <string name="filter">filter</string>
     <string name="copied">copied</string>
-    <string name="price">"Price : \u0020 "</string>
+    <string name="price">"Percetange : \u0020 "</string>
     <string name="priceWithCode">"Price With Code : \u0020 "</string>
     <string name="choseCountry">Chose country</string>
     <string name="sortby">Sort by</string>

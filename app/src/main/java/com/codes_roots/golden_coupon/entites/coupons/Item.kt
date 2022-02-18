@@ -1,5 +1,9 @@
 package com.codes_roots.golden_coupon.entites.coupons
 
+import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
+import com.codes_roots.golden_coupon.entites.brandsmodel.Item
+import com.codes_roots.golden_coupon.entites.fav.FavoriteData
+
 data class CouponItem(
     var brand_id: Int?=null,
     var category_id: Int?=null,
@@ -9,6 +13,7 @@ data class CouponItem(
     var discount_code: String?=null,
     var discount_percent: String?=null,
     var id: Int?=null,
+    var used_coupons: List<Item>?=null,
     var last_used: String?=null,
     var offer: String?=null,
     var updated_at: String?=null,

@@ -50,7 +50,7 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?) 
 
       viewModel!!.intents.trySend(
           MainIntent.FilterData(
-              viewState!!,
+              viewState!!.copy(category_position = row_index!!),
                viewModel?.FilterFileds,
                        viewState!!.country_id
           )

@@ -8,7 +8,13 @@ import android.speech.RecognizerIntent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -32,6 +38,7 @@ import com.codes_roots.golden_coupon.presentation.homefragment.mvi.UserError
 import kotlinx.android.synthetic.main.bottom_nav_content.*
 import kotlinx.android.synthetic.main.home_fragment.*
 import kotlinx.coroutines.flow.collect
+import org.jetbrains.anko.inputMethodManager
 import java.util.*
 import javax.inject.Inject
 import kotlin.collections.ArrayList
@@ -79,13 +86,24 @@ open class HomeFragment @Inject constructor() : Fragment() {
         brandsRecycleView()
         getAllData()
 
+        view.searchLayout.searchBar.setOnEditorActionListener { text ,  actionId,  event  ->
+            if(actionId == IME_ACTION_SEARCH){
+                            filteredData.clear()
+            shimmer_view_container.startShimmerAnimation()
+                val currentFocusedView = activity?.currentFocus
+                hideKeyboard(text)
 
-        //  view.searchBar.setError("assad")
-        view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
-            filteredData.clear()
             viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
-                text.toString()))
-        }
+                text.text!!.toString()
+
+
+
+            ))
+
+                true
+            }
+false
+            };
 
         view.searchLayout.microphone.setOnClickListener {
 
@@ -112,8 +130,12 @@ open class HomeFragment @Inject constructor() : Fragment() {
 
         return view.root
     }
-
-
+    private fun hideKeyboard(view: View) {
+        view?.apply {
+            val imm = requireContext().inputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
+        }
+    }
     fun brandsRecycleView() {
         page = 1
         brandsAdapter = BrandsAdapter(requireContext(),viewModel)
@@ -124,7 +146,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
 
                 val lastVisibleItem =
                     (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                    if (lastVisibleItem == brandsAdapter.itemCount-1) {
+                    if (lastVisibleItem == brandsAdapter.itemCount-1 && brandsAdapter.itemCount >= 19) {
                         page++
                         viewModel.intents.trySend(MainIntent.ShowProgress(viewModel.state.value!!))
                         viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,page))

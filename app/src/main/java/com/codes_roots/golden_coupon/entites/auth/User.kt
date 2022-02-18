@@ -6,6 +6,7 @@ data class User(
     var userid: Int? = null,
     var username: String? = null,
     var password: String? = null,
+    val email:String?=null,
     var email_required: String? = null,
     var active: Int? = null,
 )

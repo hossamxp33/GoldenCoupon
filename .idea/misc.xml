@@ -74,6 +74,14 @@
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/web_view.xml" value="0.2" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/menu/bottom_menu.xml" value="0.16197916666666667" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/menu/popup_menu.xml" value="0.16197916666666667" />
+        <entry key="app/src/main/res/layout/category_item_adapter.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/country_adapter.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/coupon_item_adapter.xml" value="0.6986147473050662" />
+        <entry key="app/src/main/res/layout/offer_item_adapter.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/offers_fragment.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/search_bar_layout.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/sort_fragment.xml" value="0.19427083333333334" />
+        <entry key="app/src/main/res/layout/sort_list.xml" value="0.19427083333333334" />
       </map>
     </option>
   </component>
