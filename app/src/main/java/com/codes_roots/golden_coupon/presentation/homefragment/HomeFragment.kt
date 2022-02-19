@@ -106,6 +106,19 @@ open class HomeFragment @Inject constructor() : Fragment() {
 false
             };
 
+        view.searchLayout.searchIcon.setOnClickListener {
+            filteredData.clear()
+            shimmer_view_container.startShimmerAnimation()
+
+
+            viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
+                view.searchLayout.searchBar.text!!.toString()
+
+
+
+            ))
+        }
+
         view.searchLayout.microphone.setOnClickListener {
 
             val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)

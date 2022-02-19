@@ -49,4 +49,6 @@
     <string name="next">next</string>
     <string name="notification">Notification</string>
     <string name="loginFirst">you should login</string>
+    <string name="forget">forget password ? </string>
+    <string name="send">send</string>
 </resources>

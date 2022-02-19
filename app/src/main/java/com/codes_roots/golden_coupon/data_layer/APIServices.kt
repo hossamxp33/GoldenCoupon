@@ -74,6 +74,13 @@ interface APIServices {
     @Headers("Accept: Application/json", "cache-control: no-cache")
     suspend fun register(@Body registerModel: User?): Response<LoginModel>
 
+    @FormUrlEncoded
+    @POST("users/add.json")
+    @Headers("Accept: Application/json", "cache-control: no-cache")
+    suspend fun forgetPassword(@Field("email") email: String?
+    ): Response<LoginModel>
+
+    //////////////////////////////////////////////////////
     @GET("StaticPages.json")
     suspend fun getStaticPages(): StaticPagesModel
 

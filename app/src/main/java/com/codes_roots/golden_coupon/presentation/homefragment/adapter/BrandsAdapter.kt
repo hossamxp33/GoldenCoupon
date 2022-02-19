@@ -67,7 +67,6 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
                     holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
 
 
-                notifyItemChanged(position)
 
             }
 

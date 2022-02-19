@@ -75,7 +75,22 @@ class AuthViewModel @Inject constructor(private val Datasources: AuthRemoteDataS
             }
         }
 
+    }    fun forgetPassword(email: String?) {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = Datasources.forgetPasswordResponse(email!!)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    authLD?.postValue(response.body())
+
+                } else {
+                    onError("Error : ${response.message()} ")
+                }
+            }
+        }
+
     }
+
+
 
 
     private fun onError(message: String) {

@@ -10,6 +10,7 @@ import com.codes_roots.golden_coupon.presentation.auth.signupfragment.SignUpFrag
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
+import com.codes_roots.golden_coupon.presentation.forgetfragment.ForgetPasswordFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.StaticFragment
@@ -72,6 +73,7 @@ interface AppComponent : AndroidInjector<DaggerApplication> {
     fun inject(app: LoginFragment)
     fun inject(app: StaticFragment)
     fun inject(app: NotificationFragment)
+    fun inject(app: ForgetPasswordFragment)
 
 
 }

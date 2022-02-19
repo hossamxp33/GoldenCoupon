@@ -1,4 +1,4 @@
-package com.codes_roots.golden_coupon.presentation.auth.loginfragment
+package com.codes_roots.golden_coupon.presentation.forgetfragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.codes_roots.golden_coupon.R
+import com.codes_roots.golden_coupon.databinding.ForgetFragmentBinding
 import com.codes_roots.golden_coupon.databinding.LoginFragmentBinding
 import com.codes_roots.golden_coupon.entites.auth.User
 import com.codes_roots.golden_coupon.helper.BaseApplication
@@ -19,11 +20,12 @@ import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
 import com.codes_roots.golden_coupon.presentation.auth.viewmodel.AuthViewModel
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import kotlinx.android.synthetic.main.forget_fragment.*
 
 import javax.inject.Inject
 
 
-class LoginFragment@Inject constructor(): Fragment() {
+class ForgetPasswordFragment @Inject constructor() : Fragment() {
 
 
     @Inject
@@ -34,45 +36,53 @@ class LoginFragment@Inject constructor(): Fragment() {
     @Inject
     lateinit var Pref: PreferenceHelper
 
-    lateinit var view: LoginFragmentBinding
+    lateinit var view: ForgetFragmentBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
         }
     }
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View? {
+
+        var emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+"
 
         view = DataBindingUtil.inflate(inflater,
-            R.layout.login_fragment, container, false)
+            R.layout.forget_fragment, container, false)
 
 
-        view.login.setOnClickListener {
-          loginRequest()
+
+        view.send.setOnClickListener {
+            if (view.email.text.toString() == "" && !view.email.text.toString().trim { it <= ' ' }
+                    .matches(emailPattern.toRegex())) {
+                Toast.makeText(requireContext(), "الرجاء أكمل البيانات", Toast.LENGTH_SHORT).show()
+
+            } else {
+               getPassword()
+            }
+
+
         }
+        viewModel.authLD?.observe(requireActivity(), Observer {
 
-        view.context = context as RegisterActivity
-        view.listener = ClickHandler()
-//        view.forgetPW.setOnClickListener {
-//            val intent = Intent(this.activity, ForgotPasswordActivity::class.java)
-//
-//            (requireActivity()).startActivity(intent)
-//        }
+            if (it.data.token == null) {
 
-        viewModel.authLD?.observe(requireActivity() , Observer {
+                Toast.makeText(context, "please enter valid email", Toast.LENGTH_SHORT)
+                    .show()
 
-            if (it.data.token == null){
-
-                Toast.makeText(context , "خطأ في كلمة المرور او كلمة السر", Toast.LENGTH_SHORT).show()
-
-            }else {
+            } else {
 
                 Pref.userName = (it.data.username)
                 Pref.token = (it.data.token)
                 Pref.UserId = it.data.userid!!
 
-            ClickHandler().switchToActivity(requireContext(),MainActivity())
+                ClickHandler().switchToActivity(requireContext(), MainActivity())
 
             }
 
@@ -82,16 +92,16 @@ class LoginFragment@Inject constructor(): Fragment() {
 
 
         viewModel.errorMessage.observe(requireActivity(), Observer {
-            Toast.makeText(context , "خطأ في كلمة المرور او كلمة السر", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "خطأ في كلمة المرور او كلمة السر", Toast.LENGTH_SHORT).show()
         })
-   return view.root
+        return view.root
     }
 
 
-    fun loginRequest() {
-        val loginInfo = User(
-         username = view.username.text.toString()
-         , password = view.password.text.toString())
-        viewModel.login(loginInfo)
+    fun getPassword() {
+
+            val  email = view.email.text.toString()
+
+        viewModel.forgetPassword(email)
     }
 }

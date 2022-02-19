@@ -24,6 +24,10 @@ class AuthRemoteDataSource @Inject constructor(private val ApiService: APIServic
         return ApiService.register(registermodel)
     }
 
+    override suspend fun forgetPasswordResponse(email: String?): Response<LoginModel> {
+        return ApiService.forgetPassword(email)
+    }
+
 
 
 }

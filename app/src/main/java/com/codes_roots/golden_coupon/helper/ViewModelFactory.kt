@@ -9,6 +9,7 @@ import com.codes_roots.golden_coupon.presentation.auth.loginfragment.LoginFragme
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
+import com.codes_roots.golden_coupon.presentation.forgetfragment.ForgetPasswordFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
@@ -119,7 +120,10 @@ abstract class FragmentFactoryModule {
     @Binds
     @IntoMap
     @FragmentKey(MenuFragment::class)
-    abstract fun bindMenuFragment(fragment: MenuFragment): Fragment
+    abstract fun bindMenuFragment(fragment: MenuFragment): Fragment   @Binds
+    @IntoMap
+    @FragmentKey(ForgetPasswordFragment::class)
+    abstract fun bindForgetPasswordFragment(fragment: ForgetPasswordFragment): Fragment
 
 //
 //    @Binds

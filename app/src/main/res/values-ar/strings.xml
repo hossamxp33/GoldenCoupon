@@ -48,4 +48,6 @@
     <string name="next">التالي</string>
     <string name="notification">الاشعارات</string>
     <string name="loginFirst">قم بتسجيل الدخول</string>
+    <string name="forget">نسيت كلمة السر ؟</string>
+    <string name="send">ارسال</string>
 </resources>

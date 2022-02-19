@@ -17,6 +17,7 @@ import com.codes_roots.golden_coupon.presentation.chose_language.LanguageActivit
 import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment
 import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
+import com.codes_roots.golden_coupon.presentation.forgetfragment.ForgetPasswordFragment
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.menufragment.StaticFragment
 import com.codes_roots.golden_coupon.presentation.notificationfragment.NotificationFragment
@@ -93,6 +94,13 @@ class ClickHandler {
 
     fun switchToDealsFragment(context: Context) {
         switchFragment(context, DealsFragment())
+    }
+
+    fun switchToForgetPWFragment(context: Context) {
+
+        ( context as RegisterActivity).supportFragmentManager.beginTransaction()
+            .setCustomAnimations(0, 0, 0, 0)
+            .replace(R.id.login_frame, ForgetPasswordFragment()).addToBackStack(null).commit()
     }
 
     fun switchToNotificationFragment(context: Context) {

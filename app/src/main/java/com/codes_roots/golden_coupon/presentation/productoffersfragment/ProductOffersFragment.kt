@@ -83,7 +83,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(progress = true , country_id = Pref.CountryId),
             viewModel.FilterFileds ,Pref.CountryId))
         //  view.searchBar.setError("assad")
-        view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
+        view.searchLayout.searchBar.doOnTextChanged {text, start, before, count ->
 
 
             viewModel.FilterFileds.put("Filter[name]",text.toString())

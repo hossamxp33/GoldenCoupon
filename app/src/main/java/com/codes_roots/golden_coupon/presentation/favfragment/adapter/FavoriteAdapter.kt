@@ -29,8 +29,8 @@ import com.codes_roots.golden_coupon.helper.ClickHandler
 
 class FavoriteAdapter(var context: Context?) :
     ListAdapter<FavoriteData, ViewHolder>(DiffCallback()) {
-    var Intent: Channel<MainIntent>?=null
-    var viewModel: MutableStateFlow<MainViewState?>?=null
+    var Intent: Channel<MainIntent>? = null
+    var viewModel: MutableStateFlow<MainViewState?>? = null
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -39,6 +39,14 @@ class FavoriteAdapter(var context: Context?) :
             R.layout.fav_item_adapter, p0, false
         )
 
+        try {
+            if ((context as MainActivity).preferenceHelper.lang!!.contains("ar"))
+                binding.brandName.text = currentList[0].brand.name
+            else
+                binding.brandName.text = currentList[0].brand.name_en
+
+        } catch (e: Exception) {
+        }
 
 
         return ViewHolder(binding)
@@ -48,10 +56,6 @@ class FavoriteAdapter(var context: Context?) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
         holder.bind(context, currentList[p1])
-try {
-
-}catch (e:Exception){}
-
 
 
     }
