@@ -44,6 +44,7 @@ open class CouponsFragment @Inject constructor() : Fragment() {
 
     val viewModel by viewModels<CouponsViewModel> { viewModelFactory }
 
+    var brandImage :String?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //   childFragmentManager.fragmentFactory = fragmentFactory!!
@@ -70,6 +71,7 @@ open class CouponsFragment @Inject constructor() : Fragment() {
         //  view.searchLayout.pref = (context as MainActivity).Pref
 
         viewModel.getCoupons(requireArguments().getInt("brandId"))
+        brandImage=     requireArguments().getString("brand_image")
         viewModel.CouponsLD!!.observe(requireActivity(), androidx.lifecycle.Observer {
             couponsAdapter.submitList(it.items)
             view.progress.isVisible = false
@@ -87,7 +89,7 @@ open class CouponsFragment @Inject constructor() : Fragment() {
     }
 
     fun couponsRecycleView() {
-        couponsAdapter = CouponsAdapter(requireContext())
+        couponsAdapter = CouponsAdapter(requireContext(),this,viewModel)
         view.couponsRecycleView.apply {
             layoutManager = LinearLayoutManager(
                 context

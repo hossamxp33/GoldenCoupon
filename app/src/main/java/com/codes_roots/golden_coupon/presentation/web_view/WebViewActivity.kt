@@ -28,16 +28,11 @@ class WebViewActivity : AppCompatActivity() {
 
         webview.settings.javaScriptEnabled = true
 
-
-
-        webview.loadUrl("https://www.goldencouponz.com/")
-
+        webview.loadUrl(url!!)
         webView.requestFocus();
-
-
         val webSettings = webView!!.getSettings()
-        webSettings.setJavaScriptEnabled(true)
+        webSettings.javaScriptEnabled = true
         // Force links and redirects to open in the WebView instead of in a browser
-        webView!!.setWebViewClient(WebViewClient())
+        webView!!.webViewClient = WebViewClient()
     }
 }

@@ -14,6 +14,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import androidx.databinding.DataBindingUtil
@@ -59,7 +60,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
-            viewModel.intents.trySend(MainIntent.Initialize(viewModel.state?.value!!.copy(progress = true),page))
+            viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!.copy(progress = true),page))
 
         }
     }
@@ -148,8 +149,8 @@ false
                     (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                     if (lastVisibleItem == brandsAdapter.itemCount-1 && brandsAdapter.itemCount >= 19) {
                         page++
-                        viewModel.intents.trySend(MainIntent.ShowProgress(viewModel.state.value!!))
                         viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,page))
+                        view.progress.isVisible = true
 
                     }
             }
@@ -183,6 +184,7 @@ false
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
                 if (it != null) {
+
                     if (it.error != null) {
                         it.error?.let {
                             when (it) {
@@ -210,6 +212,7 @@ false
                                     Toast.LENGTH_LONG).show()
                             }
                            stopLoadingShimmer()
+                            view.progress.isVisible = false
 
                         }
 

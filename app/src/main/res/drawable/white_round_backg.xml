@@ -71,7 +71,7 @@
     <!-- Background -->
     <item>
         <shape>
-            <solid android:color="@color/bottomNav" />
+            <solid android:color="@color/red2" />
 
             <corners android:bottomLeftRadius="36dp"
                 android:bottomRightRadius="36dp"

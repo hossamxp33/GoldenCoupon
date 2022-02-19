@@ -21,6 +21,10 @@
             name="pref"
             type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
 
+        <variable
+            name="string"
+            type="String" />
+
         <import type="android.text.Html"/>
 
     </data>
@@ -31,7 +35,7 @@
         android:layout_margin="@dimen/dimen_4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->listener.switchToCouponsFragment(data.id,context)}"
+        android:onClick="@{()->listener.switchToCouponsFragment(data.id,context,string)}"
         >
 
 
@@ -66,7 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:text="@{Html.fromHtml(String.format(pref.lang == `ar`? data.name : data.name_en ))}"
+            android:maxLength="20"
+            android:text="@{Html.fromHtml(String.format(pref.lang.contains(`ar`) ? data.name : data.name_en ))}"
             app:layout_constraintStart_toEndOf="@+id/cardView1"
             app:layout_constraintTop_toTopOf="@+id/cardView1" />
 

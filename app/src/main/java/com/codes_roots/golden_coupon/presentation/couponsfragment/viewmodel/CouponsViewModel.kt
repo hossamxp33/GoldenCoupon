@@ -3,10 +3,16 @@ package com.codes_roots.golden_coupon.presentation.couponsfragment.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
+import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
 import com.codes_roots.golden_coupon.repo.brands.RemoteDataSource
 
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.retry
+import java.io.IOException
 import javax.inject.Inject
 
 class CouponsViewModel @Inject constructor(private val Datasources: RemoteDataSource,
@@ -18,6 +24,7 @@ class CouponsViewModel @Inject constructor(private val Datasources: RemoteDataSo
 
     var rateJob: Job? = null
     var CouponsLD: MutableLiveData<CouponsModel>? = null
+    var UsedCouponsLD: MutableLiveData<UsedCouponModel>? = null
 
     val errorMessage = MutableLiveData<String>()
     val loading = MutableLiveData<Boolean>()
@@ -25,6 +32,23 @@ class CouponsViewModel @Inject constructor(private val Datasources: RemoteDataSo
 
     init {
         CouponsLD = MutableLiveData()
+        UsedCouponsLD= MutableLiveData()
+    }
+
+    fun getUsedCoupons(item_id: Int?)
+    {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = Datasources.getUsedCoupons(item_id!!)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    UsedCouponsLD?.postValue(response.body())
+
+                } else {
+                    onError("Error : ${response.message()} ")
+                }
+            }
+        }
+
     }
 
 

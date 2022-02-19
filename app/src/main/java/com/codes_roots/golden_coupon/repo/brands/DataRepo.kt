@@ -6,6 +6,7 @@ import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
+import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -20,9 +21,9 @@ class DataRepo @Inject constructor(
 
     // // انا كنت ناسي اعمل emit في الcatch عشان كدا كان بيرجع هنا نفس الrespone في الحالتين
     // استخدمت Result في ال follow عشان بترجع الobject , error في نفس الclass وده مش بيحصل في ال sealed
-    fun getMainData(page: Int?,filter:String): Flow<Result<BrandsModel>> =
+    fun getMainData(page: Int?, filter: String): Flow<Result<BrandsModel>> =
         flow {
-            emit(Datasources.getBrandsResponse(page,filter))
+            emit(Datasources.getBrandsResponse(page, filter))
         }
             .map { Result.success(it) }
             .retry(retries = 4) { t ->
@@ -31,7 +32,7 @@ class DataRepo @Inject constructor(
                         delay(1000)
                     }
                 }
-            }  .catch { throwable -> emit(Result.failure(throwable)) }
+            }.catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
 
@@ -47,6 +48,10 @@ class DataRepo @Inject constructor(
                     }
                 }
             }
+
+            .catch { throwable -> emit(Result.failure(throwable)) }
+            .flowOn(ioDispatcher)
+
 
             .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
@@ -86,9 +91,13 @@ class DataRepo @Inject constructor(
             emit(Datasources.getStaticPages())
         }
             .map { Result.success(it) }
-            .retry(4){ t -> (t is IOException).also { if (it) {
-                delay(1000)
-            }}}
+            .retry(4) { t ->
+                (t is IOException).also {
+                    if (it) {
+                        delay(1000)
+                    }
+                }
+            }
             .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 

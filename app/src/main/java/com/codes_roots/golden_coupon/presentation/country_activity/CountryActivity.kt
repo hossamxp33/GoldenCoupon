@@ -26,12 +26,13 @@ import kotlinx.android.synthetic.main.country_activity.*
 import javax.inject.Inject
 
 
-class CountryActivity constructor(): AppCompatActivity() , HasAndroidInjector {
+class CountryActivity @Inject constructor(): AppCompatActivity() , HasAndroidInjector {
 
     lateinit var countriesAdapter: CountriesAdapter
 
     @Inject
     lateinit var Pref: PreferenceHelper
+
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 

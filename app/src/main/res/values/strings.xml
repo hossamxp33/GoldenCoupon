@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Golden Coupon</string>
-    <string name="main">Home</string>
+    <string name="main">stores</string>
     <string name="favourite">Favourite</string>
-    <string name="menu">Menu</string>
-    <string name="offers">Offers</string>
+    <string name="menu">Account</string>
+    <string name="offers">Products Offer</string>
     <string name="enjoy">Enjoy \u0020 </string>
     <string name="title"> the largest selection of discounts and offers</string>
     <string name="best_brands">Browse our best brands</string>
@@ -26,7 +26,7 @@
     <string name="noBrandFound">No Brands Found</string>
     <string name="filter">filter</string>
     <string name="copied">copied</string>
-    <string name="price">"Percetange : \u0020 "</string>
+    <string name="price">"product price : \u0020 "</string>
     <string name="priceWithCode">"Price With Code : \u0020 "</string>
     <string name="choseCountry">Chose country</string>
     <string name="sortby">Sort by</string>
@@ -47,4 +47,6 @@
     <string name="can_change_lang">* يمكنك تغيير اللغة من قائمة حسابي "</string>
     <string name="can_change_lang2">You can change the language from the My Account menu</string>
     <string name="next">next</string>
+    <string name="notification">Notification</string>
+    <string name="loginFirst">you should login</string>
 </resources>

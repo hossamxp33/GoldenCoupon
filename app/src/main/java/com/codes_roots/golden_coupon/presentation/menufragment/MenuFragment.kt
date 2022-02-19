@@ -31,12 +31,14 @@ open class MenuFragment @Inject constructor() : Fragment(){
 
     @Inject
     lateinit var pref: PreferenceHelper
+
     lateinit var staticPagesAdapter: StaticPagesAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     val viewModel by viewModels<StaticPagesViewModel> { viewModelFactory }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         //   childFragmentManager.fragmentFactory = fragmentFactory!!
 
@@ -55,11 +57,8 @@ open class MenuFragment @Inject constructor() : Fragment(){
     ): View? {
 
         view = DataBindingUtil.inflate(inflater, R.layout.menu_fragment, container, false)
-
-
         view.context = context as MainActivity
         view.listener = ClickHandler()
-      //  view.searchLayout.pref = (context as MainActivity).Pref
 
 
 //        if (pref.lang!!.contains("en")) {

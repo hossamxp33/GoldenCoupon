@@ -23,9 +23,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
 
-class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
+class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
     ListAdapter<Brand, ViewHolder>(DiffCallback()) {
-    var Intent: Channel<MainIntent>?=null
+    var Intent: Channel<MainIntent>? = null
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val binding: BrandItemAdapterBinding = DataBindingUtil.inflate(
@@ -67,7 +67,7 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
                     holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
 
 
-              notifyItemChanged(position)
+                notifyItemChanged(position)
 
             }
 
@@ -84,30 +84,31 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel,) :
 private class DiffCallback : DiffUtil.ItemCallback<Brand>() {
 
     override fun areItemsTheSame(
-        oldItem: Brand, newItem: Brand
+        oldItem: Brand, newItem: Brand,
     ) =
         oldItem.id == newItem.id
 
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(
-        oldItem: Brand, newItem: Brand
+        oldItem: Brand, newItem: Brand,
     ) =
         oldItem == newItem
 }
 
 
 class ViewHolder(
-    val binding: BrandItemAdapterBinding
+    val binding: BrandItemAdapterBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
 
     fun bind(context: Context?, data: Brand) {
 
-         binding.listener = ClickHandler()
+        binding.listener = ClickHandler()
         binding.data = data
         binding.context = context as MainActivity?
-
+        binding.string = data.image
         binding.pref = (context as MainActivity).preferenceHelper
+
     }
 
 

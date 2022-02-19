@@ -39,6 +39,7 @@ open class BaseApplication : DaggerApplication() {
 //                createConfigurationContext(config)
 //            resources.updateConfiguration(config, resources.displayMetrics)
 //
+            ResourceUtil().changeLang(pref.lang!!, this)
 
         } catch (e: URISyntaxException) {
             throw RuntimeException(e)

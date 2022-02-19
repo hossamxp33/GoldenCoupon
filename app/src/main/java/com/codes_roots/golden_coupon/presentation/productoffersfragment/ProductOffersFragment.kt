@@ -81,18 +81,18 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         //  view.searchLayout.pref = (context as MainActivity).Pref
 
         viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(progress = true , country_id = Pref.CountryId),
-            viewModel?.FilterFileds ,Pref.CountryId))
+            viewModel.FilterFileds ,Pref.CountryId))
         //  view.searchBar.setError("assad")
         view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
 
 
-            viewModel?.FilterFileds?.put("Filter[name]",text.toString())
+            viewModel.FilterFileds.put("Filter[name]",text.toString())
 
             viewModel.intents.trySend(
 
                         MainIntent.FilterData(
                     viewModel.state.value!!,
-                            viewModel?.FilterFileds,
+                            viewModel.FilterFileds,
                             viewModel.state.value!!.country_id
                 )
             )
@@ -153,7 +153,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
     }
 
     fun categoryRecycleView() {
-        categoryAdapter = CategoryAdapter(requireContext(), viewModel)
+        categoryAdapter = CategoryAdapter(requireContext(), viewModel,this)
         view.categoryRecycleView.apply {
             layoutManager = LinearLayoutManager(
                 context,
@@ -211,14 +211,14 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                         viewModel.intents.send(MainIntent.ErrorDisplayed(it))
                     } else {
                         if (it.progress == true) {
-
                                 view.progress.isVisible = it.progress
-
                         } else {
                        //      view.subCategoryRecycleView.isVisible = it.subcategoryVisibility!!
                             //      productsAdapter.submitList(it.filterDataByCategory)
                          try {
-                            view.brandsData = it.allBrandsData
+                             view.progress.isVisible = true
+
+                             view.brandsData = it.allBrandsData
 
                             productsAdapter.submitList(it.filteredData)
 

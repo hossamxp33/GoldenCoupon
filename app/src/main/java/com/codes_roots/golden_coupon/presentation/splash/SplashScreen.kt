@@ -36,7 +36,7 @@ class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
 
         Handler().postDelayed({
             if (Pref.lang != ""){
-                SUCCESS_MotionToast(Pref.lang.toString(),this)
+               // SUCCESS_MotionToast(Pref.lang.toString(),this)
                 ResourceUtil().changeLang(Pref.lang!!, this)
               if (Pref.CountryId != 0){
 

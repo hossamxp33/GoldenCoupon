@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -18,15 +19,17 @@ import com.codes_roots.golden_coupon.entites.brandsmodel.Brand
 import com.codes_roots.golden_coupon.entites.category.Category
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewState
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
+import kotlinx.android.synthetic.main.offers_fragment.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 
-class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?) :
+class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?,var fragment:ProductOffersFragment) :
     ListAdapter<Category, ViewHolder>(DiffCallback()) {
-    var Intent: Channel<MainIntent>?=null
+    var Intent: Channel<MainIntent>? = null
     var row_index: Int? = -1
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -43,23 +46,23 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?) 
         holder.bind(context, currentList[position])
 
         holder.binding.Mview.setOnClickListener {
-  if (!currentList.isNullOrEmpty()) {
-      row_index = position
-      val viewState = viewModel?.state?.value
-      viewModel?.FilterFileds?.put("Filter[cat_id]",currentList[position].id.toString())
+            fragment.progress.isVisible = true
+            if (!currentList.isNullOrEmpty()) {
+                row_index = position
+                val viewState = viewModel?.state?.value
+                viewModel?.FilterFileds?.put("Filter[cat_id]", currentList[position].id.toString())
+                viewModel!!.intents.trySend(
+                    MainIntent.FilterData(
+                        viewState!!.copy(category_position = row_index!!),
+                        viewModel?.FilterFileds,
+                        viewState.country_id
+                    )
+                )
 
-      viewModel!!.intents.trySend(
-          MainIntent.FilterData(
-              viewState!!.copy(category_position = row_index!!),
-               viewModel?.FilterFileds,
-                       viewState!!.country_id
-          )
-      )
-
-      notifyDataSetChanged()
-      notifyItemChanged(position)
-  }else
-      WARN_MotionToast("",context as MainActivity)
+                notifyDataSetChanged()
+                notifyItemChanged(position)
+            } else
+                WARN_MotionToast("", context as MainActivity)
         }
 /// Text  underLine  when selected
         if (row_index == position) {
@@ -78,20 +81,20 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?) 
 private class DiffCallback : DiffUtil.ItemCallback<Category>() {
 
     override fun areItemsTheSame(
-        oldItem: Category, newItem: Category
+        oldItem: Category, newItem: Category,
     ) =
         oldItem.id == newItem.id
 
     @SuppressLint("DiffUtilEquals")
     override fun areContentsTheSame(
-        oldItem: Category, newItem: Category
+        oldItem: Category, newItem: Category,
     ) =
         oldItem == newItem
 }
 
 
 class ViewHolder(
-    val binding: CategoryItemAdapterBinding
+    val binding: CategoryItemAdapterBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(context: Context?, data: Category) {

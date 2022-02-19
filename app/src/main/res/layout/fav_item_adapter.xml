@@ -67,7 +67,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
 
-            android:text="@{Html.fromHtml(String.format(pref.lang == `ar`? productData.brand.name : productData.brand.name_en))}"
+            android:text="@{Html.fromHtml(String.format(pref.lang.contains(`ar`)? productData.brand.name : productData.brand.name_en))}"
             app:layout_constraintStart_toEndOf="@+id/cardView1"
             app:layout_constraintTop_toTopOf="@+id/cardView1" />
 

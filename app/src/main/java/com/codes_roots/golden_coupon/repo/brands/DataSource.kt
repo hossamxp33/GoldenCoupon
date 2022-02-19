@@ -8,6 +8,7 @@ import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
+import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
 import retrofit2.Response
 
 
@@ -23,6 +24,7 @@ interface DataSource {
     suspend fun getFavoritesResponse(): FavouritModel
     suspend fun addFavorites(brand_id: Int, UserId: Int): Boolean
     suspend fun getStaticPages(): StaticPagesModel
+    suspend fun getUsedCoupons(item_id:Int): Response<UsedCouponModel>
 
 //
 }

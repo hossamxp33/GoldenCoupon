@@ -10,6 +10,7 @@ import com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragmen
 import com.codes_roots.golden_coupon.presentation.dealsfragment.DealsFragment
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
+import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
 import com.codes_roots.golden_coupon.presentation.sortfragment.SortFragment
 
@@ -114,6 +115,11 @@ abstract class FragmentFactoryModule {
     @IntoMap
     @FragmentKey(DealsFragment::class)
     abstract fun bindDealsFragment(fragment: DealsFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(MenuFragment::class)
+    abstract fun bindMenuFragment(fragment: MenuFragment): Fragment
 
 //
 //    @Binds

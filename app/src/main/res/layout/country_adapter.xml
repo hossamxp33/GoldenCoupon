@@ -44,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:text="@{Html.fromHtml(String.format(pref.lang == `ar`? data.name : data.name_en ))}"
+        android:text="@{Html.fromHtml(String.format(pref.lang.contains(`ar`)? data.name : data.name_en ))}"
         app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView4"
         app:layout_constraintStart_toEndOf="@+id/appCompatImageView4"
         app:layout_constraintTop_toTopOf="@+id/appCompatImageView4" />

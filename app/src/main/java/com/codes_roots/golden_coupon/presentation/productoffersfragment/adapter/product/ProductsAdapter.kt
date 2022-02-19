@@ -27,8 +27,8 @@ import com.codes_roots.golden_coupon.helper.ClickHandler
 
 class ProductsAdapter(var context: Context?) :
     ListAdapter<Product, ViewHolder>(DiffCallback()) {
-    var Intent: Channel<MainIntent>?=null
-    var viewModel: MutableStateFlow<MainViewState?>?=null
+    var Intent: Channel<MainIntent>? = null
+    var viewModel: MutableStateFlow<MainViewState?>? = null
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
@@ -43,15 +43,22 @@ class ProductsAdapter(var context: Context?) :
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
         holder.bind(context, currentList[p1])
-try {
-    holder.binding.price.text = (context as MainActivity).getString(R.string.price) + currentList[p1].productsizes!![0].start_price + " " +currentList[p1].productsizes!![0].country!!.code
-    holder.binding.priceWithCode.text = (context as MainActivity).getString(R.string.priceWithCode) + currentList[p1].productsizes!![0].current_price + " " + currentList!![p1].productsizes!![0].country!!.code
+        try {
+            if ((context as MainActivity).preferenceHelper.lang!!.contains("ar")) {
+                holder.binding.price.text =
+                    (context as MainActivity).getString(R.string.price) + currentList[p1].productsizes!![0].start_price + " " + currentList[p1].productsizes!![0].country!!.code
+                holder.binding.priceWithCode.text =
+                    (context as MainActivity).getString(R.string.priceWithCode) + currentList[p1].productsizes!![0].current_price + " " + currentList!![p1].productsizes!![0].country!!.code
+            } else {
+                holder.binding.price.text =
+                    (context as MainActivity).getString(R.string.price) + currentList[p1].productsizes!![0].start_price + " " + currentList[p1].productsizes!![0].country!!.codes_en
+                holder.binding.priceWithCode.text =
+                    (context as MainActivity).getString(R.string.priceWithCode) + currentList[p1].productsizes!![0].current_price + " " + currentList!![p1].productsizes!![0].country!!.codes_en
+            }
 
+        } catch (e: Exception) {
 
-}catch (e:Exception){
-
-}
-
+        }
 
 
     }
@@ -82,7 +89,7 @@ class ViewHolder(
 ) : RecyclerView.ViewHolder(binding.root) {
 
     fun bind(context: Context?, data: Product) {
-          binding.listener = ClickHandler()
+        binding.listener = ClickHandler()
         binding.productData = data
         binding.context = context as MainActivity?
         binding.pref = (context as MainActivity).preferenceHelper

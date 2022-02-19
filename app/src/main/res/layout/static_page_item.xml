@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/menuTitles"
-            android:text="@{pref.lang== `ar` ? data.name:data.name_en}"
+            android:text="@{pref.lang.contains(`ar`) ? data.name:data.name_en}"
             app:drawableEndCompat="@drawable/left_ic"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

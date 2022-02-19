@@ -12,6 +12,7 @@ import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import com.codes_roots.golden_coupon.entites.products.ProductsModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
+import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -21,10 +22,11 @@ interface APIServices {
 
     @FormUrlEncoded
     @POST("brands.json")
-    suspend fun getBrandsData(@Query("page") page: Int?,
+    suspend fun getBrandsData(
+        @Query("page") page: Int?,
         @Field("Filter[name]") cat_id: String?,
 
-    ): BrandsModel
+        ): BrandsModel
 
 
     @GET("categories/getAllCats.json")
@@ -40,9 +42,9 @@ interface APIServices {
     @POST("products/index/{country_id}.json")
     suspend fun getProductData(
         @Path("country_id") country_id: Int?,
-        @FieldMap fields : HashMap<String, String> ?
+        @FieldMap fields: HashMap<String, String>?,
 
-    ): ProductsModel
+        ): ProductsModel
 
     @GET("items/index/{brandid}.json")
     suspend fun getCouponsData(@Path("brandid") brandid: Int): Response<CouponsModel>
@@ -68,13 +70,17 @@ interface APIServices {
     suspend fun login(@Body loginModel: User?): Response<LoginModel>
 //
 
-@POST("users/add.json")
-@Headers("Accept: Application/json", "cache-control: no-cache")
-suspend fun register(@Body registerModel: User?): Response<LoginModel>
+    @POST("users/add.json")
+    @Headers("Accept: Application/json", "cache-control: no-cache")
+    suspend fun register(@Body registerModel: User?): Response<LoginModel>
 
     @GET("StaticPages.json")
     suspend fun getStaticPages(): StaticPagesModel
 
+    @FormUrlEncoded
+    @POST("UsedCoupons/add.json")
+    @Headers("Accept: Application/json", "cache-control: no-cache")
+    suspend fun usedCoupons(@Field("item_id") item_id: Int?): Response<UsedCouponModel>
 
 
     //   http://goldencopons.codesroots.com/api/UsedCoupons/add.json

@@ -44,7 +44,6 @@ class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidIn
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chose_language_activity)
 
-
          ar_layout.setOnClickListener {
              noColoredView()
              next.isEnabled = true
@@ -64,9 +63,10 @@ class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidIn
          }
 
          next.setOnClickListener {
-
+             if (Pref.CountryId==0)
                  ClickHandler().switchToActivity(this, CountryActivity())
-
+             else
+                 ClickHandler().switchToActivity(this, SplashScreen())
          }
 
 

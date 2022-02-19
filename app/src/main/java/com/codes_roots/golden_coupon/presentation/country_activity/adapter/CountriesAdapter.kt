@@ -78,6 +78,8 @@ class ViewHolder(
           binding.listener = ClickHandler()
         binding.data = data
         binding.context = context as CountryActivity?
+        binding.pref = (context as CountryActivity).Pref
+
     }
 
 

@@ -48,8 +48,11 @@ import javax.inject.Inject
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codes_roots.golden_coupon.data_layer.OnBackPressedListener
+import com.codes_roots.golden_coupon.generated.callback.OnClickListener
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
+import com.codes_roots.golden_coupon.presentation.notificationfragment.NotificationFragment
+import kotlinx.android.synthetic.main.activity_main_content.view.*
 
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
@@ -84,6 +87,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
+
+        notification_background.setOnClickListener {
+         ClickHandler().switchFragment(this, NotificationFragment())
+
+        }
+
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .setCustomAnimations(0, 0, 0, 0)
@@ -100,7 +109,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 else include?.visibility = View.VISIBLE
             })
 
-        preferenceHelper.lang
         bottom_nav_bar.setOnNavigationItemSelectedListener {
             val id = it.itemId
             if (integerDeque.contains(id)) {
@@ -132,7 +140,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     }
                     R.id.fav -> {
                         menu.getItem(2).isChecked = true
-                        ClickHandler().switchFragment(this@MainActivity, FavoriteFragment())
+                        ClickHandler().checkForToken(context, FavoriteFragment())
+
+
                     }
 
                     R.id.menu -> {
@@ -165,7 +175,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                 this,
                 BottomNav().getFragment(this, integerDeque.peek()!!)
             )
+            doubleBackToExitPressedOnce = true
         } else if (doubleBackToExitPressedOnce)
+
             finish()
         else if (fragmentManager.backStackEntryCount == 0) {
             bottom_nav_bar.selectedItemId = R.id.homeFragment
