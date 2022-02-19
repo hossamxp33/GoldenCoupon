@@ -19,8 +19,7 @@
         <item name="colorPrimary">@color/white</item>
         <item name="colorPrimaryVariant">@color/orange</item>
         <item name="colorOnPrimary">@color/white</item>
-
-
+        <item name="android:fontFamily">@font/cocon_next_arabic</item>
 
     </style>
     <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
