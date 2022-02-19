@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         setContentView(R.layout.activity_main)
 
         notification_background.setOnClickListener {
-         ClickHandler().switchFragment(this, NotificationFragment())
+            ClickHandler().switchFragment(this, NotificationFragment())
 
         }
 
@@ -169,24 +169,15 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        integerDeque.poll()
-        if (!integerDeque.isNullOrEmpty()) {
-            ClickHandler().switchFragment(
-                this,
-                BottomNav().getFragment(this, integerDeque.peek()!!)
-            )
-            doubleBackToExitPressedOnce = true
-        } else if (doubleBackToExitPressedOnce)
+        when (fragmentManager.backStackEntryCount) {
+            0 -> bottom_nav_bar.selectedItemId = R.id.homeFragment
+            1 -> bottom_nav_bar.selectedItemId = R.id.offer
+            2 -> bottom_nav_bar.selectedItemId = R.id.fav
+            3 -> bottom_nav_bar.selectedItemId = R.id.menu
+            else ->
+                finish()
 
-            finish()
-        else if (fragmentManager.backStackEntryCount == 0) {
-            bottom_nav_bar.selectedItemId = R.id.homeFragment
-            doubleBackToExitPressedOnce = true
         }
-
-
-
-//       Handler(Looper.getMainLooper()).postDelayed(Runnable {  }, 2000)
 
     }
 

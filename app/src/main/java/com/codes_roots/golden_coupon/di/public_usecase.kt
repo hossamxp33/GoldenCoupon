@@ -18,6 +18,7 @@ import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.helper.Constants
 
 import com.google.android.material.imageview.ShapeableImageView
+import com.makeramen.roundedimageview.RoundedImageView
 import www.sanju.motiontoast.MotionToast
 import www.sanju.motiontoast.MotionToastStyle
 import java.lang.Long
@@ -72,11 +73,11 @@ fun setImageResource(imageView: AppCompatImageView, resource: String?) {
         .into(imageView)
 }
 @BindingAdapter("app:imageResourcee")
-fun imageResourcee(imageView: AppCompatImageView, resource: String?) {
+fun imageResourcee(imageView: RoundedImageView, resource: String?) {
     val requestOptions = RequestOptions()
     requestOptions.error(R.drawable.noimg)
     Glide.with(imageView.context)
-        .load((resource))
+        .load((Constants.IMAGE_URL+resource))
         .transition(DrawableTransitionOptions.withCrossFade())
         .apply(requestOptions)
         .into(imageView)
