@@ -60,7 +60,6 @@ class ForgetPasswordFragment @Inject constructor() : Fragment() {
             R.layout.forget_fragment, container, false)
 
 
-
         view.send.setOnClickListener {
             if (view.email.text.toString() == "" && !view.email.text.toString().trim { it <= ' ' }
                     .matches(emailPattern.toRegex())) {
