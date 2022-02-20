@@ -11,15 +11,19 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.BrandItemAdapterBinding
+import com.codes_roots.golden_coupon.di.WARN_MotionToast
 import com.codes_roots.golden_coupon.entites.brandsmodel.Brand
 import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
+import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
+import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewState
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.jetbrains.anko.startActivityForResult
 import javax.inject.Inject
 
 
@@ -53,6 +57,10 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
 
             holder.binding.favoriteIcon.setOnClickListener {
 
+                if (( context as MainActivity).preferenceHelper.token.isNullOrEmpty()) {
+                    WARN_MotionToast(( context as MainActivity).getString(R.string.loginFirst),  context as MainActivity)
+                    val i = Intent(context, RegisterActivity::class.java)
+                    (context as MainActivity).startActivityForResult(i, 100)}else
                 viewModel.intents.trySend(
                     MainIntent
                         .AddToFavorite(
