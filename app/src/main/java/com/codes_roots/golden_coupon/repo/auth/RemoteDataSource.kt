@@ -9,6 +9,7 @@ import com.codes_roots.golden_coupon.entites.countries.CountryModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
+import com.codes_roots.golden_coupon.entites.forget.ForgetPasswordModelX
 import retrofit2.Response
 
 import javax.inject.Inject
@@ -24,7 +25,7 @@ class AuthRemoteDataSource @Inject constructor(private val ApiService: APIServic
         return ApiService.register(registermodel)
     }
 
-    override suspend fun forgetPasswordResponse(email: String?): Response<LoginModel> {
+    override suspend fun forgetPasswordResponse(email: String?): Response<ForgetPasswordModelX> {
         return ApiService.forgetPassword(email)
     }
 

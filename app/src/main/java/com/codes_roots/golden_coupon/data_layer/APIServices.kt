@@ -9,6 +9,7 @@ import com.codes_roots.golden_coupon.entites.countries.CountryModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
+import com.codes_roots.golden_coupon.entites.forget.ForgetPasswordModelX
 import com.codes_roots.golden_coupon.entites.products.ProductsModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
@@ -75,10 +76,9 @@ interface APIServices {
     suspend fun register(@Body registerModel: User?): Response<LoginModel>
 
     @FormUrlEncoded
-    @POST("users/add.json")
+    @POST("Users/forgotpassword.json")
     @Headers("Accept: Application/json", "cache-control: no-cache")
-    suspend fun forgetPassword(@Field("email") email: String?
-    ): Response<LoginModel>
+    suspend fun forgetPassword(@Field("email") email: String?): Response<ForgetPasswordModelX>
 
     //////////////////////////////////////////////////////
     @GET("StaticPages.json")

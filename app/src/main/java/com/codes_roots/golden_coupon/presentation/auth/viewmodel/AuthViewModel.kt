@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.codes_roots.golden_coupon.entites.auth.LoginModel
 import com.codes_roots.golden_coupon.entites.auth.User
+import com.codes_roots.golden_coupon.entites.forget.ForgetPasswordModelX
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.repo.auth.AuthRemoteDataSource
 
@@ -23,12 +24,16 @@ class AuthViewModel @Inject constructor(private val Datasources: AuthRemoteDataS
     var rateJob: Job? = null
     var authLD: MutableLiveData<LoginModel>? = null
 
+    var  forgetPasswordLD: MutableLiveData<ForgetPasswordModelX>? = null
+
     val errorMessage = MutableLiveData<String>()
     val loading = MutableLiveData<Boolean>()
 
 
     init {
         authLD = MutableLiveData()
+
+        forgetPasswordLD= MutableLiveData()
     }
 
 
@@ -80,7 +85,7 @@ class AuthViewModel @Inject constructor(private val Datasources: AuthRemoteDataS
             val response = Datasources.forgetPasswordResponse(email!!)
             withContext(Dispatchers.Main) {
                 if (response.isSuccessful) {
-                    authLD?.postValue(response.body())
+                    forgetPasswordLD?.postValue(response.body())
 
                 } else {
                     onError("Error : ${response.message()} ")

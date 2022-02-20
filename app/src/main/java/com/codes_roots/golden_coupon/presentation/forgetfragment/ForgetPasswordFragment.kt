@@ -13,6 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.ForgetFragmentBinding
 import com.codes_roots.golden_coupon.databinding.LoginFragmentBinding
+import com.codes_roots.golden_coupon.di.Error_MotionToast
+import com.codes_roots.golden_coupon.di.SUCCESS_MotionToast
+import com.codes_roots.golden_coupon.di.WARN_MotionToast
 import com.codes_roots.golden_coupon.entites.auth.User
 import com.codes_roots.golden_coupon.helper.BaseApplication
 import com.codes_roots.golden_coupon.helper.ClickHandler
@@ -69,22 +72,16 @@ class ForgetPasswordFragment @Inject constructor() : Fragment() {
 
 
         }
-        viewModel.authLD?.observe(requireActivity(), Observer {
+        viewModel.forgetPasswordLD?.observe(requireActivity(), Observer {
+            if (it.user.state.contains( "500")) {
+                Error_MotionToast(it?.user?.data!!,requireActivity())
 
-            if (it.data.token == null) {
-
-                Toast.makeText(context, "please enter valid email", Toast.LENGTH_SHORT)
-                    .show()
-
-            } else {
-
-                Pref.userName = (it.data.username)
-                Pref.token = (it.data.token)
-                Pref.UserId = it.data.userid!!
-
+            } else if (it.user.state.contains( "200") ){
+                 SUCCESS_MotionToast(it.user.data,requireActivity())
                 ClickHandler().switchToActivity(requireContext(), MainActivity())
-
             }
+            else
+                WARN_MotionToast("please enter valid email",requireActivity())
 
         })
 
@@ -99,9 +96,7 @@ class ForgetPasswordFragment @Inject constructor() : Fragment() {
 
 
     fun getPassword() {
-
-            val  email = view.email.text.toString()
-
+        val  email = view.email.text.toString()
         viewModel.forgetPassword(email)
     }
 }
