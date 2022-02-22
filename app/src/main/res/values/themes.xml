@@ -75,7 +75,12 @@
         <item name="android:layout_marginLeft">12dp</item>
 
     </style>
+    <style name="EnHomeTitles">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/dinnextarabicbold</item>
 
+    </style>
     <style name="HomeTitles">
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@color/black</item>
