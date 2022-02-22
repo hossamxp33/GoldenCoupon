@@ -9,6 +9,7 @@ import com.codes_roots.golden_coupon.presentation.dealsfragment.mvi.DealsViewMod
 import com.codes_roots.golden_coupon.presentation.favfragment.mvi.FavViewModel
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 import com.codes_roots.golden_coupon.presentation.menufragment.mvi.StaticPagesViewModel
+import com.codes_roots.golden_coupon.presentation.notificationfragment.viewmodel.NotificationViewModel
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
 
 
@@ -59,6 +60,11 @@ interface MainModule {
     @IntoMap
     @ViewModelKey(StaticPagesViewModel::class)
     fun bindStaticPagesViewModel(mainViewModel: StaticPagesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(NotificationViewModel::class)
+    fun bindNotificationViewModel(mainViewModel: NotificationViewModel): ViewModel
 
 
 

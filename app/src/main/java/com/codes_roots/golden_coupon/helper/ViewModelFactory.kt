@@ -12,6 +12,7 @@ import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.forgetfragment.ForgetPasswordFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
+import com.codes_roots.golden_coupon.presentation.notificationfragment.NotificationFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
 import com.codes_roots.golden_coupon.presentation.sortfragment.SortFragment
 
@@ -125,11 +126,11 @@ abstract class FragmentFactoryModule {
     @FragmentKey(ForgetPasswordFragment::class)
     abstract fun bindForgetPasswordFragment(fragment: ForgetPasswordFragment): Fragment
 
-//
-//    @Binds
-//    @IntoMap
-//    @FragmentKey(SortFragment::class)
-//    abstract fun bindSortFragment(fragment: SortFragment): Fragment
+
+    @Binds
+    @IntoMap
+    @FragmentKey(NotificationFragment::class)
+    abstract fun bindNotificationFragment(fragment: NotificationFragment): Fragment
 
 }
 

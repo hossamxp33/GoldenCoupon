@@ -10,6 +10,7 @@ import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import com.codes_roots.golden_coupon.entites.forget.ForgetPasswordModelX
+import com.codes_roots.golden_coupon.entites.notification.NotificationModel
 import com.codes_roots.golden_coupon.entites.products.ProductsModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
@@ -55,6 +56,10 @@ interface APIServices {
 
     @GET("FavouriteItems/index.json")
     suspend fun getFavorite(): FavouritModel
+
+    @GET("notifications.json")
+    suspend fun getNotifications(): Response<NotificationModel>
+
 
     @FormUrlEncoded
     @POST("FavouriteItems/add.json")

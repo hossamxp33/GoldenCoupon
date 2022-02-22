@@ -7,6 +7,7 @@ import com.codes_roots.golden_coupon.entites.countries.CountryModel
 import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
 import com.codes_roots.golden_coupon.entites.deals.DealsModel
 import com.codes_roots.golden_coupon.entites.fav.FavouritModel
+import com.codes_roots.golden_coupon.entites.notification.NotificationModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
 import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
@@ -50,6 +51,10 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
 
     override suspend fun getUsedCoupons(item_id:Int):  Response<UsedCouponModel> {
         return ApiService.usedCoupons(item_id)
+
+    }
+    override suspend fun getNotifications():Response<NotificationModel> {
+        return ApiService.getNotifications()
     }
 
 

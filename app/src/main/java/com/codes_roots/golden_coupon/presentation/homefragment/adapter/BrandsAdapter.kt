@@ -34,8 +34,7 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val binding: BrandItemAdapterBinding = DataBindingUtil.inflate(
             LayoutInflater.from(p0.context),
-            R.layout.brand_item_adapter, p0, false
-        )
+            R.layout.brand_item_adapter, p0,false)
 
         return ViewHolder(binding)
 
