@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.FavoriteFragmentBinding
 import com.codes_roots.golden_coupon.databinding.OffersFragmentBinding
+import com.codes_roots.golden_coupon.entites.fav.FavoriteData
+import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import com.codes_roots.golden_coupon.helper.BaseApplication
 import com.codes_roots.golden_coupon.presentation.favfragment.adapter.FavoriteAdapter
 import com.codes_roots.golden_coupon.presentation.favfragment.mvi.FavViewModel
@@ -49,6 +51,7 @@ open class FavoriteFragment @Inject constructor() : Fragment() {
 
     val viewModel by viewModels<FavViewModel> { viewModelFactory }
 
+    var data: ArrayList<FavoriteData>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         //   childFragmentManager.fragmentFactory = fragmentFactory!!
@@ -95,7 +98,7 @@ open class FavoriteFragment @Inject constructor() : Fragment() {
 
 
     fun favoriteRecycleView() {
-        favoriteAdapter = FavoriteAdapter(requireContext())
+        favoriteAdapter = FavoriteAdapter(requireContext(),viewModel,this)
         view.favRecycle.apply {
             layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = favoriteAdapter
@@ -129,6 +132,7 @@ open class FavoriteFragment @Inject constructor() : Fragment() {
                         } else {
 
                           favoriteAdapter.submitList(it.data!!.data)
+                            data = it.data!!.data
                      //       productsAdapter.submitList(it.filteredData)
 //
 //

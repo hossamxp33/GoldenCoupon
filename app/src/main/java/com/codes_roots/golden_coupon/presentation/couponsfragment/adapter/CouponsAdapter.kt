@@ -53,17 +53,23 @@ class CouponsAdapter(
         holder.bind(context, currentList[position])
         holder.binding.image = fragment.brandImage
 
-        holder.binding.visitSiteButton.setOnClickListener {
-            viewmodel.getUsedCoupons(currentList[position].used_coupons!![position].item_id)
-            context as MainActivity
+    holder.binding.visitSiteButton.setOnClickListener {
+        try {
+        viewmodel.getUsedCoupons(currentList[position].used_coupons!![position].item_id)
+        context as MainActivity
 
-            if (!currentList[position].url.isNullOrEmpty()) {
-                val intent = Intent(context, WebViewActivity::class.java)
-                intent.putExtra("url", currentList[position].url);
-                (context as MainActivity).startActivity(intent)
-                notifyItemChanged(position)
-            }
+        if (!currentList[position].url.isNullOrEmpty()) {
+            val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("url", currentList[position].url);
+            (context as MainActivity).startActivity(intent)
+            notifyItemChanged(position)
         }
+        }catch (e:Exception){
+
+        }
+        }
+
+
 
     }
 

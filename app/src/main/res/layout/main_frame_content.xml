@@ -7,18 +7,18 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
 
-
         <FrameLayout
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
-            android:background="@color/white"
             android:layout_height="0dp"
-            app:layout_constraintHeight_percent="0.91"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.91"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </FrameLayout>
+
 
 <!--        <fragment-->
 <!--            android:id="@+id/nav_host_fragment"-->

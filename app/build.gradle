@@ -46,6 +46,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     def navigation_version = "2.3.0"
 
 
@@ -79,6 +80,7 @@ dependencies {
     /// firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
     implementation 'com.google.gms:google-services:4.3.10'
 
     implementation "androidx.activity:activity-ktx:1.4.0"
@@ -147,5 +149,7 @@ dependencies {
 
     //    implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    implementation 'com.nambimobile.widgets:expandable-fab:1.2.1'
 
 }

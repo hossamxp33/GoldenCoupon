@@ -10,6 +10,7 @@ data class MainViewState(
     var data: FavouritModel?=null,
     val noFavFound:  Boolean? = null,
     val progress:  Boolean? = null,
+    var IsFave : Boolean ? = false,
     var error: UserError?=null
 
 )

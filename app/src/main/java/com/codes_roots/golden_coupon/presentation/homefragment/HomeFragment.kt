@@ -217,7 +217,7 @@ false
                             try {
                                 filteredData.addAll(it.filteredData!!)
                                 brandsAdapter.submitList(filteredData)
-                                brandsAdapter.notifyDataSetChanged()
+                       //         brandsAdapter.notifyDataSetChanged()
 
                             }catch (e:Exception){
                                 Toast.makeText(requireContext(),

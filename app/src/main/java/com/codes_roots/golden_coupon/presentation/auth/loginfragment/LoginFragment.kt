@@ -19,6 +19,7 @@ import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.auth.RegisterActivity
 import com.codes_roots.golden_coupon.presentation.auth.viewmodel.AuthViewModel
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.google.firebase.auth.FirebaseAuth
 
 import javax.inject.Inject
 
@@ -33,6 +34,7 @@ class LoginFragment@Inject constructor(): Fragment() {
 
     @Inject
     lateinit var Pref: PreferenceHelper
+    private lateinit var auth: FirebaseAuth
 
     lateinit var view: LoginFragmentBinding
     override fun onCreate(savedInstanceState: Bundle?) {

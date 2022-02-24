@@ -19,15 +19,15 @@ import javax.inject.Inject
 class RemoteDataSource @Inject constructor(private val ApiService: APIServices) : DataSource {
 
     override suspend fun getBrandsResponse(page: Int?, filter: String): BrandsModel =
-        runCatching { ApiService.getBrandsData(page,filter)}
+        runCatching { ApiService.getBrandsData(page, filter) }
             .getOrThrow()
 
     override suspend fun getDealsResponse(page: Int?): DealsModel =
-        runCatching { ApiService.getDealsData(page)}
+        runCatching { ApiService.getDealsData(page) }
             .getOrElse { throw it }
 
-    override suspend fun getCouponsResponse(brandid:Int): Response<CouponsModel> {
-       return ApiService.getCouponsData(brandid)
+    override suspend fun getCouponsResponse(brandid: Int): Response<CouponsModel> {
+        return ApiService.getCouponsData(brandid)
     }
 
     override suspend fun getCountriesResponse(): Response<CountryModel> {
@@ -45,19 +45,24 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
 
     }
 
+    override suspend fun deleteFavorite(brand_id: Int, UserId: Int): Boolean {
+        return ApiService.deleteFavorite(brand_id, UserId)
+
+    }
+
+
     override suspend fun getStaticPages(): StaticPagesModel {
         return ApiService.getStaticPages()
     }
 
-    override suspend fun getUsedCoupons(item_id:Int):  Response<UsedCouponModel> {
+    override suspend fun getUsedCoupons(item_id: Int): Response<UsedCouponModel> {
         return ApiService.usedCoupons(item_id)
 
     }
-    override suspend fun getNotifications():Response<NotificationModel> {
+
+    override suspend fun getNotifications(): Response<NotificationModel> {
         return ApiService.getNotifications()
     }
-
-
 
 
 }

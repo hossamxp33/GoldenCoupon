@@ -19,9 +19,13 @@
             type="com.codes_roots.golden_coupon.helper.ClickHandler" />
 
         <variable
+
             name="pref"
             type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
 
+        <variable
+            name="string"
+            type="String" />
 
 
         <import type="android.text.Html"/>
@@ -33,6 +37,8 @@
         android:layout_margin="@dimen/dimen_4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:onClick="@{()->listener.switchToCouponsFragment(productData.brand.id,context,string)}"
+
         >
 
 
@@ -82,14 +88,14 @@
 
 
         <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/time_of_use"
+            android:id="@+id/fav_icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="12dp"
             android:padding="@dimen/dimen_8"
-            android:src="@drawable/star_out"
+            android:src="@drawable/star"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

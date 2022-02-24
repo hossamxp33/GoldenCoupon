@@ -57,16 +57,23 @@ interface APIServices {
     @GET("FavouriteItems/index.json")
     suspend fun getFavorite(): FavouritModel
 
-    @GET("notifications.json")
-    suspend fun getNotifications(): Response<NotificationModel>
-
-
     @FormUrlEncoded
     @POST("FavouriteItems/add.json")
     suspend fun addFavorite(
         @Field("brand_id") brand_id: Int?,
         @Field("user_id") UserId: Int,
     ): Boolean
+
+    @POST("FavouriteItems/Delete/{id}/{user_id}.json")
+    suspend fun deleteFavorite(
+        @Path("id") brand_id: Int?,
+        @Path("user_id") UserId: Int,
+    ): Boolean
+
+    @GET("notifications.json")
+    suspend fun getNotifications(): Response<NotificationModel>
+
+
 
 
     //

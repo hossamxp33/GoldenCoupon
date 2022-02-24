@@ -18,9 +18,12 @@ suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
     loadMainData: suspend () -> Flow<Result<FavouritModel>> = { Datarepo.getFavouriteData },
-) = when (intent) {
+    DeleteFavorite: suspend () ->  Flow<Result<Boolean>> = { Datarepo.deleteFavorite(intent.brand_id!!, intent.user_id!!) },
+
+    ) = when (intent) {
     is MainIntent.Initialize -> proceedWithInitialize(loadMainData, intent)
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
+    is MainIntent.DeleteFavorite -> proceedDeleteFavorite(DeleteFavorite,intent)
 
 }
 
@@ -44,6 +47,19 @@ private suspend fun proceedWithInitialize(
         }
 
 
+}
+private suspend fun proceedDeleteFavorite( DeleteFavorite : suspend () -> Flow<Result<Boolean>>   ,intent: MainIntent
+): MainViewState
+{
+    val response =  DeleteFavorite().first()
+
+    return runCatching {
+
+        return intent.viewState!!.copy(IsFave = false)
+    }.getOrElse {
+        intent.viewState!!.copy(error = UserError.NetworkError(it))
+
+    }
 }
 
 

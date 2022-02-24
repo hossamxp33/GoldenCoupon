@@ -15,7 +15,6 @@ import com.codes_roots.golden_coupon.databinding.OfferItemAdapterBinding
 
 import com.codes_roots.golden_coupon.entites.category.Category
 import com.codes_roots.golden_coupon.entites.products.Product
-import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewState
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import kotlinx.coroutines.channels.Channel
@@ -25,29 +24,32 @@ import androidx.navigation.Navigation
 import com.codes_roots.golden_coupon.databinding.FavItemAdapterBinding
 import com.codes_roots.golden_coupon.entites.fav.FavoriteData
 import com.codes_roots.golden_coupon.helper.ClickHandler
+import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
+import com.codes_roots.golden_coupon.presentation.favfragment.mvi.FavViewModel
+import com.codes_roots.golden_coupon.presentation.favfragment.mvi.MainIntent
+import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 
 
-class FavoriteAdapter(var context: Context?) :
+class FavoriteAdapter(var context: Context?, var viewModel: FavViewModel,var fragment:FavoriteFragment) :
     ListAdapter<FavoriteData, ViewHolder>(DiffCallback()) {
     var Intent: Channel<MainIntent>? = null
-    var viewModel: MutableStateFlow<MainViewState?>? = null
 
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
         val binding: FavItemAdapterBinding = DataBindingUtil.inflate(
             LayoutInflater.from(p0.context),
-            R.layout.fav_item_adapter, p0, false
-        )
+            R.layout.fav_item_adapter, p0, false)
 
         try {
+
             if ((context as MainActivity).preferenceHelper.lang!!.contains("ar"))
-                binding.brandName.text = currentList[0].brand.name
+                binding.brandName.text = currentList[p1].brand.name
             else
-                binding.brandName.text = currentList[0].brand.name_en
+                binding.brandName.text = currentList[p1].brand.name_en
+
 
         } catch (e: Exception) {
         }
-
 
         return ViewHolder(binding)
 
@@ -55,15 +57,33 @@ class FavoriteAdapter(var context: Context?) :
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
+
         holder.bind(context, currentList[p1])
+        holder.binding.favIcon.setOnClickListener {
+
+            holder.binding.favIcon.setImageResource(R.drawable.star_out)
+            viewModel.intents.trySend(
+                MainIntent
+                    .DeleteFavorite(
+                        viewModel.state.value!!,
+                        currentList[p1].id,
+                        (context as MainActivity).preferenceHelper.UserId
+                    )
+
+            )
+            fragment.data!!.removeAt(p1)
+            notifyItemRemoved(p1)
+            notifyItemChanged(p1)
 
 
+        }
     }
-
 }
 
 fun onClick(view: View?) {
+
     Navigation.findNavController(view!!).navigate(R.id.action_offer_to_coupons)
+
 }
 
 private class DiffCallback : DiffUtil.ItemCallback<FavoriteData>() {
@@ -90,6 +110,7 @@ class ViewHolder(
         binding.productData = data
         binding.context = context as MainActivity?
         binding.pref = (context as MainActivity).preferenceHelper
+        binding.string = data.brand.image
 
     }
 

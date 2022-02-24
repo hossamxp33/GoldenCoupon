@@ -18,9 +18,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.ActivityMainBinding
-import com.codes_roots.golden_coupon.helper.BottomNavigationBehavior
-import com.codes_roots.golden_coupon.helper.ClickHandler
-import com.codes_roots.golden_coupon.helper.Permissions
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
@@ -49,10 +46,32 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.codes_roots.golden_coupon.data_layer.OnBackPressedListener
 import com.codes_roots.golden_coupon.generated.callback.OnClickListener
-import com.codes_roots.golden_coupon.helper.PreferenceHelper
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.notificationfragment.NotificationFragment
 import kotlinx.android.synthetic.main.activity_main_content.view.*
+
+
+import androidx.core.content.ContextCompat
+
+import android.content.res.ColorStateList
+
+import android.animation.AnimatorListenerAdapter
+
+import androidx.core.content.PackageManagerCompat.LOG_TAG
+
+import android.animation.ValueAnimator
+import android.animation.ValueAnimator.AnimatorUpdateListener
+import android.app.Dialog
+import android.graphics.Color.TRANSPARENT
+import android.os.Handler
+import androidx.core.content.PackageManagerCompat
+import android.util.DisplayMetrics
+import android.widget.TextView
+import com.codes_roots.golden_coupon.di.DaggerAppComponent.factory
+import com.codes_roots.golden_coupon.helper.*
+import kotlinx.android.synthetic.main.call_us_dialog.*
+import kotlinx.android.synthetic.main.call_us_dialog.view.*
+import kotlinx.android.synthetic.main.main_frame_content.*
 
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
@@ -65,7 +84,15 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     var binding: ActivityMainBinding? = null
 
     var flag = false
+    private val mDisplayMetrics: DisplayMetrics? = null
+    private var mStartX = 0f
+    private var mStartY = 0f
+    private var mBottomY = 0
+    private var mBottomX = 0
 
+    private var mIsCancel = false
+    private var mBottomListStartY = 0f
+    private val resetBottomList = false
 
     lateinit var fragment: Fragment
 
@@ -103,6 +130,21 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         }
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
+        fab!!.setOnClickListener { view ->
+            // custom dialog
+            val dialog = Dialog(this, R.style.Theme_AppCompat_Dialog)
+            dialog.setContentView(R.layout.call_us_dialog)
+            val toNumber =
+                "201102856010"
+            dialog.welcome.setOnClickListener { view ->
+                ResourceUtil().openWhatsApp(this,
+                    toNumber,
+                    "i want to create an account please..")
+            }
+            dialog.show()
+            //Intent myIntent = new Intent(view.getContext(), agones.class);
+            //startActivityForResult(myIntent, 0);
+        }
         KeyboardVisibilityEvent.setEventListener(this,
             KeyboardVisibilityEventListener { view ->
                 if (view) include?.visibility = View.GONE

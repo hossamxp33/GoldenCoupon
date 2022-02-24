@@ -35,11 +35,11 @@ class FavViewModel @Inject constructor(
 
 
     val errorMessage = MutableLiveData<String>()
+
     val loading = MutableLiveData<Boolean>()
 
 
     init {
-
 
         getIntent()
 

@@ -59,7 +59,8 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
                 if (( context as MainActivity).preferenceHelper.token.isNullOrEmpty()) {
                     WARN_MotionToast(( context as MainActivity).getString(R.string.loginFirst),  context as MainActivity)
                     val i = Intent(context, RegisterActivity::class.java)
-                    (context as MainActivity).startActivityForResult(i, 100)}else
+                    (context as MainActivity).startActivityForResult(i, 100)
+                } else
                 viewModel.intents.trySend(
                     MainIntent
                         .AddToFavorite(
@@ -72,8 +73,6 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
                     holder.binding.favoriteIcon.setImageResource(R.drawable.star)
                 else
                     holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
-
-
 
             }
 

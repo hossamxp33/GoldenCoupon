@@ -85,6 +85,23 @@ class DataRepo @Inject constructor(
             }
             .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
+    fun deleteFavorite(brand_id: Int, UserId: Int): Flow<Result<Boolean>> =
+        flow {
+            emit(Datasources.deleteFavorite(brand_id, UserId))
+        }
+            .map { Result.success(it) }
+            .retry(retries = 4) { t ->
+                (t is IOException).also {
+                    if (it) {
+                        delay(1000)
+                    }
+                }
+            }
+            .catch { throwable -> emit(Result.failure(throwable)) }
+            .flowOn(ioDispatcher)
+
+
+
 
     fun getStaticPages(): Flow<Result<StaticPagesModel>> =
         flow {
