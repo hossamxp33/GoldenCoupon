@@ -76,23 +76,10 @@ import kotlinx.android.synthetic.main.main_frame_content.*
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
     var integerDeque: Deque<Int> = LinkedList()
-    var doubleBackToExitPressedOnce: Boolean = false
-
-    private var bottomNavigationView: BottomNavigationView? = null
-    var navHostFragment: NavHostFragment? = null
 
     var binding: ActivityMainBinding? = null
 
     var flag = false
-    private val mDisplayMetrics: DisplayMetrics? = null
-    private var mStartX = 0f
-    private var mStartY = 0f
-    private var mBottomY = 0
-    private var mBottomX = 0
-
-    private var mIsCancel = false
-    private var mBottomListStartY = 0f
-    private val resetBottomList = false
 
     lateinit var fragment: Fragment
 
@@ -129,14 +116,18 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             getAllData()
         }
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+         viewModel.getWhatsApp()
+        viewModel.whatsAppLD!!.observe(this, androidx.lifecycle.Observer {
+
+        })
 
         fab!!.setOnClickListener { view ->
             // custom dialog
             val dialog = Dialog(this, R.style.Theme_AppCompat_Dialog)
             dialog.setContentView(R.layout.call_us_dialog)
             val toNumber =
-                "201102856010"
-            dialog.welcome.setOnClickListener { view ->
+                "201141087755"
+            dialog.welcome.setOnClickListener {
                 ResourceUtil().openWhatsApp(this,
                     toNumber,
                     "i want to create an account please..")

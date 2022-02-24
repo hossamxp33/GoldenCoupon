@@ -47,25 +47,37 @@ class ResourceUtil {
     }
     fun openWhatsApp(context: Context, number:String?, message: String?) {
         context as MainActivity
-
         try {
-         val  newNumber = number!!.replace(" ", "").replace("+", "")
-            val sendIntent = Intent("android.intent.action.MAIN")
-            sendIntent.type = "text/plain";
-            sendIntent.component = ComponentName("com.whatsapp", "com.whatsapp.Conversation")
-            sendIntent.putExtra(Intent.EXTRA_TEXT, message);
 
-            sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators(newNumber) + "@s.whatsapp.net")
-            context.startActivity(sendIntent)
-//            val uri =
-//                Uri.parse("https://api.whatsapp.com/send?phone=" + newNumber + "&text=" + message)
-//
-//            val sendIntent = Intent(Intent.ACTION_VIEW, uri)
-//
-//            context.startActivity(sendIntent)
+            val toNumber =
+                "201102856010" // Replace with mobile phone number without +Sign or leading zeros, but with country code
+            //Suppose your country is India and your phone number is “xxxxxxxxxx”, then you need to send “91xxxxxxxxxx”.
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$toNumber&text=$message")
+            context.  startActivity(intent)
         } catch (e: Exception) {
-            Log.e(TAG, "ERROR_OPEN_MESSANGER$e")
+            e.printStackTrace()
         }
+//        try {
+//         val  newNumber = number!!.replace(" ", "").replace("+", "")
+//            val sendIntent = Intent("android.intent.action.MAIN")
+//
+//            sendIntent.component = ComponentName("com.whatsapp", "com.whatsapp.Conversation")
+//            sendIntent.putExtra("jid", PhoneNumberUtils.stripSeparators(newNumber) + "@s.whatsapp.net")
+//            sendIntent.putExtra(Intent.EXTRA_TEXT, message);
+//            sendIntent.type = "text/plain"
+//            context.startActivity(sendIntent)
+//
+//
+////            val uri =
+////                Uri.parse("https://api.whatsapp.com/send?phone=" + newNumber + "&text=" + message)
+//
+////            val sendIntent = Intent(Intent.ACTION_VIEW, uri)
+////
+////            context.startActivity(sendIntent)
+//        } catch (e: Exception) {
+//            Log.e(TAG, "ERROR_OPEN_MESSANGER$e")
+//        }
 
     }
 

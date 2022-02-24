@@ -2,22 +2,24 @@ package com.codes_roots.golden_coupon.presentation.homefragment.mvi
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.codes_roots.golden_coupon.entites.coupons.CouponsModel
+import com.codes_roots.golden_coupon.entites.whatsapp.WhatsAppModel
 import com.codes_roots.golden_coupon.repo.brands.DataRepo
 import com.codes_roots.golden_coupon.repo.brands.DataSource
+import com.codes_roots.golden_coupon.repo.brands.RemoteDataSource
 import com.tarweej.mypost.BaseViewModel
+import kotlinx.coroutines.*
 
 
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 class MainViewModel @Inject constructor(
-    private val DateRepoCompnay: DataRepo,
+    private val DateRepoCompnay: DataRepo,private val Datasources: RemoteDataSource
 
 
     ) : BaseViewModel<MainViewState>() {
@@ -35,12 +37,14 @@ class MainViewModel @Inject constructor(
 
     val errorMessage = MutableLiveData<String>()
     val loading = MutableLiveData<Boolean>()
+    var whatsAppLD: MutableLiveData<WhatsAppModel>? = null
 
 
     init {
 
 
         getIntent()
+        whatsAppLD= MutableLiveData()
 
 // لازم ابعت viewstate كامل واتحكم بكل option حسب المطلوب وارساله مرة اخري واستقباله هنا او في ال view
 
@@ -59,7 +63,20 @@ class MainViewModel @Inject constructor(
             }
         }
     }
+    fun getWhatsApp() {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = Datasources.getwhatsApp()
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    whatsAppLD?.postValue(response.body())
 
+                } else {
+                    onError("Error : ${response.message()} ")
+                }
+            }
+        }
+
+    }
 
     private fun onError(message: String) {
         errorMessage.value = message

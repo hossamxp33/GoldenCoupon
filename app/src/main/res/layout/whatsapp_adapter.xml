@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+<data>
+
+
+    <variable
+        name="context"
+        type="com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity" />
+
+    <variable
+        name="data"
+        type="com.codes_roots.golden_coupon.entites.countries.Country" />
+
+    <variable
+        name="listener"
+        type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+
+
+    <variable
+        name="pref"
+        type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
+
+
+    <import type="android.text.Html"/>
+
+</data>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/Mview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/coupon_bg"
+    android:animateLayoutChanges="true"
+    android:layout_margin="2dp"
+    android:onClick="@{()->listener.switchToMainActivity(context,data.id)}"
+    tools:context=".presentation.mainactivity.MainActivity">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        style="@style/HomeTitles"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@{Html.fromHtml(String.format(pref.lang.contains(`ar`)? data.name : data.name_en ))}"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

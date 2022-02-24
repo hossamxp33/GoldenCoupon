@@ -11,6 +11,7 @@ import com.codes_roots.golden_coupon.entites.notification.NotificationModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
 import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
+import com.codes_roots.golden_coupon.entites.whatsapp.WhatsAppModel
 import retrofit2.Response
 
 import javax.inject.Inject
@@ -22,6 +23,9 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
         runCatching { ApiService.getBrandsData(page, filter) }
             .getOrThrow()
 
+
+
+
     override suspend fun getDealsResponse(page: Int?): DealsModel =
         runCatching { ApiService.getDealsData(page) }
             .getOrElse { throw it }
@@ -29,6 +33,12 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
     override suspend fun getCouponsResponse(brandid: Int): Response<CouponsModel> {
         return ApiService.getCouponsData(brandid)
     }
+
+    override suspend fun getwhatsApp(): Response<WhatsAppModel> {
+        return ApiService.whatsApp()
+
+    }
+
 
     override suspend fun getCountriesResponse(): Response<CountryModel> {
         return ApiService.getCountries()
@@ -59,6 +69,8 @@ class RemoteDataSource @Inject constructor(private val ApiService: APIServices) 
         return ApiService.usedCoupons(item_id)
 
     }
+
+
 
     override suspend fun getNotifications(): Response<NotificationModel> {
         return ApiService.getNotifications()

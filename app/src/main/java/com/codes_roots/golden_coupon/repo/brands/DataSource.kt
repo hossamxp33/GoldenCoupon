@@ -10,6 +10,7 @@ import com.codes_roots.golden_coupon.entites.notification.NotificationModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
 import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
+import com.codes_roots.golden_coupon.entites.whatsapp.WhatsAppModel
 import retrofit2.Response
 
 
@@ -29,6 +30,7 @@ interface DataSource {
     suspend fun getStaticPages(): StaticPagesModel
     suspend fun getUsedCoupons(item_id:Int): Response<UsedCouponModel>
     suspend fun getNotifications(): Response<NotificationModel>
+    suspend fun getwhatsApp(): Response<WhatsAppModel>
 
 //
 }

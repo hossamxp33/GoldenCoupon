@@ -15,6 +15,7 @@ import com.codes_roots.golden_coupon.entites.products.ProductsModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
 import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
+import com.codes_roots.golden_coupon.entites.whatsapp.WhatsAppModel
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -64,16 +65,16 @@ interface APIServices {
         @Field("user_id") UserId: Int,
     ): Boolean
 
+
     @POST("FavouriteItems/Delete/{id}/{user_id}.json")
     suspend fun deleteFavorite(
         @Path("id") brand_id: Int?,
         @Path("user_id") UserId: Int,
     ): Boolean
 
+
     @GET("notifications.json")
     suspend fun getNotifications(): Response<NotificationModel>
-
-
 
 
     //
@@ -100,6 +101,9 @@ interface APIServices {
     @POST("UsedCoupons/add.json")
     @Headers("Accept: Application/json", "cache-control: no-cache")
     suspend fun usedCoupons(@Field("item_id") item_id: Int?): Response<UsedCouponModel>
+
+    @GET("whats.json")
+    suspend fun whatsApp(): Response<WhatsAppModel>
 
 
     //   http://goldencopons.codesroots.com/api/UsedCoupons/add.json

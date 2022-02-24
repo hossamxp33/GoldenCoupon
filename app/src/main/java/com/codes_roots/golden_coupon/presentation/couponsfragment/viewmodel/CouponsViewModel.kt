@@ -69,6 +69,8 @@ class CouponsViewModel @Inject constructor(private val Datasources: RemoteDataSo
 
     }
 
+
+
     private fun onError(message: String) {
         errorMessage.value = message
         loading.value = false
