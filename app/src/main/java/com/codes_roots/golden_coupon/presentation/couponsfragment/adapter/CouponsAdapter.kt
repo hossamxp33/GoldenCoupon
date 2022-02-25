@@ -54,19 +54,16 @@ class CouponsAdapter(
         holder.binding.image = fragment.brandImage
 
     holder.binding.visitSiteButton.setOnClickListener {
-        try {
-        viewmodel.getUsedCoupons(currentList[position].used_coupons!![position].item_id)
-        context as MainActivity
+
+        viewmodel.getUsedCoupons(currentList[position].id)
 
         if (!currentList[position].url.isNullOrEmpty()) {
             val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra("url", currentList[position].url);
             (context as MainActivity).startActivity(intent)
-            notifyItemChanged(position)
+          //  notifyItemChanged(position)
         }
-        }catch (e:Exception){
 
-        }
         }
 
 
