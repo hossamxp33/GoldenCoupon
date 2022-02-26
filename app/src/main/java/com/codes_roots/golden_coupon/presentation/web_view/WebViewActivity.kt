@@ -29,7 +29,7 @@ class WebViewActivity : AppCompatActivity() {
         val webview = findViewById<View>(R.id.webView) as WebView
 
         webview.settings.javaScriptEnabled = true
-        back.setOnClickListener {
+        backbutton.setOnClickListener {
             onBackPressed()
         }
         webview.loadUrl(url!!)

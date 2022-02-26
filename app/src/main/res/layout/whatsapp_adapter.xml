@@ -8,11 +8,11 @@
 
     <variable
         name="context"
-        type="com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity" />
+        type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
 
     <variable
         name="data"
-        type="com.codes_roots.golden_coupon.entites.countries.Country" />
+        type="com.codes_roots.golden_coupon.entites.whatsapp.Data" />
 
     <variable
         name="listener"
@@ -31,10 +31,9 @@
     android:id="@+id/Mview"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/coupon_bg"
+    android:background="@drawable/shadow_white_bg"
     android:animateLayoutChanges="true"
     android:layout_margin="2dp"
-    android:onClick="@{()->listener.switchToMainActivity(context,data.id)}"
     tools:context=".presentation.mainactivity.MainActivity">
 
 
@@ -43,7 +42,7 @@
         style="@style/HomeTitles"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@{Html.fromHtml(String.format(pref.lang.contains(`ar`)? data.name : data.name_en ))}"
+        android:text="@{Html.fromHtml(String.format(pref.lang.contains(`ar`)? data.name : data.name ))}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

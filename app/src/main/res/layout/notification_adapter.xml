@@ -21,7 +21,6 @@ android:id="@+id/layout"
         type="com.codes_roots.golden_coupon.entites.notification.NotificationData" />
 
 
-
     <import type="android.text.Html" />
 
 
@@ -64,7 +63,6 @@ android:id="@+id/layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{data.body}"
-
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -81,6 +79,19 @@ android:id="@+id/layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@{data.message_en}"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+            app:layout_constraintTop_toBottomOf="@+id/description" />
+     <TextView
+            android:id="@+id/date"
+            style="@style/SearchTextStyle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:datetext="@{data.created != null ?data.created : ``}"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"

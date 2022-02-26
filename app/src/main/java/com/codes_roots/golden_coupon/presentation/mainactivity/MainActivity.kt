@@ -67,8 +67,14 @@ import android.os.Handler
 import androidx.core.content.PackageManagerCompat
 import android.util.DisplayMetrics
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.codes_roots.golden_coupon.databinding.WhatsappAdapterBinding
 import com.codes_roots.golden_coupon.di.DaggerAppComponent.factory
+import com.codes_roots.golden_coupon.entites.whatsapp.WhatsAppModel
 import com.codes_roots.golden_coupon.helper.*
+import com.codes_roots.golden_coupon.presentation.mainactivity.whatsapp.WhatsAppAdapter
+import com.codes_roots.golden_coupon.presentation.notificationfragment.adapter.NotificationAdapter
 import kotlinx.android.synthetic.main.call_us_dialog.*
 import kotlinx.android.synthetic.main.call_us_dialog.view.*
 import kotlinx.android.synthetic.main.main_frame_content.*
@@ -78,6 +84,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     var integerDeque: Deque<Int> = LinkedList()
 
     var binding: ActivityMainBinding? = null
+
+    lateinit var whatsAppAdapter: WhatsAppAdapter
 
     var flag = false
 
@@ -93,15 +101,12 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     lateinit var viewModelFactory: ViewModelProvider.Factory
 
     val viewModel by viewModels<MainViewModel> { viewModelFactory }
-
+    var whatsAppList : WhatsAppModel?=null
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
         supportFragmentManager.fragmentFactory = fragmentFactory
-
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_main)
-
         notification_background.setOnClickListener {
             ClickHandler().switchFragment(this, NotificationFragment())
 
@@ -117,21 +122,26 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         }
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
          viewModel.getWhatsApp()
-        viewModel.whatsAppLD!!.observe(this, androidx.lifecycle.Observer {
 
-        })
 
         fab!!.setOnClickListener { view ->
+
+            viewModel.whatsAppLD!!.observe(this,  {
+                whatsAppList = it
+            })
             // custom dialog
+
             val dialog = Dialog(this, R.style.Theme_AppCompat_Dialog)
             dialog.setContentView(R.layout.call_us_dialog)
+
+            whatsAppAdapter = WhatsAppAdapter(viewModel,this)
+            dialog.whats_recycleView.adapter = whatsAppAdapter
+            dialog.whats_recycleView.layoutManager = LinearLayoutManager(this)
+            whatsAppAdapter.submitList(whatsAppList?.data)
+
             val toNumber =
-                "201141087755"
-            dialog.welcome.setOnClickListener {
-                ResourceUtil().openWhatsApp(this,
-                    toNumber,
-                    "i want to create an account please..")
-            }
+                "201064033997"
+
             dialog.show()
             //Intent myIntent = new Intent(view.getContext(), agones.class);
             //startActivityForResult(myIntent, 0);

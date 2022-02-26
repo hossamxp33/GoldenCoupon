@@ -2,7 +2,7 @@ package com.codes_roots.golden_coupon.entites.notification
 
 data class NotificationData(
     var body: String?=null,
-    var created: Any?=null,
+    var created: String?=null,
     var id: Int?=null,
     var message_en: String?=null,
     var photo: String?=null,

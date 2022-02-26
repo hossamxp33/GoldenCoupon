@@ -99,11 +99,8 @@ fun setSliderImageResource(imageView: AppCompatImageView, resource: String?) {
 fun setDatetext(text: TextView, resource: String?) {
 
     val myFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
-
-    val dateObj: Date
-
-    dateObj = myFormat.parse(resource)
-    val timestamp = dateObj.getTime().toString()//  //Example -> in ms
+    val dateObj: Date = myFormat.parse(resource!!)
+    val timestamp = dateObj.time.toString()//  //Example -> in ms
     val fromServer = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale("en"))
     val dateString = fromServer.format(Date(Long.parseLong(timestamp)))
 

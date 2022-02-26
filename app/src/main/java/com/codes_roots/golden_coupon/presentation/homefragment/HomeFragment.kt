@@ -48,7 +48,7 @@ import kotlin.collections.ArrayList
 open class HomeFragment @Inject constructor() : Fragment() {
     private val REQUEST_CODE_STT = 102
     lateinit var brandsAdapter: BrandsAdapter
-    var filteredData =  ArrayList<Brand>()
+    var filteredData = ArrayList<Brand>()
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -60,10 +60,12 @@ open class HomeFragment @Inject constructor() : Fragment() {
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
-            viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!.copy(progress = true),page))
+            viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!.copy(progress = true),
+                page))
 
         }
     }
+
     internal var page = 1
 
     private lateinit var view: HomeFragmentBinding
@@ -87,34 +89,30 @@ open class HomeFragment @Inject constructor() : Fragment() {
         brandsRecycleView()
         getAllData()
 
-        view.searchLayout.searchBar.setOnEditorActionListener { text ,  actionId,  event  ->
-            if(actionId == IME_ACTION_SEARCH){
-                            filteredData.clear()
-            shimmer_view_container.startShimmerAnimation()
-                val currentFocusedView = activity?.currentFocus
+
+        view.searchLayout.searchBar.setOnEditorActionListener { text, actionId, event ->
+            if (actionId == IME_ACTION_SEARCH) {
+                filteredData.clear()
+                shimmer_view_container.startShimmerAnimation()
                 hideKeyboard(text)
-
-            viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
-                text.text!!.toString()
-
-
-
-            ))
-
+                viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
+                    view.searchLayout.searchBar.text!!.toString()
+                ))
                 true
             }
-false
-            };
+            false
+        };
+
+//        view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
+//            viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
+//                text.toString()))
+//        }
 
         view.searchLayout.searchIcon.setOnClickListener {
             filteredData.clear()
             shimmer_view_container.startShimmerAnimation()
-
-
             viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
                 view.searchLayout.searchBar.text!!.toString()
-
-
 
             ))
         }
@@ -144,34 +142,37 @@ false
 
         return view.root
     }
+
     private fun hideKeyboard(view: View) {
         view?.apply {
             val imm = requireContext().inputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
+
     fun brandsRecycleView() {
         page = 1
-        brandsAdapter = BrandsAdapter(requireContext(),viewModel)
+        brandsAdapter = BrandsAdapter(requireContext(), viewModel)
         view.brandsRecycleView.apply {
-            addOnScrollListener(object :RecyclerView.OnScrollListener(){
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
+                    super.onScrolled(recyclerView, dx, dy)
 
-                val lastVisibleItem =
-                    (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                    if (lastVisibleItem == brandsAdapter.itemCount-1 && brandsAdapter.itemCount >= 19) {
+                    val lastVisibleItem =
+                        (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    if (lastVisibleItem == brandsAdapter.itemCount - 1 && brandsAdapter.itemCount >= 19) {
                         page++
-                        viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,page))
+                        viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,
+                            page))
                         view.progress.isVisible = true
 
                     }
-            }
+                }
 
             })
             layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = brandsAdapter;
-          //  isNestedScrollingEnabled = false
+            //  isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
     }
@@ -185,6 +186,9 @@ false
                     result?.let {
                         val recognizedText = it[0]
                         view.searchLayout.searchBar.setText(recognizedText)
+                        filteredData.clear()
+                        viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
+                                      recognizedText.toString()))
                     }
                 }
             }
@@ -217,14 +221,15 @@ false
                             try {
                                 filteredData.addAll(it.filteredData!!)
                                 brandsAdapter.submitList(filteredData)
-                       //         brandsAdapter.notifyDataSetChanged()
 
-                            }catch (e:Exception){
+                                brandsAdapter.notifyDataSetChanged()
+
+                            } catch (e: Exception) {
                                 Toast.makeText(requireContext(),
                                     "There is no other coupons",
                                     Toast.LENGTH_LONG).show()
                             }
-                           stopLoadingShimmer()
+                            stopLoadingShimmer()
                             view.progress.isVisible = false
 
                         }
