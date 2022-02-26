@@ -16,7 +16,9 @@ class WebViewActivity : AppCompatActivity() {
         webView.webViewClient = WebViewClient()
         webView.settings.setSupportZoom(true)
         webView.settings.javaScriptEnabled = true
-
+        backbutton.setOnClickListener {
+            finish()
+        }
 
         val extras = intent.extras
 
