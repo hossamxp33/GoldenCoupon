@@ -27,7 +27,9 @@ class WebViewActivity : AppCompatActivity() {
         val webview = findViewById<View>(R.id.webView) as WebView
 
         webview.settings.javaScriptEnabled = true
-
+        back.setOnClickListener {
+            onBackPressed()
+        }
         webview.loadUrl(url!!)
         webView.requestFocus();
         val webSettings = webView!!.getSettings()
