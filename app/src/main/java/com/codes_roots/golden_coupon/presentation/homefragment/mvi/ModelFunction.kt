@@ -24,7 +24,7 @@ suspend fun mapIntentToViewState(
 ) = when (intent) {
     is MainIntent.Initialize -> proceedWithInitialize(loadMainData, intent)
     is MainIntent.ShowProgress -> intent.viewState.copy(progress = true)
-    is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
+    is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null,filteredData=null)
     is MainIntent.SearchByName -> proceedWithInitialize(loadSearchByName, intent)
     is MainIntent.AddToFavorite -> proceedAddFavorite(AddFavorite,intent)
     is MainIntent.DeleteFavorite -> proceedDeleteFavorite(DeleteFavorite,intent)
