@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.HomeFragmentBinding
+import com.codes_roots.golden_coupon.di.Error_MotionToast
 import com.codes_roots.golden_coupon.entites.brandsmodel.Brand
 import com.codes_roots.golden_coupon.helper.BaseApplication
 import com.codes_roots.golden_coupon.helper.ClickHandler
@@ -160,6 +161,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
 
                     val lastVisibleItem =
                         (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                 if (filteredData!=null)
                     if (lastVisibleItem == brandsAdapter.itemCount - 1 && brandsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
                         page++
                         viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,
@@ -201,18 +203,18 @@ open class HomeFragment @Inject constructor() : Fragment() {
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
                 if (it != null) {
-
                     if (it.error != null) {
-                        it.error?.let {
-                            when (it) {
+                        it.error?.let {Error ->
+                            when (Error) {
                                 is UserError.InvalidId -> "Invalid id"
-                                is UserError.NetworkError -> it.throwable.message
+                                is UserError.NetworkError -> Error.throwable.message
                                 UserError.ServerError -> "Server error"
                                 UserError.Unexpected -> "Unexpected error"
                                 is UserError.UserNotFound -> "User not found"
                                 UserError.ValidationFailed -> "Validation failed"
                             }
                         }
+
                         viewModel.intents.send(MainIntent.ErrorDisplayed(it))
                     } else {
                         if (it.progress == true) {
@@ -221,7 +223,6 @@ open class HomeFragment @Inject constructor() : Fragment() {
                             try {
                                 filteredData.addAll(it.filteredData!!)
                                 brandsAdapter.submitList(filteredData)
-
                                 brandsAdapter.notifyDataSetChanged()
 
                             } catch (e: Exception) {
@@ -229,6 +230,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
                                     "There is no other coupons",
                                     Toast.LENGTH_LONG).show()
                             }
+
                             stopLoadingShimmer()
                             view.progress.isVisible = false
 
