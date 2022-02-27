@@ -73,7 +73,7 @@ open class NotificationFragment @Inject constructor() : Fragment() {
         notificationAdapter = NotificationAdapter(viewModel, requireContext())
         view.notificationRecycle.apply {
             adapter = notificationAdapter;
-            isNestedScrollingEnabled = false
+       //w     isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
     }

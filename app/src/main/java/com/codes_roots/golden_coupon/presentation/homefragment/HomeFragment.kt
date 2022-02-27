@@ -160,7 +160,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
 
                     val lastVisibleItem =
                         (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                    if (lastVisibleItem == brandsAdapter.itemCount - 1 && brandsAdapter.itemCount >= 19) {
+                    if (lastVisibleItem == brandsAdapter.itemCount - 1 && brandsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
                         page++
                         viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,
                             page))

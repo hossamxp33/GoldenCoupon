@@ -22,7 +22,7 @@ import dagger.android.HasAndroidInjector
 import javax.inject.Inject
 
 
-class SplashScreen constructor(): AppCompatActivity() , HasAndroidInjector {
+class SplashScreen @Inject constructor(): AppCompatActivity() , HasAndroidInjector {
 
     private val SPLASH_DISPLAY_LENGTH = 2000 //splash screen will be shown for 2 seconds
 

@@ -121,9 +121,14 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             getAllData()
         }
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-         viewModel.getWhatsApp()
 
 
+        try {
+            viewModel.getWhatsApp()
+
+        }catch (e:Exception){
+
+        }
         fab!!.setOnClickListener { view ->
 
             viewModel.whatsAppLD!!.observe(this,  {

@@ -54,6 +54,7 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
             val num = currentList[position].items?.get(0)?.sum.toString()
             holder.binding.couponNum.text = "$num $couponText"
 
+
             holder.binding.favoriteIcon.setOnClickListener {
 
                 if (( context as MainActivity).preferenceHelper.token.isNullOrEmpty()) {

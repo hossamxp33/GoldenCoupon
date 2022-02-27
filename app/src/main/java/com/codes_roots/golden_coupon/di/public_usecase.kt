@@ -97,7 +97,6 @@ fun setSliderImageResource(imageView: AppCompatImageView, resource: String?) {
 
 @BindingAdapter("app:datetext")
 fun setDatetext(text: TextView, resource: String?) {
-
     val myFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm")
     val dateObj: Date = myFormat.parse(resource!!)
     val timestamp = dateObj.time.toString()//  //Example -> in ms

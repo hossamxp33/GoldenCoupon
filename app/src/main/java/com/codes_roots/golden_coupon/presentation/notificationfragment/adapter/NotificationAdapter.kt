@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.NotificationAdapterBinding
+import com.codes_roots.golden_coupon.di.WARN_MotionToast
+import com.codes_roots.golden_coupon.di.setDatetext
 import com.codes_roots.golden_coupon.entites.notification.NotificationData
 import com.codes_roots.golden_coupon.entites.notification.NotificationModel
 import com.codes_roots.golden_coupon.helper.ClickHandler
@@ -26,13 +28,17 @@ class NotificationAdapter(
         val binding: NotificationAdapterBinding = DataBindingUtil.inflate(
             LayoutInflater.from(p0.context),
             R.layout.notification_adapter, p0, false)
-
+        if (currentList[p1].created!=null)
+            setDatetext(binding.date,currentList[p1].created)
+        else
+            WARN_MotionToast("error data",context as MainActivity)
         return NotificationViewHolder(binding)
 
     }
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
         holder.bind(context, currentList[position])
+
 
     }
 

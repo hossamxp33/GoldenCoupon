@@ -1,5 +1,6 @@
 package com.codes_roots.golden_coupon.repo.brands
 
+import android.widget.Toast
 import com.codes_roots.golden_coupon.di.IoDispatcher
 import com.codes_roots.golden_coupon.entites.brandsmodel.BrandsModel
 import com.codes_roots.golden_coupon.entites.deals.DealsModel
@@ -7,6 +8,7 @@ import com.codes_roots.golden_coupon.entites.fav.FavouritModel
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem
 import com.codes_roots.golden_coupon.entites.staticpages.StaticPagesModel
 import com.codes_roots.golden_coupon.entites.used_coupons.UsedCouponModel
+import com.google.android.play.core.internal.e
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -47,14 +49,9 @@ class DataRepo @Inject constructor(
                         delay(1000)
                     }
                 }
-            }
-
-            .catch { throwable -> emit(Result.failure(throwable)) }
+            }.catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
-
-            .catch { throwable -> emit(Result.failure(throwable)) }
-            .flowOn(ioDispatcher)
 
     val getFavouriteData: Flow<Result<FavouritModel>> =
         flow {
@@ -85,6 +82,7 @@ class DataRepo @Inject constructor(
             }
             .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
+
     fun deleteFavorite(brand_id: Int, UserId: Int): Flow<Result<Boolean>> =
         flow {
             emit(Datasources.deleteFavorite(brand_id, UserId))

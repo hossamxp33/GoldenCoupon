@@ -43,6 +43,7 @@
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/activity_splash.xml" value="0.2574074074074074" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/bottom_nav_content.xml" value="0.33" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/brand_item_adapter.xml" value="0.25" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/brands_item_adapter.xml" value="0.15925925925925927" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/call_us_dialog.xml" value="0.22" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/category_item_adapter.xml" value="0.2824074074074074" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/chose_language_activity.xml" value="0.17604166666666668" />
@@ -58,6 +59,7 @@
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/login_fragment.xml" value="0.12395833333333334" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/main_frame_content.xml" value="0.16197916666666667" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/menu_fragment.xml" value="0.2" />
+        <entry key="..\:/GoldenCoupon/app/src/main/res/layout/notificaion_fragment.xml" value="0.15925925925925927" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/notification_adapter.xml" value="0.16510416666666666" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/offer_item_adapter.xml" value="0.2" />
         <entry key="..\:/GoldenCoupon/app/src/main/res/layout/offers_fragment.xml" value="0.20903954802259886" />
