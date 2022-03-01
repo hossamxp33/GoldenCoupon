@@ -46,6 +46,7 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?,v
         holder.bind(context, currentList[position])
 
         holder.binding.Mview.setOnClickListener {
+            fragment.filteredData.clear()
             fragment.progress.isVisible = true
             if (!currentList.isNullOrEmpty()) {
                 row_index = position

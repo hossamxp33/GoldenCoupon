@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.OffersFragmentBinding
 import com.codes_roots.golden_coupon.di.WARN_MotionToast
+import com.codes_roots.golden_coupon.entites.brandsmodel.Brand
+import com.codes_roots.golden_coupon.entites.products.Product
 import com.codes_roots.golden_coupon.helper.BaseApplication
 import com.codes_roots.golden_coupon.helper.ClickHandler
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
@@ -38,6 +40,7 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent.set
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener
 
 import java.util.*
+import java.util.Collections.addAll
 import javax.inject.Inject
 
 
@@ -49,16 +52,21 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    internal var page = 1
 
     val viewModel by viewModels<ProductsViewModel> { viewModelFactory }
 
+    var filteredData = ArrayList<Product>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        //   childFragmentManager.fragmentFactory = fragmentFactory!!
         super.onCreate(savedInstanceState)
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
         }
+        viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(page = page,
+            progress = true,
+            country_id = Pref.CountryId),
+            viewModel.FilterFileds, Pref.CountryId))
     }
 
     private lateinit var view: OffersFragmentBinding
@@ -66,40 +74,27 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
     @Inject
     lateinit var Pref: PreferenceHelper
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View? {
 
         view = DataBindingUtil.inflate(inflater, R.layout.offers_fragment, container, false)
 
-
-        //   view.searchLayout.listener = ClickHandler()
-
         view.context = context as MainActivity
-         view.listener = ClickHandler()
+        view.listener = ClickHandler()
         view.viewModel = viewModel
 
-        //  view.searchLayout.pref = (context as MainActivity).Pref
-
-        viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(progress = true , country_id = Pref.CountryId),
-            viewModel.FilterFileds ,Pref.CountryId))
-        //  view.searchBar.setError("assad")
-        view.searchLayout.searchBar.doOnTextChanged {text, start, before, count ->
-
-
-            viewModel.FilterFileds.put("Filter[name]",text.toString())
-
+        view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
+            viewModel.FilterFileds.put("Filter[name]", text.toString())
             viewModel.intents.trySend(
-
-                        MainIntent.FilterData(
+                MainIntent.FilterData(
                     viewModel.state.value!!,
-                            viewModel.FilterFileds,
-                            viewModel.state.value!!.country_id
+                    viewModel.FilterFileds,
+                    viewModel.state.value!!.country_id
                 )
             )
         }
 
         view.searchLayout.microphone.setOnClickListener {
-
             val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
             sttIntent.putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
@@ -119,10 +114,6 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                 ).show()
             }
         }
-
-
-
-
         myView()
 
         return view.root
@@ -144,46 +135,64 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         }
     }
 
-    fun myView() {
-
+    private fun myView() {
         getAllData()
         categoryRecycleView()
         productsRecycleView()
         subcategoryRecycleView()
     }
 
-    fun categoryRecycleView() {
-        categoryAdapter = CategoryAdapter(requireContext(), viewModel,this)
+    private fun categoryRecycleView() {
+        categoryAdapter = CategoryAdapter(requireContext(), viewModel, this)
         view.categoryRecycleView.apply {
             layoutManager = LinearLayoutManager(
                 context,
-                RecyclerView.HORIZONTAL,
+                HORIZONTAL,
                 false
-            ) // default orientation is vertical
+            )
             adapter = categoryAdapter;
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
 
     }
-    fun subcategoryRecycleView() {
-        subcategoryAdapter = SubCategoryAdapter(requireContext(), viewModel)
+
+    private fun subcategoryRecycleView() {
+        subcategoryAdapter = SubCategoryAdapter(requireContext(), viewModel,this)
         view.subCategoryRecycleView.apply {
             layoutManager = LinearLayoutManager(
                 context,
-                RecyclerView.HORIZONTAL,
+                HORIZONTAL,
                 false
-            ) // default orientation is vertical
+            )
             adapter = subcategoryAdapter;
-          isNestedScrollingEnabled = false
+            isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
 
     }
 
-    fun productsRecycleView() {
+    private fun productsRecycleView() {
+        page = 1
         productsAdapter = ProductsAdapter(requireContext())
         view.productsRecycleView.apply {
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                    val lastVisibleItem =
+                        (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    if (filteredData != null)
+                        if (lastVisibleItem == productsAdapter.itemCount - 1 && productsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
+                            page++
+                            viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(
+                                page = page,
+                                progress = true,
+                                country_id = Pref.CountryId),
+                                viewModel.FilterFileds, Pref.CountryId))
+                        }
+                }
+            })
+
             layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = productsAdapter
             isNestedScrollingEnabled = false
@@ -193,7 +202,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
 
     }
 
-    fun getAllData() {
+    private fun getAllData() {
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
                 if (it != null) {
@@ -211,27 +220,31 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                         viewModel.intents.send(MainIntent.ErrorDisplayed(it))
                     } else {
                         if (it.progress == true) {
-                                view.progress.isVisible = it.progress
+
                         } else {
-                       //      view.subCategoryRecycleView.isVisible = it.subcategoryVisibility!!
-                            //      productsAdapter.submitList(it.filterDataByCategory)
-                         try {
-                             view.progress.isVisible = true
 
-                             view.brandsData = it.allBrandsData
+                            try {
 
-                            productsAdapter.submitList(it.filteredData)
+                                view.progress.isVisible = false
+                                filteredData.addAll(it.filteredData!!)
 
-                            categoryAdapter.submitList(it.categoryData!!.categories)
+                                view.brandsData = it.allBrandsData
 
-                            subcategoryAdapter.submitList(it.categoryData!!.categories!![it.category_position].subcats)
-                            view.progress.isVisible = false
+                                productsAdapter.submitList(filteredData)
+                                productsAdapter.notifyDataSetChanged()
 
-                             view.productData= it.filteredData!![0]
+                                categoryAdapter.submitList(it.categoryData!!.categories)
 
-                         }catch (e:Exception){
-                          WARN_MotionToast("not found",requireActivity())
-                         }
+                                subcategoryAdapter.submitList(it.categoryData!!.categories!![it.category_position].subcats)
+
+
+                                view.productData = it.filteredData!![0]
+
+                            } catch (e: Exception) {
+                                WARN_MotionToast("not found", requireActivity())
+                            }
+
+
                         }
 
                     }

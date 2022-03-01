@@ -85,9 +85,10 @@ open class HomeFragment @Inject constructor() : Fragment() {
         //   view.searchLayout.listener = ClickHandler()
 
         view.context = context as MainActivity
-        //  view.searchLayout.pref = (context as MainActivity).Pref
+
 
         brandsRecycleView()
+
         getAllData()
 
 
@@ -145,7 +146,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
     }
 
     private fun hideKeyboard(view: View) {
-        view?.apply {
+        view.apply {
             val imm = requireContext().inputMethodManager
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
@@ -191,6 +192,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
                         filteredData.clear()
                         viewModel.intents.trySend(MainIntent.SearchByName(viewModel.state.value!!,
                                       recognizedText.toString()))
+
                     }
                 }
             }

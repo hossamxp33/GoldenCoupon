@@ -36,7 +36,7 @@
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/coupon_num"
+            android:id="@+id/coupon_name"
             style="@style/blackText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,6 +45,7 @@
             android:layout_marginBottom="@dimen/dimen_4"
             android:layout_marginTop="@dimen/dimen_4"
             android:textStyle="bold"
+            android:text="@{pref.lang.contains(`ar`) ? data.name : data.name_en}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

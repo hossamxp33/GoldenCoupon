@@ -19,5 +19,6 @@ data class Product(
     var percentage: Int?=null,
     var productsizes: List<Productsize>?=null,
     var subcat_id: Int?=null,
-    var url: String?=null
+    var url: String?=null,
+    var url_en: String?=null
 )

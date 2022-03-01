@@ -64,11 +64,11 @@ var sortValue:String? = ""
                 } else if (selectedSortOption == 1) {
                     sortValue = "percentage"
                 }
-                viewModel!!.intents.trySend(
+                viewModel.intents.trySend(
                     MainIntent.FilterData(
                         viewState!!,
-                        viewModel?.FilterFileds,
-                        viewState!!.country_id, sort = sortValue
+                        viewModel.FilterFileds,
+                        viewState.country_id, sort = sortValue
                     )
                 )
 

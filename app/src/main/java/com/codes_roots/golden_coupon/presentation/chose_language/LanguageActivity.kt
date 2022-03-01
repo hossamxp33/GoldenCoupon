@@ -33,41 +33,44 @@ import kotlinx.android.synthetic.main.country_activity.*
 import javax.inject.Inject
 
 
-class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidInjector {
+class LanguageActivity @Inject constructor() : AppCompatActivity(), HasAndroidInjector {
 
 
     @Inject
     lateinit var Pref: PreferenceHelper
 
-     override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this@LanguageActivity)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.chose_language_activity)
 
-         ar_layout.setOnClickListener {
-             noColoredView()
-             next.isEnabled = true
-             coloredView(ar_layout)
-             ResourceUtil().changeLang("ar", this)
-             Pref.lang = "ar"
+        ar_layout.setOnClickListener {
+            noColoredView()
+            next.isEnabled = true
+            next.setText("التالي")
+            coloredView(ar_layout)
+            ResourceUtil().changeLang("ar", this)
+            Pref.lang = "ar"
 
 
-         }
+        }
 
-         us_layout.setOnClickListener {
-             noColoredView()
-             next.isEnabled = true
-             coloredView(us_layout)
-             ResourceUtil().changeLang("en", this)
-             Pref.lang = "en"
-         }
+        us_layout.setOnClickListener {
+            noColoredView()
+            next.isEnabled = true
+            next.setText("next")
 
-         next.setOnClickListener {
-             if (Pref.CountryId==0)
-                 ClickHandler().switchToActivity(this, CountryActivity())
-             else
-                 ClickHandler().switchToActivity(this, SplashScreen())
-         }
+            coloredView(us_layout)
+            ResourceUtil().changeLang("en", this)
+            Pref.lang = "en"
+        }
+
+        next.setOnClickListener {
+            if (Pref.CountryId == 0)
+                ClickHandler().switchToActivity(this, CountryActivity())
+            else
+                ClickHandler().switchToActivity(this, SplashScreen())
+        }
 
 
     }
@@ -82,6 +85,7 @@ class LanguageActivity @Inject constructor(): AppCompatActivity() , HasAndroidIn
         view.setBackgroundColor(ContextCompat
             .getColor(this, R.color.bottomNav))
     }
+
     private fun whiteView(view: View) {
         view.setBackgroundColor(ContextCompat
             .getColor(this, R.color.white))

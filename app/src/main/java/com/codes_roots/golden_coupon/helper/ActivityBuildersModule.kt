@@ -8,6 +8,7 @@ import com.codes_roots.golden_coupon.presentation.chose_language.LanguageActivit
 import com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import com.codes_roots.golden_coupon.presentation.splash.SplashScreen
+import com.codes_roots.golden_coupon.presentation.web_view.WebViewActivity
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -37,6 +38,9 @@ interface ActivityBuildersModule {
 
     @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
     fun contributeLanguageActivity(): LanguageActivity
+    @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
+    fun contributeWebViewActivity(): WebViewActivity
+
 
 //    @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
 //    fun contributeLStaticPagesActivity(): StaticPagesActivity

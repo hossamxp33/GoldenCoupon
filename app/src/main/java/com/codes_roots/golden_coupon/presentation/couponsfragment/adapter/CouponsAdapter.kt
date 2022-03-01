@@ -56,10 +56,12 @@ class CouponsAdapter(
     holder.binding.visitSiteButton.setOnClickListener {
 
         viewmodel.getUsedCoupons(currentList[position].id)
+        if (!currentList[position].url.isNullOrEmpty()||!currentList[position].url_en.isNullOrEmpty()) {
 
-        if (!currentList[position].url.isNullOrEmpty()) {
             val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra("url", currentList[position].url);
+            intent.putExtra("url_en", currentList[position].url_en);
+
             (context as MainActivity).startActivity(intent)
           //  notifyItemChanged(position)
         }

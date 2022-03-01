@@ -67,10 +67,10 @@
 
                     <ImageView
                         android:id="@+id/card_view_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/egypt" />
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ar_logo" />
 
                     <TextView
                         android:id="@+id/card_view_image_title"
@@ -107,10 +107,10 @@
 
                     <ImageView
                         android:id="@+id/us_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="128dp"
+                        android:layout_height="128dp"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/us" />
+                        android:src="@drawable/logo2" />
 
                     <TextView
                         android:id="@+id/us_title"
@@ -163,7 +163,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/blackText"
-            android:text="@string/next"
             android:enabled="false"
             app:layout_constraintBottom_toBottomOf="parent"
             android:background="@drawable/site_button"

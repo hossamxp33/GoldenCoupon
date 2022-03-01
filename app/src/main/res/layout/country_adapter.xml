@@ -34,7 +34,7 @@
     android:background="@drawable/coupon_bg"
     android:animateLayoutChanges="true"
     android:layout_margin="2dp"
-    android:onClick="@{()->listener.switchToMainActivity(context,data.id)}"
+    android:onClick="@{()->listener.switchToRegisterActivity(context,data.id)}"
     tools:context=".presentation.mainactivity.MainActivity">
 
 

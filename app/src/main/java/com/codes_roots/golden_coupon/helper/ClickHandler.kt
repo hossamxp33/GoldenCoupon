@@ -138,21 +138,25 @@ class ClickHandler {
         return false
     }
 
-    fun openWebView(context: Context, url: String?) {
+    fun openWebView(context: Context, url: String?, url_en:String?) {
         context as MainActivity
 
         if (!url.isNullOrEmpty()) {
 
             val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra("url", url);
-            (context as MainActivity).startActivity(intent)
+            intent.putExtra("url_en", url_en);
+            (context.startActivity(intent))
         }
     }
 
-    fun switchToMainActivity(context: Context, countryId: Int?) {
+    fun switchToMainActivity(context: Context) {
+        switchToActivity(context, MainActivity())
+    }
+   fun switchToRegisterActivity(context: Context, countryId: Int?) {
         context as CountryActivity
         context.Pref.CountryId = countryId!!
-        switchToActivity(context, MainActivity())
+        switchToActivity(context, RegisterActivity())
 
     }
 

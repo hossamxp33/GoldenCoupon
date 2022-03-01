@@ -15,6 +15,7 @@ data class MainViewState(
     var filteredData: List<Product>? = null,
     val noProductsFound: Boolean? = null,
     val progress: Boolean? = null,
+    val page : Int?=null,
     val country_id : Int? = null,
     var error: UserError? = null,
     var subcategoryVisibility: Boolean? = false,

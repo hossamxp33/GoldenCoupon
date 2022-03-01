@@ -6,6 +6,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -19,13 +20,15 @@ import com.codes_roots.golden_coupon.entites.category.Category
 import com.codes_roots.golden_coupon.entites.category.Subcat
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewState
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
+import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel
+import kotlinx.android.synthetic.main.offers_fragment.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 
 
-class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?) :
+class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?,var fragment: ProductOffersFragment) :
     ListAdapter<Subcat, ViewHolder>(DiffCallback()) {
     var Intent: Channel<MainIntent>? = null
     var row_index: Int? = -1
@@ -44,6 +47,7 @@ class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel
         holder.bind(context, currentList[position])
 
         holder.binding.Mview.setOnClickListener {
+            fragment.filteredData.clear()
             row_index = position
             val viewState = viewModel?.state?.value
             viewModel?.FilterFileds?.put("Filter[subcat_id]",currentList[position].id.toString())

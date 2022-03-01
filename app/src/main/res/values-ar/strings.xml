@@ -36,6 +36,7 @@
     <string name="sortbyName" >بالاسم</string>
     <string name="logout">تسجيل خروج</string>
     <string name="login">تسجيل دخول</string>
+    <string name="loginas">دخول ك ضيف </string>
     <string name="register">حساب جديد</string>
     <string name="username">اسم المستخدم</string>
     <string name="password">كلمة المرور</string>

@@ -45,7 +45,6 @@ class CountryActivity @Inject constructor(): AppCompatActivity() , HasAndroidInj
 
       viewModel.getCountriesData()
          viewModel.CountryLD!!.observe(this, Observer {
-
                  countriesAdapter.submitList(it.Countries)
 
          })

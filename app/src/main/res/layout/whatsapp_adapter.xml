@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 <data>
 
-
     <variable
         name="context"
         type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
@@ -18,15 +17,14 @@
         name="listener"
         type="com.codes_roots.golden_coupon.helper.ClickHandler" />
 
-
     <variable
         name="pref"
         type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
 
-
     <import type="android.text.Html"/>
 
 </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout
     android:id="@+id/Mview"
     android:layout_width="match_parent"

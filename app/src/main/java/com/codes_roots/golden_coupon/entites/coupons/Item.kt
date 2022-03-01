@@ -18,5 +18,6 @@ data class CouponItem(
     var offer: String?=null,
     var updated_at: String?=null,
     var url: String?=null,
+    var url_en: String?=null,
     var used_count: Int?=null,
 )

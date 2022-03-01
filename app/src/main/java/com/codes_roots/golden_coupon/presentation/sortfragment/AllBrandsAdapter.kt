@@ -51,8 +51,6 @@ class AllBrandsAdapter(var context: Context?, var viewModel: ProductsViewModel?)
                 val viewState = viewModel?.state?.value
                 viewModel?.FilterFileds?.put("Filter[brand_id]",currentList[position].id.toString())
 
-
-
                 notifyDataSetChanged()
                 notifyItemChanged(position)
             }else

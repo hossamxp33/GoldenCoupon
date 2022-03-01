@@ -20,11 +20,12 @@ import kotlin.collections.ArrayList
 suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
+
     loadCategoryData: suspend () -> Flow<Result<AllCategoryModel>> = { Datarepo.getCategoryData },
 
     loadAllBrandsData: suspend () -> Flow<Result<AllBrandsModel>> = { Datarepo.getAllBrandsResponse },
 
-    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = { Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
+    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.viewState!!.page, intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
 
     //getProductsData
 ) = when (intent) {
@@ -32,8 +33,7 @@ suspend fun mapIntentToViewState(
         loadCategoryData,
         loadProductsData,
         loadAllBrandsData,
-        intent
-    )
+        intent)
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
     is MainIntent.SearchByName -> searchByName(intent, intent.Name!!)
     is MainIntent.GetBrandList ->  proceedWithBrandList(loadAllBrandsData,intent)

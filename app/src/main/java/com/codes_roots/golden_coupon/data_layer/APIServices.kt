@@ -46,7 +46,7 @@ interface APIServices {
     suspend fun getProductData(
         @Path("country_id") country_id: Int?,
         @FieldMap fields: HashMap<String, String>?,
-
+        @Query("page") page: Int?,
         ): ProductsModel
 
     @GET("items/index/{brandid}.json")
@@ -76,8 +76,6 @@ interface APIServices {
     @GET("notifications.json")
     suspend fun getNotifications(): Response<NotificationModel>
 
-
-    //
     ////////////// Authentication
     @POST("users/token.json")
     @Headers("Accept: Application/json", "cache-control: no-cache")
