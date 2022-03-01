@@ -3,19 +3,13 @@ package com.codes_roots.golden_coupon.presentation.mainactivity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Html
-import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.NavigationUI
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.databinding.ActivityMainBinding
 import com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment
@@ -24,7 +18,6 @@ import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.UserError
 import com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment
 import com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
@@ -42,39 +35,17 @@ import java.util.*
 import javax.inject.Inject
 
 
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
-import com.codes_roots.golden_coupon.data_layer.OnBackPressedListener
-import com.codes_roots.golden_coupon.generated.callback.OnClickListener
 import com.codes_roots.golden_coupon.presentation.favfragment.FavoriteFragment
 import com.codes_roots.golden_coupon.presentation.notificationfragment.NotificationFragment
 import kotlinx.android.synthetic.main.activity_main_content.view.*
 
 
-import androidx.core.content.ContextCompat
-
-import android.content.res.ColorStateList
-
-import android.animation.AnimatorListenerAdapter
-
-import androidx.core.content.PackageManagerCompat.LOG_TAG
-
-import android.animation.ValueAnimator
-import android.animation.ValueAnimator.AnimatorUpdateListener
 import android.app.Dialog
-import android.graphics.Color.TRANSPARENT
-import android.os.Handler
-import androidx.core.content.PackageManagerCompat
-import android.util.DisplayMetrics
-import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.codes_roots.golden_coupon.databinding.WhatsappAdapterBinding
-import com.codes_roots.golden_coupon.di.DaggerAppComponent.factory
 import com.codes_roots.golden_coupon.entites.whatsapp.WhatsAppModel
 import com.codes_roots.golden_coupon.helper.*
 import com.codes_roots.golden_coupon.presentation.mainactivity.whatsapp.WhatsAppAdapter
-import com.codes_roots.golden_coupon.presentation.notificationfragment.adapter.NotificationAdapter
+import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.call_us_dialog.*
 import kotlinx.android.synthetic.main.call_us_dialog.view.*
 import kotlinx.android.synthetic.main.main_frame_content.*
@@ -121,6 +92,11 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             getAllData()
         }
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+       if (preferenceHelper.lang!!.contains("ar"))
+        logo_icon.setImageResource(R.drawable.splash_logo_ar)
+        else
+           logo_icon.setImageResource(R.drawable.splash_logo_english)
+
 
 
         try {
@@ -143,9 +119,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             dialog.whats_recycleView.adapter = whatsAppAdapter
             dialog.whats_recycleView.layoutManager = LinearLayoutManager(this)
             whatsAppAdapter.submitList(whatsAppList?.data)
-
-            val toNumber =
-                "201064033997"
 
             dialog.show()
             //Intent myIntent = new Intent(view.getContext(), agones.class);
