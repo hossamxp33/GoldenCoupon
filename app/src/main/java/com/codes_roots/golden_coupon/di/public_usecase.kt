@@ -88,7 +88,7 @@ fun setSliderImageResource(imageView: AppCompatImageView, resource: String?) {
     val requestOptions = RequestOptions()
     requestOptions.error(R.drawable.noimg)
     Glide.with(imageView.context)
-        .load((resource))
+        .load((Constants.IMAGE_URL+resource))
         .transition(DrawableTransitionOptions.withCrossFade())
         .apply(requestOptions)
         .into(imageView)
