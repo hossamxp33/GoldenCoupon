@@ -85,9 +85,10 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
 
         view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
             viewModel.FilterFileds.put("Filter[name]", text.toString())
+            filteredData.clear()
             viewModel.intents.trySend(
                 MainIntent.FilterData(
-                    viewModel.state.value!!,
+                    viewModel.state.value!!.copy(page = page),
                     viewModel.FilterFileds,
                     viewModel.state.value!!.country_id
                 )
@@ -129,6 +130,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                     result?.let {
                         val recognizedText = it[0]
                         view.searchLayout.searchBar.setText(recognizedText)
+
                     }
                 }
             }
