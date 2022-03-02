@@ -27,7 +27,7 @@ import java.util.*
 import javax.inject.Inject
 
 
-open class MenuFragment @Inject constructor() : Fragment(){
+open class MenuFragment @Inject constructor() : Fragment() {
 
     @Inject
     lateinit var pref: PreferenceHelper
@@ -51,14 +51,17 @@ open class MenuFragment @Inject constructor() : Fragment(){
     private lateinit var view: MenuFragmentBinding
 
 
-
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?,
     ): View? {
 
         view = DataBindingUtil.inflate(inflater, R.layout.menu_fragment, container, false)
         view.context = context as MainActivity
         view.listener = ClickHandler()
+
+        view.myAccount.isVisible = pref.token.isNullOrEmpty()
+        view.logout.isVisible = !pref.token.isNullOrEmpty()
+
 
 
 //        if (pref.lang!!.contains("en")) {
@@ -70,17 +73,13 @@ open class MenuFragment @Inject constructor() : Fragment(){
 //
 //            //            chat.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_next, 0);
 //        }
-       // viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!.copy(progress = false)))
+        // viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!.copy(progress = false)))
 
         myOrderRecycleView()
 
         getAllData()
         return view.root
     }
-
-
-
-
 
 
     fun getAllData() {
@@ -119,6 +118,7 @@ open class MenuFragment @Inject constructor() : Fragment(){
             }
         }
     }
+
     fun myOrderRecycleView() {
         staticPagesAdapter = StaticPagesAdapter(requireContext())
         view.pagesRecycle.apply {
@@ -130,8 +130,6 @@ open class MenuFragment @Inject constructor() : Fragment(){
             setHasFixedSize(true)
         }
     }
-
-
 
 
 }

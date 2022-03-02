@@ -1,5 +1,6 @@
 package com.codes_roots.golden_coupon.helper
 
+import android.app.ActivityOptions
 import android.content.*
 import android.os.Build
 import android.os.Bundle
@@ -70,6 +71,7 @@ class ClickHandler {
 
     fun setClipboard(context: Context, text: String, code: String) {
         context as MainActivity
+
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             val clipboard =
                 context.getSystemService(Context.CLIPBOARD_SERVICE) as android.text.ClipboardManager
@@ -102,7 +104,15 @@ class ClickHandler {
             .setCustomAnimations(0, 0, 0, 0)
             .replace(R.id.login_frame, ForgetPasswordFragment()).addToBackStack(null).commit()
     }
+    fun Logout(context: Context){
+         context as MainActivity
+        context.preferenceHelper.token = ""
+        context.preferenceHelper.userName=""
+        Toast.makeText(context, "تم تسجيل خروجك", Toast.LENGTH_SHORT).show()
+        val homeIntent = Intent(context, RegisterActivity::class.java)
+        ( context ).startActivity(homeIntent, ActivityOptions.makeSceneTransitionAnimation(context).toBundle())
 
+    }
     fun switchToNotificationFragment(context: Context) {
         switchFragment(context, NotificationFragment())
     }

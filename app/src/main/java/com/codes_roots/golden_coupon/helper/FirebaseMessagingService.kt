@@ -34,7 +34,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         if (remoteMessage.notification != null){
             myJson = JSONObject(remoteMessage!!.data!! as Map<*, *>?)
            var click = myJson!!.optString("click_action").toString()
-
             val title =    remoteMessage.notification!!.title
             val body = remoteMessage.notification!!.body
             NotificationHelper().sendNotification(applicationContext,title!!,body!!,click,id1!!)

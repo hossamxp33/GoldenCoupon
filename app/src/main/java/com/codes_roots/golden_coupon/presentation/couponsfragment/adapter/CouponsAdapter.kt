@@ -53,9 +53,14 @@ class CouponsAdapter(
         holder.bind(context, currentList[position])
         holder.binding.image = fragment.brandImage
 
+
+
+        holder.binding.copyButton.setOnClickListener {
+            viewmodel.getUsedCoupons(currentList[position].id)
+            ClickHandler().setClipboard(context as MainActivity,currentList[position].discount_code!!,currentList[position].discount_code!!)
+        }
     holder.binding.visitSiteButton.setOnClickListener {
 
-        viewmodel.getUsedCoupons(currentList[position].id)
         if (!currentList[position].url.isNullOrEmpty()||!currentList[position].url_en.isNullOrEmpty()) {
 
             val intent = Intent(context, WebViewActivity::class.java)
