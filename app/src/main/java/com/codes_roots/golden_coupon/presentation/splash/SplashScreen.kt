@@ -37,7 +37,6 @@ class SplashScreen @Inject constructor(): AppCompatActivity() , HasAndroidInject
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
       val lang =   Resources.getSystem().configuration.locale.language;
-
          if (lang.contains("ar"))
              img.setImageResource(R.drawable.splash_logo_ar)
          else

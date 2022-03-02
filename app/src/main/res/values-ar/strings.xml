@@ -53,4 +53,6 @@
     <string name="send">ارسال</string>
     <string name="contact_us">تواصل معنا</string>
     <string name="back">رجوع</string>
+    <string name="createAcc">اريد انشاء حساب من فضلك ..</string>
+
 </resources>

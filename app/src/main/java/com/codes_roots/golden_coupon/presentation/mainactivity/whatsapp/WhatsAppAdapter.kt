@@ -39,8 +39,8 @@ class WhatsAppAdapter(
         val phone = "2"+ currentList[position].phone
         holder.binding.Mview.setOnClickListener {
             ResourceUtil().openWhatsApp(context as MainActivity,
-                phone,
-                "i want to create an account please..")
+                phone,  (context as MainActivity).getString(R.string.createAcc)
+                )
         }
     }
 

@@ -87,13 +87,9 @@ var sortValue:String? = ""
         brandsRecycleView()
         lifecycleScope.launchWhenStarted {
             viewModel.state.collect {
-
                 brandsAdapter.submitList(it?.allBrandsData?.Brands)
 
             }
-
-
-
             }
 
         return view.root
