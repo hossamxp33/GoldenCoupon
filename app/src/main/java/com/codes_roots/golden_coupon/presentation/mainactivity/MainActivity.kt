@@ -74,11 +74,17 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     val viewModel by viewModels<MainViewModel> { viewModelFactory }
     var whatsAppList : WhatsAppModel?=null
     override fun onCreate(savedInstanceState: Bundle?) {
+
         AndroidInjection.inject(this)
+
         supportFragmentManager.fragmentFactory = fragmentFactory
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
-        notification_background.setOnClickListener {
+
+        constraintLayout.setOnClickListener {
+
             ClickHandler().switchFragment(this, NotificationFragment())
 
         }
@@ -91,28 +97,27 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             topicTitle()
             getAllData()
         }
-        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-       if (preferenceHelper.lang!!.contains("ar"))
+       this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE or WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+        if(preferenceHelper.lang!!.contains("ar"))
         logo_icon.setImageResource(R.drawable.splash_logo_ar)
         else
-           logo_icon.setImageResource(R.drawable.splash_logo_english)
-
-
-
+        logo_icon.setImageResource(R.drawable.splash_logo_english)
         try {
             viewModel.getWhatsApp()
-
-        }catch (e:Exception){
+        } catch (e:Exception){
 
         }
+
         fab!!.setOnClickListener { view ->
 
             viewModel.whatsAppLD!!.observe(this,  {
                 whatsAppList = it
             })
-            // custom dialog
+
 
             val dialog = Dialog(this, R.style.Theme_AppCompat_Dialog)
+
             dialog.setContentView(R.layout.call_us_dialog)
 
             whatsAppAdapter = WhatsAppAdapter(viewModel,this)

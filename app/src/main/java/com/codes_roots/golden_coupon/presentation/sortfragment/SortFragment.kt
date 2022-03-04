@@ -49,7 +49,7 @@ var sortValue:String? = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         view = DataBindingUtil.inflate(inflater,
             R.layout.sort_fragment, container, false)
         view.listener = ClickHandler()
@@ -57,8 +57,8 @@ var sortValue:String? = ""
         val viewState = viewModel.state.value
 
         viewModel.intents.trySend(MainIntent.GetBrandList(viewModel.state.value!!))
+        viewModel.filteredData.clear()
         view.ButtonClick.setOnClickListener {
-
                 if (selectedSortOption == 0) {
                     sortValue = "name"
                 } else if (selectedSortOption == 1) {

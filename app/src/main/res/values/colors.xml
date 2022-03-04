@@ -39,7 +39,7 @@
     <color name="medium_orange">#e9b193</color>
     <color name="gold">#f7b500</color>
 
-
+<color name="logo_red">#a9201a</color>
 
     <color name="light_orange">#ffd8c3</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>

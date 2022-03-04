@@ -2,6 +2,7 @@ package com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.codes_roots.golden_coupon.entites.products.Product
 import com.codes_roots.golden_coupon.repo.products.DataRepo
 import com.tarweej.mypost.BaseViewModel
 
@@ -12,6 +13,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import java.util.ArrayList
 import javax.inject.Inject
 
 
@@ -21,7 +23,9 @@ class ProductsViewModel @Inject constructor(
     ) : BaseViewModel<MainViewState>() {
 
     val intents: Channel<MainIntent> = Channel<MainIntent>(Channel.UNLIMITED)
+
     var FilterFileds: HashMap<String, String> = HashMap()
+    var filteredData = ArrayList<Product>()
 
     protected val uiState: MutableStateFlow<MainViewState?> = MutableStateFlow(MainViewState())
 

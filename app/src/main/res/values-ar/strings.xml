@@ -54,5 +54,10 @@
     <string name="contact_us">تواصل معنا</string>
     <string name="back">رجوع</string>
     <string name="createAcc">اريد انشاء حساب من فضلك ..</string>
+    <string name="problem">"الكوبون لا يعمل "</string>
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <string name="report">ابلاغ</string>
+    <string name="errorincoupon">هل الكوبون لا يعمل ؟</string>
 
 </resources>

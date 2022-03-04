@@ -156,6 +156,7 @@ class ClickHandler {
             val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra("url", url);
             intent.putExtra("url_en", url_en);
+
             (context.startActivity(intent))
         }
     }

@@ -9,19 +9,34 @@
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="@color/logo_red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/wraning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:text="@string/report"
+            android:textSize="18dp"
+            android:fontFamily="@font/dinnextarabicbold"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/user_icon"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="80dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:scaleType="fitXY"
-            android:src="@drawable/logo"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/splash_logo_ar"
+            app:layout_constraintEnd_toStartOf="@+id/wraning"
+            app:layout_constraintStart_toEndOf="@+id/backbutton"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -35,6 +50,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             android:text="@string/back"
+            android:textColor="@color/white"
             android:textSize="18dp"
             android:fontFamily="@font/dinnextarabicbold" />
 
@@ -46,7 +62,7 @@
         android:id="@+id/webView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 

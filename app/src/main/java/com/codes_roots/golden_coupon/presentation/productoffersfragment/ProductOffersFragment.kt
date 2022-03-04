@@ -67,6 +67,8 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
             progress = true,
             country_id = Pref.CountryId),
             viewModel.FilterFileds, Pref.CountryId))
+
+
     }
 
     private lateinit var view: OffersFragmentBinding
@@ -183,8 +185,8 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                     super.onScrolled(recyclerView, dx, dy)
                     val lastVisibleItem =
                         (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                    if (filteredData != null)
-                        if (lastVisibleItem == productsAdapter.itemCount - 1 && productsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
+                    if (viewModel.filteredData != null)
+                        if (lastVisibleItem == productsAdapter.itemCount - 1 && productsAdapter.itemCount >= 19 && lastVisibleItem !=    viewModel.filteredData.size) {
                             page++
                             viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(
                                 page = page,
@@ -226,13 +228,13 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                         } else {
 
                             try {
-
+                                viewModel.filteredData.addAll(it.filteredData!!)
                                 view.progress.isVisible = false
-                                filteredData.addAll(it.filteredData!!)
+                                filteredData.addAll(viewModel.filteredData)
 
                                 view.brandsData = it.allBrandsData
 
-                                productsAdapter.submitList(filteredData)
+                                productsAdapter.submitList(   viewModel.filteredData)
                                 productsAdapter.notifyDataSetChanged()
 
                                 categoryAdapter.submitList(it.categoryData!!.categories)

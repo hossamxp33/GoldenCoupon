@@ -30,7 +30,11 @@ import com.codes_roots.golden_coupon.presentation.favfragment.mvi.MainIntent
 import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewModel
 
 
-class FavoriteAdapter(var context: Context?, var viewModel: FavViewModel,var fragment:FavoriteFragment) :
+class FavoriteAdapter(
+    var context: Context?,
+    var viewModel: FavViewModel,
+    var fragment: FavoriteFragment,
+) :
     ListAdapter<FavoriteData, ViewHolder>(DiffCallback()) {
     var Intent: Channel<MainIntent>? = null
 
@@ -40,16 +44,7 @@ class FavoriteAdapter(var context: Context?, var viewModel: FavViewModel,var fra
             LayoutInflater.from(p0.context),
             R.layout.fav_item_adapter, p0, false)
 
-        try {
 
-            if ((context as MainActivity).preferenceHelper.lang!!.contains("ar"))
-                binding.brandName.text = currentList[p1].brand.name
-            else
-                binding.brandName.text = currentList[p1].brand.name_en
-
-
-        } catch (e: Exception) {
-        }
 
         return ViewHolder(binding)
 
@@ -59,18 +54,23 @@ class FavoriteAdapter(var context: Context?, var viewModel: FavViewModel,var fra
     override fun onBindViewHolder(holder: ViewHolder, p1: Int) {
 
         holder.bind(context, currentList[p1])
-        holder.binding.favIcon.setOnClickListener {
+        try {
+            if ((context as MainActivity).preferenceHelper.lang!!.contains("ar"))
+                holder.binding.brandName.text = currentList[p1].brand.name
+            else
+                holder.binding.brandName.text = currentList[p1].brand.name_en
 
+
+        } catch (e: Exception) {
+        }
+        holder.binding.favIcon.setOnClickListener {
             holder.binding.favIcon.setImageResource(R.drawable.star_out)
             viewModel.intents.trySend(
                 MainIntent
                     .DeleteFavorite(
                         viewModel.state.value!!,
                         currentList[p1].id,
-                        (context as MainActivity).preferenceHelper.UserId
-                    )
-
-            )
+                        (context as MainActivity).preferenceHelper.UserId))
             fragment.data!!.removeAt(p1)
             notifyItemRemoved(p1)
             notifyItemChanged(p1)
@@ -81,38 +81,31 @@ class FavoriteAdapter(var context: Context?, var viewModel: FavViewModel,var fra
 }
 
 fun onClick(view: View?) {
-
     Navigation.findNavController(view!!).navigate(R.id.action_offer_to_coupons)
-
 }
 
 private class DiffCallback : DiffUtil.ItemCallback<FavoriteData>() {
-
     override fun areItemsTheSame(
-        oldItem: FavoriteData, newItem: FavoriteData,
+        oldItem: FavoriteData,
+        newItem: FavoriteData,
     ) =
         oldItem.id == newItem.id
 
     @SuppressLint("DiffUtilEquals")
-    override fun areContentsTheSame(
-        oldItem: FavoriteData, newItem: FavoriteData,
-    ) =
+    override fun areContentsTheSame(oldItem: FavoriteData, newItem: FavoriteData) =
         oldItem == newItem
 }
-
 
 class ViewHolder(
     val binding: FavItemAdapterBinding,
 ) : RecyclerView.ViewHolder(binding.root) {
-
     fun bind(context: Context?, data: FavoriteData) {
+
         binding.listener = ClickHandler()
+
         binding.productData = data
         binding.context = context as MainActivity?
         binding.pref = (context as MainActivity).preferenceHelper
         binding.string = data.brand.image
-
     }
-
-
 }

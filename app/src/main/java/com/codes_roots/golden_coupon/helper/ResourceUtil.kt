@@ -46,7 +46,6 @@ class ResourceUtil {
         return prefs.getString(langPref, "ar")
     }
     fun openWhatsApp(context: Context, number:String?, message: String?) {
-        context as MainActivity
         try {
 
     // Replace with mobile phone number without +Sign or leading zeros, but with country code
@@ -54,7 +53,7 @@ class ResourceUtil {
 
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse("http://api.whatsapp.com/send?phone=$number&text=$message")
-            context.  startActivity(intent)
+            context.startActivity(intent)
         } catch (e: Exception) {
             e.printStackTrace()
         }

@@ -27,7 +27,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="@color/logo_red"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -45,23 +45,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/notification_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginTop="18dp"
             android:layout_marginLeft="@dimen/dimen_32"
-            android:src="@drawable/alarm"
+            android:src="@drawable/bell"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/notification_background"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/oval"
-            android:translationX="2dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

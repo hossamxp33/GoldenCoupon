@@ -44,10 +44,7 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
         holder.bind(context, currentList[position])
         val viewState = viewModel.state.value
 
-        if (!currentList[position].favourite_items.isNullOrEmpty())
-            holder.binding.favoriteIcon.setImageResource(R.drawable.star)
-        else
-            holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
+
 
         try {
             val couponText = context!!.getString(R.string.coupon)
@@ -56,6 +53,10 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
 
 
             holder.binding.favoriteIcon.setOnClickListener {
+                if (currentList[position].favourite_items.isNullOrEmpty())
+                    holder.binding.favoriteIcon.setImageResource(R.drawable.star)
+                else
+                    holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
 
                 if (( context as MainActivity).preferenceHelper.token.isNullOrEmpty()) {
                     WARN_MotionToast(( context as MainActivity).getString(R.string.loginFirst),  context as MainActivity)
@@ -70,14 +71,13 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
                             (context as MainActivity).preferenceHelper.UserId
                         )
                 )
-                if (currentList[position].favourite_items.isNullOrEmpty())
-                    holder.binding.favoriteIcon.setImageResource(R.drawable.star)
-                else
-                    holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
 
             }
 
-
+            if (!currentList[position].favourite_items.isNullOrEmpty())
+                holder.binding.favoriteIcon.setImageResource(R.drawable.star)
+            else
+                holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
         } catch (e: Exception) {
         }
 

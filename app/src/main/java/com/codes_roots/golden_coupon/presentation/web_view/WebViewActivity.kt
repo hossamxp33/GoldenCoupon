@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.web_view.*
 import android.webkit.WebView
 import android.view.View
+import android.widget.LinearLayout
+import androidx.appcompat.app.AlertDialog
 import com.codes_roots.golden_coupon.R
 import com.codes_roots.golden_coupon.di.WARN_MotionToast
 import com.codes_roots.golden_coupon.helper.PreferenceHelper
@@ -17,12 +19,14 @@ import dagger.android.AndroidInjection
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.HasAndroidInjector
+import kotlinx.android.synthetic.main.top_bar.*
 import javax.inject.Inject
 
 
 class WebViewActivity : AppCompatActivity(), HasAndroidInjector {
     @Inject
     lateinit var preferenceHelper: PreferenceHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         AndroidInjection.inject(this)
 
@@ -36,7 +40,8 @@ class WebViewActivity : AppCompatActivity(), HasAndroidInjector {
             finish()
         }
 
-        val extras = intent.extras
+        var extras = intent.extras
+        var name = extras?.getString("name")
 
 
 
@@ -47,18 +52,44 @@ class WebViewActivity : AppCompatActivity(), HasAndroidInjector {
         val webview = findViewById<View>(R.id.webView) as WebView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             ResourceUtil().changeLang(preferenceHelper.lang!!, this)
-
         }
         webview.settings.javaScriptEnabled = true
         backbutton.setOnClickListener {
 
             onBackPressed()
         }
+        wraning.setOnClickListener {
+            val alertDialog = AlertDialog.Builder(this).create()
+            alertDialog.setTitle( this.getString(R.string.report))
+            alertDialog.setMessage(this.getString(R.string.errorincoupon))
+            alertDialog.setIcon(this.getDrawable(R.drawable.warningsign))
 
-        if (preferenceHelper.lang!!.contains("ar") &&  !url.isNullOrEmpty())
+            alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, this.getString(R.string.yes)
+            ) { dialog, which ->  ResourceUtil().openWhatsApp(this,
+                "201064033997",  this.getString(R.string.problem)
+            ) }
+
+            alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, this.getString(R.string.no)
+            ) { dialog, which -> dialog.dismiss() }
+            alertDialog.show()
+
+            val btnPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            val btnNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE)
+
+            val layoutParams = btnPositive.layoutParams as LinearLayout.LayoutParams
+            layoutParams.weight = 10f
+            btnPositive.layoutParams = layoutParams
+            btnNegative.layoutParams = layoutParams
+        }
+
+
+        if (preferenceHelper.lang!!.contains("ar") &&  !url.isNullOrEmpty()){
             webview.loadUrl(url)
-        else if (preferenceHelper.lang!!.contains("en") &&  !url_en.isNullOrEmpty())
+            user_icon.setImageResource(R.drawable.splash_logo_ar)}
+
+        else if (preferenceHelper.lang!!.contains("en") &&  !url_en.isNullOrEmpty()){
             webview.loadUrl(url_en)
+            user_icon.setImageResource(R.drawable.splash_logo_english)}
 
         else if (preferenceHelper.lang!!.contains("en") && !url.isNullOrEmpty())
             webview.loadUrl(url)
@@ -94,4 +125,5 @@ class WebViewActivity : AppCompatActivity(), HasAndroidInjector {
         }
         return super.onKeyDown(keyCode, event)
     }
+
 }
