@@ -31,10 +31,13 @@ import com.google.android.gms.tasks.Task
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.register_activity.*
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
+
 import java.util.*
 import javax.inject.Inject
+
+
+
+
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -67,6 +70,7 @@ class RegisterActivity : AppCompatActivity() {
 
 // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
+// Configure Google Sign In
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
@@ -135,19 +139,19 @@ class RegisterActivity : AppCompatActivity() {
 
 
             val acct = GoogleSignIn.getLastSignedInAccount(this)
-            if (acct != null) {
-                val personName = acct.displayName
-                val personGivenName = acct.givenName
-                val personFamilyName = acct.familyName
-                val personEmail = acct.email
-                val personId = acct.id
-                val personPhoto: Uri? = acct.photoUrl
 
-                pref.photo = personPhoto.toString()
+      //          val personName = acct.displayName
+                val personGivenName = acct!!.givenName
+//                val personFamilyName = acct.familyName
+//                val personEmail = acct.email
+//                val personId = acct.id
+//                val personPhoto: Uri? = acct.photoUrl
+
+          //      pref.photo = personPhoto.toString()
                 //      Pref.UserId = personId!!.toInt()
 
                 Toast.makeText(this, "user name is : $personGivenName", Toast.LENGTH_SHORT).show()
-            }
+
             ClickHandler().switchToActivity(this, MainActivity())
             // Signed in successfully, show authenticated UI.
         } catch (e: ApiException) {

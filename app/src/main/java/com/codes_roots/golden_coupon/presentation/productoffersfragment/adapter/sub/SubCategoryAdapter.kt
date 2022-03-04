@@ -47,7 +47,7 @@ class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel
         holder.bind(context, currentList[position])
 
         holder.binding.Mview.setOnClickListener {
-            fragment.filteredData.clear()
+            viewModel!!.filteredData.clear()
             row_index = position
             val viewState = viewModel?.state?.value
             viewModel?.FilterFileds?.put("Filter[subcat_id]",currentList[position].id.toString())

@@ -46,9 +46,10 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?,v
         holder.bind(context, currentList[position])
 
         holder.binding.Mview.setOnClickListener {
-            fragment.filteredData.clear()
+            viewModel!!.filteredData.clear()
             fragment.progress.isVisible = true
             if (!currentList.isNullOrEmpty()) {
+
                 row_index = position
                 val viewState = viewModel?.state?.value
                 viewModel?.FilterFileds?.put("Filter[cat_id]", currentList[position].id.toString())

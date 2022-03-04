@@ -62,7 +62,7 @@ class WebViewActivity : AppCompatActivity(), HasAndroidInjector {
             val alertDialog = AlertDialog.Builder(this).create()
             alertDialog.setTitle( this.getString(R.string.report))
             alertDialog.setMessage(this.getString(R.string.errorincoupon))
-            alertDialog.setIcon(this.getDrawable(R.drawable.warningsign))
+            alertDialog.setIcon(this.getDrawable(R.drawable.whatsapp))
 
             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, this.getString(R.string.yes)
             ) { dialog, which ->  ResourceUtil().openWhatsApp(this,

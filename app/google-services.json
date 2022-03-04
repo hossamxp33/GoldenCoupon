@@ -12,33 +12,15 @@
           "package_name": "com.codes_roots.golden_coupon"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "278997993002-80d0p9qu0j5nsm756go2n7bt8pjp906g.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.codes_roots.golden_coupon",
-            "certificate_hash": "b55b730052512905a04c5fb3eebf8e65f36fe4e2"
-          }
-        },
-        {
-          "client_id": "278997993002-bqctguckvlgacriv9cnsql5ur7becs37.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCzsrzbtnXkOIQxPbRVXM54NH4g_xA9qSI"
+          "current_key": "AIzaSyCmJ64mDasu2TALlzBI5YpevFZI6Thdkwc"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "278997993002-bqctguckvlgacriv9cnsql5ur7becs37.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }
