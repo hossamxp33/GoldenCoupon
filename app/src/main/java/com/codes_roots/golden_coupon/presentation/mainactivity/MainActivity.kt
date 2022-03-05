@@ -45,6 +45,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.codes_roots.golden_coupon.entites.whatsapp.WhatsAppModel
 import com.codes_roots.golden_coupon.helper.*
 import com.codes_roots.golden_coupon.presentation.mainactivity.whatsapp.WhatsAppAdapter
+import com.google.firebase.FirebaseApp
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.call_us_dialog.*
 import kotlinx.android.synthetic.main.call_us_dialog.view.*
@@ -76,7 +78,10 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     override fun onCreate(savedInstanceState: Bundle?) {
 
         AndroidInjection.inject(this)
-
+        FirebaseApp.initializeApp(this)
+        FirebaseMessaging.getInstance()
+        FirebaseMessaging.getInstance().subscribeToTopic(preferenceHelper.UserId.toString())
+        FirebaseMessaging.getInstance().subscribeToTopic("AllUser")
         supportFragmentManager.fragmentFactory = fragmentFactory
 
         super.onCreate(savedInstanceState)

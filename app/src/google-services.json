@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:714887118419:android:3f5d4a53bf3112a42090a6",
+        "mobilesdk_app_id": "1:714887118419:android:0e1f653a6ec35c162090a6",
         "android_client_info": {
-          "package_name": "com.codes_roots.golden_coupon"
+          "package_name": "com.codesroots.cityrolls"
         }
       },
       "oauth_client": [
@@ -44,9 +44,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:714887118419:android:0e1f653a6ec35c162090a6",
+        "mobilesdk_app_id": "1:714887118419:android:64fcaadaf039a1002090a6",
         "android_client_info": {
-          "package_name": "com.codesroots.cityrolls"
+          "package_name": "com.codesroots.goldencoupon"
         }
       },
       "oauth_client": [

@@ -11,7 +11,7 @@ android {
     compileSdk 31
 
     defaultConfig {
-        applicationId "com.codes_roots.golden_coupon"
+        applicationId "com.codesroots.goldencoupon"
         minSdk 24
         targetSdk 31
         versionCode 1
@@ -78,13 +78,13 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2+"
     implementation 'io.reactivex.rxjava2:rxandroid:2+'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2+'
+    implementation 'com.google.gms:google-services:4.3.10'
 
     /// firebase
     implementation platform('com.google.firebase:firebase-bom:29.0.3')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-messaging:23.0.0'
 
-    implementation 'com.google.gms:google-services:4.3.10'
 
     implementation "androidx.activity:activity-ktx:1.4.0"
     //You must use fragment 1.3.0-alpha02 or later
