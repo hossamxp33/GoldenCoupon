@@ -62,14 +62,11 @@ interface APIServices {
     @POST("FavouriteItems/add.json")
     suspend fun addFavorite(
         @Field("brand_id") brand_id: Int?,
-        @Field("user_id") UserId: Int,
     ): Boolean
 
-
-    @POST("FavouriteItems/Delete/{id}/{user_id}.json")
+    @POST("FavouriteItems/Delete/{brand_id}.json")
     suspend fun deleteFavorite(
-        @Path("id") brand_id: Int?,
-        @Path("user_id") UserId: Int,
+        @Path("brand_id") brand_id: Int?,
     ): Boolean
 
 
@@ -80,6 +77,10 @@ interface APIServices {
     @POST("users/token.json")
     @Headers("Accept: Application/json", "cache-control: no-cache")
     suspend fun login(@Body loginModel: User?): Response<LoginModel>
+
+    @POST("users/facebooklogin.json")
+    @Headers("Accept: Application/json", "cache-control: no-cache")
+    suspend fun loginByGoogle(@Body loginModel: User?): Response<LoginModel>
 //
 
     @POST("users/add.json")

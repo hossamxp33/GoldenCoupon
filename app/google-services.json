@@ -12,7 +12,16 @@
           "package_name": "com.codes_roots.golden_coupon"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "278997993002-bfbks7laqc6o7dl155bq3gpo2bco49ov.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codes_roots.golden_coupon",
+            "certificate_hash": "b55b730052512905a04c5fb3eebf8e65f36fe4e2"
+          }
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCmJ64mDasu2TALlzBI5YpevFZI6Thdkwc"

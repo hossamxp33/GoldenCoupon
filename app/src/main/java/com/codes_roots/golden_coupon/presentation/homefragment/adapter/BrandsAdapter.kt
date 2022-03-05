@@ -23,6 +23,7 @@ import com.codes_roots.golden_coupon.presentation.homefragment.mvi.MainViewState
 import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
+import org.jetbrains.anko.imageResource
 import org.jetbrains.anko.startActivityForResult
 import javax.inject.Inject
 
@@ -44,40 +45,53 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
         holder.bind(context, currentList[position])
         val viewState = viewModel.state.value
 
-
-
         try {
+
+            if (!currentList[position].favourite_items.isNullOrEmpty())
+                holder.binding.favoriteIcon.setImageResource(R.drawable.star)
+            else
+                holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
+
+
             val couponText = context!!.getString(R.string.coupon)
             val num = currentList[position].items?.get(0)?.sum.toString()
             holder.binding.couponNum.text = "$num $couponText"
 
 
             holder.binding.favoriteIcon.setOnClickListener {
-                if (currentList[position].favourite_items.isNullOrEmpty())
-                    holder.binding.favoriteIcon.setImageResource(R.drawable.star)
-                else
-                    holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
+                if (holder.binding.favoriteIcon.drawable != (context as MainActivity).resources.getDrawable( R.drawable.star))
+                {
 
-                if (( context as MainActivity).preferenceHelper.token.isNullOrEmpty()) {
-                    WARN_MotionToast(( context as MainActivity).getString(R.string.loginFirst),  context as MainActivity)
-                    val i = Intent(context, RegisterActivity::class.java)
-                    (context as MainActivity).startActivityForResult(i, 100)
-                } else
-                viewModel.intents.trySend(
-                    MainIntent
-                        .AddToFavorite(
-                            viewModel.state.value!!,
-                            currentList[position].id,
-                            (context as MainActivity).preferenceHelper.UserId
+                    if (( context as MainActivity).preferenceHelper.token.isNullOrEmpty()) {
+                        WARN_MotionToast(( context as MainActivity).getString(R.string.loginFirst),  context as MainActivity)
+                        val i = Intent(context, RegisterActivity::class.java)
+                        (context as MainActivity).startActivityForResult(i, 100)
+                    } else
+                        holder.binding.favoriteIcon.setImageResource(R.drawable.star)
+
+                    viewModel.intents.trySend(
+                            MainIntent
+                                .AddToFavorite(
+                                    viewModel.state.value!!,
+                                    currentList[position].id
+
+                                )
                         )
-                )
+                }
+                else {
+                        viewModel.intents.trySend(
+                            MainIntent
+                                .DeleteFavorite(
+                                    viewModel.state.value!!,
+                                    currentList[position].id
+
+                                )
+                        )
+                    holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
+                }
 
             }
 
-            if (!currentList[position].favourite_items.isNullOrEmpty())
-                holder.binding.favoriteIcon.setImageResource(R.drawable.star)
-            else
-                holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
         } catch (e: Exception) {
         }
 

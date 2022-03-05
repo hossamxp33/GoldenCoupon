@@ -15,6 +15,7 @@ import retrofit2.Response
 interface DataSource {
 
     suspend fun getLoginResponse(loginModel: User): Response<LoginModel>
+    suspend fun getloginByGoogleResponse(loginModel: User): Response<LoginModel>
     suspend fun getRegisterModelResponse(registerModel: User): Response<LoginModel>
     suspend fun forgetPasswordResponse(email:String?): Response<ForgetPasswordModelX>
 

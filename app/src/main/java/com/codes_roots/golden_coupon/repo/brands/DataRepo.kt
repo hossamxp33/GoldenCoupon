@@ -68,9 +68,9 @@ class DataRepo @Inject constructor(
             .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
-    fun addFavouriteData(brand_id: Int, UserId: Int): Flow<Result<Boolean>> =
+    fun addFavouriteData(brand_id: Int): Flow<Result<Boolean>> =
         flow {
-            emit(Datasources.addFavorites(brand_id, UserId))
+            emit(Datasources.addFavorites(brand_id))
         }
             .map { Result.success(it) }
             .retry(retries = 4) { t ->
@@ -83,9 +83,9 @@ class DataRepo @Inject constructor(
             .catch { throwable -> emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
-    fun deleteFavorite(brand_id: Int, UserId: Int): Flow<Result<Boolean>> =
+    fun deleteFavorite(brand_id: Int): Flow<Result<Boolean>> =
         flow {
-            emit(Datasources.deleteFavorite(brand_id, UserId))
+            emit(Datasources.deleteFavorite(brand_id))
         }
             .map { Result.success(it) }
             .retry(retries = 4) { t ->

@@ -66,7 +66,22 @@ class AuthViewModel @Inject constructor(private val Datasources: AuthRemoteDataS
             }
         }
 
+    }    fun loginByGoogleResponse(loginModel: User?) {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            val response = Datasources.getloginByGoogleResponse(loginModel!!)
+            withContext(Dispatchers.Main) {
+                if (response.isSuccessful) {
+                    authLD?.postValue(response.body())
+
+                } else {
+                    onError("Error : ${response.message()} ")
+                }
+            }
+        }
+
     }
+
+
     fun register(registerModel: User?) {
         job = CoroutineScope(Dispatchers.IO).launch {
             val response = Datasources.getRegisterModelResponse(registerModel!!)

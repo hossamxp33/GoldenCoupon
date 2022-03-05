@@ -6,7 +6,7 @@ sealed class MainIntent(open val viewState: MainViewState? = null,open val brand
 
     data class Initialize(override val viewState: MainViewState) : MainIntent()
 
-    data class DeleteFavorite(override val viewState: MainViewState, override val brand_id:Int?, override val user_id:Int?) : MainIntent()
+    data class DeleteFavorite(override val viewState: MainViewState, override val brand_id:Int?) : MainIntent()
 
     data class ErrorDisplayed(override val viewState: MainViewState) : MainIntent()
 

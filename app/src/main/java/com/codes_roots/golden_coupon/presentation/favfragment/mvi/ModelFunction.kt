@@ -18,7 +18,7 @@ suspend fun mapIntentToViewState(
     intent: MainIntent,
     Datarepo: DataRepo,
     loadMainData: suspend () -> Flow<Result<FavouritModel>> = { Datarepo.getFavouriteData },
-    DeleteFavorite: suspend () ->  Flow<Result<Boolean>> = { Datarepo.deleteFavorite(intent.brand_id!!, intent.user_id!!) },
+    DeleteFavorite: suspend () ->  Flow<Result<Boolean>> = { Datarepo.deleteFavorite(intent.brand_id!!) },
 
     ) = when (intent) {
     is MainIntent.Initialize -> proceedWithInitialize(loadMainData, intent)

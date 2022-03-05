@@ -24,8 +24,8 @@ interface DataSource {
 
     suspend fun getCountriesResponse(): Response<CountryModel>
     suspend fun getFavoritesResponse(): FavouritModel
-    suspend fun addFavorites(brand_id: Int, UserId: Int): Boolean
-    suspend fun deleteFavorite(brand_id: Int, UserId: Int): Boolean
+    suspend fun addFavorites(brand_id: Int): Boolean
+    suspend fun deleteFavorite(brand_id: Int): Boolean
 
     suspend fun getStaticPages(): StaticPagesModel
     suspend fun getUsedCoupons(item_id:Int): Response<UsedCouponModel>

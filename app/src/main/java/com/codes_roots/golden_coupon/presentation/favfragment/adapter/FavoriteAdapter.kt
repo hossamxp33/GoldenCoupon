@@ -20,6 +20,7 @@ import com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.Navigation
 import com.codes_roots.golden_coupon.databinding.FavItemAdapterBinding
 import com.codes_roots.golden_coupon.entites.fav.FavoriteData
@@ -61,21 +62,25 @@ class FavoriteAdapter(
                 holder.binding.brandName.text = currentList[p1].brand.name_en
 
 
-        } catch (e: Exception) {
-        }
         holder.binding.favIcon.setOnClickListener {
+            try {
             holder.binding.favIcon.setImageResource(R.drawable.star_out)
             viewModel.intents.trySend(
                 MainIntent
                     .DeleteFavorite(
                         viewModel.state.value!!,
-                        currentList[p1].id,
-                        (context as MainActivity).preferenceHelper.UserId))
+                        currentList[p1].brand.id
+                  ))
             fragment.data!!.removeAt(p1)
             notifyItemRemoved(p1)
             notifyItemChanged(p1)
+            } catch (e: Exception) {
+                Toast.makeText(context,"wait",Toast.LENGTH_SHORT).show()
+            }
+        }
 
-
+        } catch (e: Exception) {
+            Toast.makeText(context,"wait",Toast.LENGTH_SHORT).show()
         }
     }
 }

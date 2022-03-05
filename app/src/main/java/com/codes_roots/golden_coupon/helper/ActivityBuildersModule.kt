@@ -31,21 +31,22 @@ interface ActivityBuildersModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
     fun contributeCountryActivity(): CountryActivity
+
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
     fun contributeRegisterActivity(): RegisterActivity
-    @ActivityScope
 
+    @ActivityScope
     @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
     fun contributeLanguageActivity(): LanguageActivity
+
+    @ActivityScope
     @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
     fun contributeWebViewActivity(): WebViewActivity
 
 
 //    @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
 //    fun contributeLStaticPagesActivity(): StaticPagesActivity
-
-
 
 
 }
