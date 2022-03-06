@@ -8,20 +8,20 @@
 
     <variable
         name="context"
-        type="com.codes_roots.golden_coupon.presentation.country_activity.CountryActivity" />
+        type="com.codesroots.goldencoupon.presentation.country_activity.CountryActivity" />
 
     <variable
         name="data"
-        type="com.codes_roots.golden_coupon.entites.countries.Country" />
+        type="com.codesroots.goldencoupon.entites.countries.Country" />
 
     <variable
         name="listener"
-        type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+        type="com.codesroots.goldencoupon.helper.ClickHandler" />
 
 
     <variable
         name="pref"
-        type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
+        type="com.codesroots.goldencoupon.helper.PreferenceHelper" />
 
 
     <import type="android.text.Html"/>

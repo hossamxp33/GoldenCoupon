@@ -7,15 +7,15 @@
     <data>
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+            type="com.codesroots.goldencoupon.presentation.mainactivity.MainActivity" />
 
         <variable
             name="click"
-            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+            type="com.codesroots.goldencoupon.helper.ClickHandler" />
 
         <variable
             name="Pref"
-            type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
+            type="com.codesroots.goldencoupon.helper.PreferenceHelper" />
 
     </data>
 

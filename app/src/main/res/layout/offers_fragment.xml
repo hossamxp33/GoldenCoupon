@@ -10,21 +10,21 @@
 
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+            type="com.codesroots.goldencoupon.presentation.mainactivity.MainActivity" />
         <variable
             name="listener"
-            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+            type="com.codesroots.goldencoupon.helper.ClickHandler" />
         <variable
             name="viewModel"
-            type="com.codes_roots.golden_coupon.presentation.productoffersfragment.mvi.ProductsViewModel" />
+            type="com.codesroots.goldencoupon.presentation.productoffersfragment.mvi.ProductsViewModel" />
 
         <variable
             name="productData"
-            type="com.codes_roots.golden_coupon.entites.products.Product" />
+            type="com.codesroots.goldencoupon.entites.products.Product" />
 
         <variable
             name="brandsData"
-            type="com.codes_roots.golden_coupon.entites.allbrands.AllBrandsModel" />
+            type="com.codesroots.goldencoupon.entites.allbrands.AllBrandsModel" />
 
     </data>
 

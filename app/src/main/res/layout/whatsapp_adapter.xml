@@ -7,19 +7,19 @@
 
     <variable
         name="context"
-        type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+        type="com.codesroots.goldencoupon.presentation.mainactivity.MainActivity" />
 
     <variable
         name="data"
-        type="com.codes_roots.golden_coupon.entites.whatsapp.Data" />
+        type="com.codesroots.goldencoupon.entites.whatsapp.Data" />
 
     <variable
         name="listener"
-        type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+        type="com.codesroots.goldencoupon.helper.ClickHandler" />
 
     <variable
         name="pref"
-        type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
+        type="com.codesroots.goldencoupon.helper.PreferenceHelper" />
 
     <import type="android.text.Html"/>
 

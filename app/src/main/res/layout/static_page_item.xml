@@ -7,19 +7,19 @@
     <data>
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+            type="com.codesroots.goldencoupon.presentation.mainactivity.MainActivity" />
 
         <variable
             name="listener"
-            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+            type="com.codesroots.goldencoupon.helper.ClickHandler" />
 
         <variable
             name="pref"
-            type="com.codes_roots.golden_coupon.helper.PreferenceHelper" />
+            type="com.codesroots.goldencoupon.helper.PreferenceHelper" />
 
         <variable
             name="data"
-            type="com.codes_roots.golden_coupon.entites.staticpages.StaticPagesItem" />
+            type="com.codesroots.goldencoupon.entites.staticpages.StaticPagesItem" />
 
     </data>
 

@@ -1,35 +1,44 @@
 {
   "project_info": {
-    "project_number": "278997993002",
-    "project_id": "golden-coupon",
-    "storage_bucket": "golden-coupon.appspot.com"
+    "project_number": "887165944188",
+    "project_id": "golden-coupons-41c80",
+    "storage_bucket": "golden-coupons-41c80.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:278997993002:android:84f4cf37aeb164324fe553",
+        "mobilesdk_app_id": "1:887165944188:android:726b64d00857a2d0dd64f9",
         "android_client_info": {
-          "package_name": "com.codes_roots.golden_coupon"
+          "package_name": "com.codesroots.goldencoupon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "278997993002-bfbks7laqc6o7dl155bq3gpo2bco49ov.apps.googleusercontent.com",
+          "client_id": "887165944188-7jm7lku7ag5r9qjftqhq1i7kp4uo07cs.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.codes_roots.golden_coupon",
+            "package_name": "com.codesroots.goldencoupon",
             "certificate_hash": "b55b730052512905a04c5fb3eebf8e65f36fe4e2"
           }
+        },
+        {
+          "client_id": "887165944188-5ic5dosuk39rl9c018pdrcnvnrl48ndb.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCmJ64mDasu2TALlzBI5YpevFZI6Thdkwc"
+          "current_key": "AIzaSyDYU-Ht4JDRQpY1s5GQRhCwaVDMSHYgFc4"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887165944188-5ic5dosuk39rl9c018pdrcnvnrl48ndb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

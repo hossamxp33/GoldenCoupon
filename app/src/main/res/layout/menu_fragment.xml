@@ -8,10 +8,10 @@
     <data>
         <variable
             name="context"
-            type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+            type="com.codesroots.goldencoupon.presentation.mainactivity.MainActivity" />
         <variable
             name="listener"
-            type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+            type="com.codesroots.goldencoupon.helper.ClickHandler" />
 
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -53,7 +53,6 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/logout"
                     style="@style/menuTitles"
-                    android:onClick="@{() -> listener.Logout(context)}"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"

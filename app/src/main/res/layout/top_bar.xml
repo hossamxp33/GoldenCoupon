@@ -7,11 +7,11 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 <data>
     <variable
         name="context"
-        type="com.codes_roots.golden_coupon.presentation.mainactivity.MainActivity" />
+        type="com.codesroots.goldencoupon.presentation.mainactivity.MainActivity" />
 
     <variable
         name="MainListener"
-        type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+        type="com.codesroots.goldencoupon.helper.ClickHandler" />
 
 </data>
 

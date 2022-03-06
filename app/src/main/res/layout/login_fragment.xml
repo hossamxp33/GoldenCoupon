@@ -6,11 +6,11 @@
 <data>
     <variable
         name="context"
-        type="com.codes_roots.golden_coupon.presentation.auth.RegisterActivity" />
+        type="com.codesroots.goldencoupon.presentation.auth.RegisterActivity" />
 
     <variable
         name="listener"
-        type="com.codes_roots.golden_coupon.helper.ClickHandler" />
+        type="com.codesroots.goldencoupon.helper.ClickHandler" />
 
 </data>
 
@@ -188,8 +188,8 @@
                 android:textColor="@color/red2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forgetPW"
-                app:layout_constraintWidth_percent="0.45" />
+                app:layout_constraintTop_toBottomOf="@+id/login"
+                app:layout_constraintWidth_percent="0.45"/>
             <TextView
                 android:id="@+id/login"
                 style="@style/LoginTextStyle"
@@ -203,8 +203,9 @@
                 android:textColor="@color/red2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/loginAs"
-                app:layout_constraintWidth_percent="0.45" />
+                app:layout_constraintTop_toBottomOf="@+id/forgetPW"
+                app:layout_constraintWidth_percent="0.45"
+                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,12 +9,12 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.codes_roots.golden_coupon.presentation.homefragment.HomeFragment"
+        android:name="com.codesroots.goldencoupon.presentation.homefragment.HomeFragment"
         android:label="fragment_home_courses"
         tools:layout="@layout/home_fragment" />
     <fragment
         android:id="@+id/offer"
-        android:name="com.codes_roots.golden_coupon.presentation.productoffersfragment.ProductOffersFragment"
+        android:name="com.codesroots.goldencoupon.presentation.productoffersfragment.ProductOffersFragment"
         android:label="fragment_courses_stagged"
         tools:layout="@layout/offers_fragment" >
 
@@ -24,17 +24,17 @@
     </fragment>
     <fragment
         android:id="@+id/fav"
-        android:name="com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment"
+        android:name="com.codesroots.goldencoupon.presentation.menufragment.MenuFragment"
         android:label="fragment_matches_courses"
         tools:layout="@layout/menu_fragment" />
     <fragment
         android:id="@+id/menu"
-        android:name="com.codes_roots.golden_coupon.presentation.menufragment.MenuFragment"
+        android:name="com.codesroots.goldencoupon.presentation.menufragment.MenuFragment"
         android:label="fragment_matches_courses"
         tools:layout="@layout/menu_fragment" />
     <fragment
         android:id="@+id/coupons"
-        android:name="com.codes_roots.golden_coupon.presentation.couponsfragment.CouponsFragment"
+        android:name="com.codesroots.goldencoupon.presentation.couponsfragment.CouponsFragment"
         android:label="fragment_matches_courses"
         tools:layout="@layout/coupon_item_adapter" />
 
