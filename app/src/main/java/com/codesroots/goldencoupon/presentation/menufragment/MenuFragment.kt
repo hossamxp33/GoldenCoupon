@@ -66,7 +66,7 @@ open class MenuFragment @Inject constructor() : Fragment() {
         view = DataBindingUtil.inflate(inflater, R.layout.menu_fragment, container, false)
         view.context = context as MainActivity
         view.listener = ClickHandler()
-
+         view.pref = pref
         view.myAccount.isVisible = pref.token.isNullOrEmpty()
         view.logout.isVisible = !pref.token.isNullOrEmpty()
 

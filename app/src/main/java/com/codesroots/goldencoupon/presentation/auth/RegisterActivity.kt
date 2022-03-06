@@ -149,6 +149,7 @@ class RegisterActivity @Inject constructor() : AppCompatActivity(), HasAndroidIn
                 val personName = account.displayName
                 Toast.makeText(this, "user name is : $personName", Toast.LENGTH_SHORT).show()
                 pref.token = token
+                pref.userName = personName
                 val loginInfo = User(username = personName,
                     google_token = token,
                     active = 1,

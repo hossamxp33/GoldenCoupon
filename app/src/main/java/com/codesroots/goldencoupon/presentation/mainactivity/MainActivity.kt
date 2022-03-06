@@ -45,6 +45,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.goldencoupon.entites.whatsapp.WhatsAppModel
 import com.codesroots.goldencoupon.helper.*
 import com.codesroots.goldencoupon.presentation.mainactivity.whatsapp.WhatsAppAdapter
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.call_us_dialog.*
 import kotlinx.android.synthetic.main.call_us_dialog.view.*
@@ -70,6 +73,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
+    lateinit var mAuth: FirebaseAuth
 
     val viewModel by viewModels<MainViewModel> { viewModelFactory }
     var whatsAppList : WhatsAppModel?=null
@@ -88,6 +92,11 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
             ClickHandler().switchFragment(this, NotificationFragment())
 
         }
+        mAuth = FirebaseAuth.getInstance()
+        FirebaseApp.initializeApp(this)
+        FirebaseMessaging.getInstance()
+            .subscribeToTopic("1")
+        FirebaseMessaging.getInstance().subscribeToTopic("100")
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

@@ -12,6 +12,9 @@
         <variable
             name="listener"
             type="com.codesroots.goldencoupon.helper.ClickHandler" />
+        <variable
+            name="pref"
+            type="com.codesroots.goldencoupon.helper.PreferenceHelper" />
 
     </data>
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -51,6 +54,17 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/username"
+                    style="@style/grayText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="32dp"
+                    android:text="@{pref.userName != null ? @string/username + ` : ` +  pref.userName: ` `}"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/best_brands_title" />
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/logout"
                     style="@style/menuTitles"
                     android:layout_width="match_parent"
@@ -64,7 +78,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/best_brands_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/username" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/rateApp"
