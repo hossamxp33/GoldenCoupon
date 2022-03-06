@@ -19,6 +19,7 @@ import com.codesroots.goldencoupon.presentation.homefragment.mvi.MainIntent
 import com.codesroots.goldencoupon.presentation.homefragment.mvi.MainViewModel
 import com.codesroots.goldencoupon.presentation.mainactivity.MainActivity
 import kotlinx.coroutines.channels.Channel
+import org.jetbrains.anko.image
 
 
 class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
@@ -40,11 +41,15 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
 
         try {
 
-            if (!currentList[position].favourite_items.isNullOrEmpty())
+            if (!currentList[position].favourite_items.isNullOrEmpty()) {
                 holder.binding.favoriteIcon.setImageResource(R.drawable.star)
-            else
+                holder.binding.favoriteIcon.tag = "full"
+            }
+            else {
                 holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
+                holder.binding.favoriteIcon.tag = "outline"
 
+            }
 
             val couponText = context!!.getString(R.string.coupon)
             val num = currentList[position].items?.get(0)?.sum.toString()
@@ -52,17 +57,21 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
 
 
             holder.binding.favoriteIcon.setOnClickListener {
-                if (holder.binding.favoriteIcon.drawable != (context as MainActivity).resources.getDrawable( R.drawable.star))
-                {
+                if ((context as MainActivity).preferenceHelper.token.isNullOrEmpty()) {
+                    WARN_MotionToast(
+                        (context as MainActivity).getString(R.string.loginFirst),
+                        context as MainActivity
+                    )
+                    val i = Intent(context, RegisterActivity::class.java)
+                    (context as MainActivity).startActivityForResult(i, 100)
+                } else {
+                    if (holder.binding.favoriteIcon.tag  != "full"
+                    ) {
 
-                    if (( context as MainActivity).preferenceHelper.token.isNullOrEmpty()) {
-                        WARN_MotionToast(( context as MainActivity).getString(R.string.loginFirst),  context as MainActivity)
-                        val i = Intent(context, RegisterActivity::class.java)
-                        (context as MainActivity).startActivityForResult(i, 100)
-                    } else
+
                         holder.binding.favoriteIcon.setImageResource(R.drawable.star)
-
-                    viewModel.intents.trySend(
+                        holder.binding.favoriteIcon.tag = "full"
+                        viewModel.intents.trySend(
                             MainIntent
                                 .AddToFavorite(
                                     viewModel.state.value!!,
@@ -70,8 +79,7 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
 
                                 )
                         )
-                }
-                else {
+                    } else {
                         viewModel.intents.trySend(
                             MainIntent
                                 .DeleteFavorite(
@@ -80,14 +88,16 @@ class BrandsAdapter(var context: Context?, var viewModel: MainViewModel) :
 
                                 )
                         )
-                    holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
+                        holder.binding.favoriteIcon.tag = "outline"
+
+                        holder.binding.favoriteIcon.setImageResource(R.drawable.star_out)
+                    }
+
                 }
 
             }
-
         } catch (e: Exception) {
         }
-
 
     }
 

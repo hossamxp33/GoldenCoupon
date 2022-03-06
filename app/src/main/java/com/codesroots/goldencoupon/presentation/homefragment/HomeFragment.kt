@@ -216,8 +216,9 @@ open class HomeFragment @Inject constructor() : Fragment() {
                             try {
                                 filteredData.addAll(it.filteredData!!)
                                 brandsAdapter.submitList(filteredData)
-                                brandsAdapter.notifyDataSetChanged()
-
+                                if (it.IsFave == null) {
+                                    brandsAdapter.notifyDataSetChanged()
+                                }
                             } catch (e: Exception) {
                                 Toast.makeText(requireContext(),
                                     "There is no other coupons",

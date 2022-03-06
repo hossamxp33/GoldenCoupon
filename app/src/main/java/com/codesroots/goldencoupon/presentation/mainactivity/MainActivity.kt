@@ -47,6 +47,7 @@ import com.codesroots.goldencoupon.helper.*
 import com.codesroots.goldencoupon.presentation.mainactivity.whatsapp.WhatsAppAdapter
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_splash.*
 import kotlinx.android.synthetic.main.call_us_dialog.*
@@ -95,6 +96,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         mAuth = FirebaseAuth.getInstance()
         FirebaseApp.initializeApp(this)
         FirebaseMessaging.getInstance()
+        FirebaseMessaging.getInstance()
+
             .subscribeToTopic("1")
         FirebaseMessaging.getInstance().subscribeToTopic("100")
 
