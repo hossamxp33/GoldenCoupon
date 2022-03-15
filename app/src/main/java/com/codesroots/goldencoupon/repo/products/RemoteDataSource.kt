@@ -15,8 +15,8 @@ class RemoteProductsDataSource @Inject constructor(private val ApiService: APISe
         runCatching { ApiService.getCategoryData() }
             .getOrElse { throw it }
 
-    override suspend fun getProductsResponse(page:Int?,country_id: Int?,FilterData:HashMap<String,String>, cat_id: String?): ProductsModel =
-        runCatching { ApiService.getProductData(country_id,FilterData,page) }
+    override suspend fun getProductsResponse(country_id: Int?,FilterData:HashMap<String,String>, cat_id: String?): ProductsModel =
+        runCatching { ApiService.getProductData(country_id,FilterData) }
             .getOrElse { throw it }
 
    override suspend fun getAllBrandsResponse(): AllBrandsModel =

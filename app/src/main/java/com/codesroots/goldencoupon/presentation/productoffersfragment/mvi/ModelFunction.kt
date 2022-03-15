@@ -24,7 +24,7 @@ suspend fun mapIntentToViewState(
 
     loadAllBrandsData: suspend () -> Flow<Result<AllBrandsModel>> = { Datarepo.getAllBrandsResponse },
 
-    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.viewState!!.page, intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
+    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
 
     //getProductsData
 ) = when (intent) {

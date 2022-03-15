@@ -58,7 +58,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
         }
-        viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(page = page,
+        viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(
             progress = true,
             country_id = Pref.CountryId),
             viewModel.FilterFileds, Pref.CountryId))
@@ -82,10 +82,10 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
 
         view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
             viewModel.FilterFileds.put("Filter[name]", text.toString())
-            filteredData.clear()
+            viewModel.filteredData.clear()
             viewModel.intents.trySend(
                 MainIntent.FilterData(
-                    viewModel.state.value!!.copy(page = page),
+                    viewModel.state.value!!,
                     viewModel.FilterFileds,
                     viewModel.state.value!!.country_id
                 )
@@ -175,23 +175,6 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         page = 1
         productsAdapter = ProductsAdapter(requireContext())
         view.productsRecycleView.apply {
-            addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                    val lastVisibleItem =
-                        (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
-                    if (viewModel.filteredData != null)
-                        if (lastVisibleItem == productsAdapter.itemCount - 1 && productsAdapter.itemCount >= 19 && lastVisibleItem !=    viewModel.filteredData.size) {
-                            page++
-                            viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(
-                                page = page,
-                                progress = true,
-                                country_id = Pref.CountryId),
-                                viewModel.FilterFileds, Pref.CountryId))
-                        }
-                }
-            })
-
             layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = productsAdapter
             isNestedScrollingEnabled = false
@@ -223,14 +206,14 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                         } else {
 
                             try {
-                                viewModel.filteredData.addAll(it.filteredData!!)
+                          viewModel.filteredData.addAll(it.filteredData!!)
+
                                 view.progress.isVisible = false
-                                filteredData.addAll(viewModel.filteredData)
 
                                 view.brandsData = it.allBrandsData
 
-                                productsAdapter.submitList(   viewModel.filteredData)
-                                productsAdapter.notifyDataSetChanged()
+                                productsAdapter.submitList( viewModel.filteredData)
+                             productsAdapter.notifyDataSetChanged()
 
                                 categoryAdapter.submitList(it.categoryData!!.categories)
 

@@ -55,7 +55,6 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?,v
                         viewState.country_id
                     )
                 )
-
                 notifyDataSetChanged()
                 notifyItemChanged(position)
             } else
