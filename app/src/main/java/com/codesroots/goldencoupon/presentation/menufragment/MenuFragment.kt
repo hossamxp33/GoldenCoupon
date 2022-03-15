@@ -79,6 +79,9 @@ open class MenuFragment @Inject constructor() : Fragment() {
 // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);
 
+        if (pref.userName == "")
+            view.username.isVisible=false
+
         view.logout.setOnClickListener {
             mGoogleSignInClient.signOut()
             pref.token = ""
