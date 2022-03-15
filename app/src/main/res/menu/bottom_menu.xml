@@ -13,9 +13,9 @@
         android:title="@string/offers" />
 
     <item
-        android:id="@+id/fav"
-        android:icon="@drawable/star_out"
-        android:title="@string/favourite" />
+        android:id="@+id/deals"
+        android:icon="@drawable/deal"
+        android:title="@string/deals" />
 
     <item
         android:id="@+id/menu"

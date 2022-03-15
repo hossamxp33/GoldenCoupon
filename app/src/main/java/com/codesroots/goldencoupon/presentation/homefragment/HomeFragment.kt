@@ -151,16 +151,20 @@ open class HomeFragment @Inject constructor() : Fragment() {
                 override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                     super.onScrolled(recyclerView, dx, dy)
 
+
                     val lastVisibleItem =
                         (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                  if (filteredData!=null)
                     if (lastVisibleItem == brandsAdapter.itemCount - 1 && brandsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
+
                         page++
                         viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,
                             page))
                         view.progress.isVisible = true
 
                     }
+
+
                 }
 
             })
@@ -216,7 +220,8 @@ open class HomeFragment @Inject constructor() : Fragment() {
                             try {
                                 filteredData.addAll(it.filteredData!!)
                                 brandsAdapter.submitList(filteredData)
-                                if (it.IsFave == null) {
+
+                                if (it.IsFave == false) {
                                     brandsAdapter.notifyDataSetChanged()
                                 }
                             } catch (e: Exception) {

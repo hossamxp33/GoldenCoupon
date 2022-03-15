@@ -25,7 +25,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="@{()->listener.openWebView(context,data.discount_code,data.url)}"
+        android:onClick="@{()->listener.openWebDealsView(context,data.discount_code,data.url,data.code,data.description)}"
         android:animateLayoutChanges="true">
 
         <androidx.appcompat.widget.AppCompatImageView
@@ -37,7 +37,6 @@
             android:layout_marginEnd="16dp"
             android:scaleType="fitXY"
             app:imageResource="@{data.image}"
-
             android:src="@drawable/test11"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

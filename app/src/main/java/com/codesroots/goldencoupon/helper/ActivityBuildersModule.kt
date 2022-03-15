@@ -8,6 +8,7 @@ import com.codesroots.goldencoupon.presentation.country_activity.CountryActivity
 import com.codesroots.goldencoupon.presentation.mainactivity.MainActivity
 import com.codesroots.goldencoupon.presentation.splash.SplashScreen
 import com.codesroots.goldencoupon.presentation.web_view.WebViewActivity
+import com.codesroots.goldencoupon.presentation.web_view_slider.WebViewSliderActivity
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
@@ -42,6 +43,10 @@ interface ActivityBuildersModule {
     @ActivityScope
     @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
     fun contributeWebViewActivity(): WebViewActivity
+
+    @ActivityScope
+    @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])
+    fun contributeWebViewSliderActivity(): WebViewSliderActivity
 
 
 //    @ContributesAndroidInjector(modules = [MainModule::class, FragmentFactoryModule::class])

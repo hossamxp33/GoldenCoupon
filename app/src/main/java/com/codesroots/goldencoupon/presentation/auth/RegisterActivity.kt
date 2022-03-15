@@ -147,9 +147,13 @@ class RegisterActivity @Inject constructor() : AppCompatActivity(), HasAndroidIn
                 val personEmail = account.email
                 val token = account.id
                 val personName = account.displayName
+
                 Toast.makeText(this, "user name is : $personName", Toast.LENGTH_SHORT).show()
+
                 pref.token = token
+
                 pref.userName = personName
+
                 val loginInfo = User(username = personName,
                     google_token = token,
                     active = 1,
@@ -157,7 +161,6 @@ class RegisterActivity @Inject constructor() : AppCompatActivity(), HasAndroidIn
                     email_required = "1")
 
                 viewModel.loginByGoogleResponse(loginInfo)
-
 
                 Log.d(TAG, "firebaseAuthWithGoogle:" + account.id)
 

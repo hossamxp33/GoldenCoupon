@@ -66,10 +66,11 @@ open class MenuFragment @Inject constructor() : Fragment() {
         view = DataBindingUtil.inflate(inflater, R.layout.menu_fragment, container, false)
         view.context = context as MainActivity
         view.listener = ClickHandler()
-         view.pref = pref
+        view.pref = pref
+
         view.myAccount.isVisible = pref.token.isNullOrEmpty()
         view.logout.isVisible = !pref.token.isNullOrEmpty()
-
+        view.username.isVisible = !pref.token.isNullOrEmpty()
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
@@ -80,11 +81,12 @@ open class MenuFragment @Inject constructor() : Fragment() {
 
         view.logout.setOnClickListener {
             mGoogleSignInClient.signOut()
-           pref.token = ""
-            pref.userName=""
+            pref.token = ""
+            pref.userName = ""
             Toast.makeText(requireContext(), "تم تسجيل خروجك", Toast.LENGTH_SHORT).show()
             val homeIntent = Intent(requireContext(), RegisterActivity::class.java)
-           startActivity(homeIntent, ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle())
+            startActivity(homeIntent,
+                ActivityOptions.makeSceneTransitionAnimation(requireActivity()).toBundle())
 
         }
 //        if (pref.lang!!.contains("en")) {

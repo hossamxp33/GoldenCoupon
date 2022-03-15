@@ -113,17 +113,17 @@
                     app:layout_constraintTop_toBottomOf="@+id/rateApp" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/deals"
+                    android:id="@+id/favourite"
                     style="@style/menuTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:onClick="@{()->listener.switchToDealsFragment(context)}"
+                    android:onClick="@{()->listener.switchToFavFragment(context)}"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
                     android:background="@drawable/shadow_white_bg"
                     android:drawableEnd="@drawable/left_ic"
-                    android:text="@string/deals"
+                    android:text="@string/favourite"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/myAccount" />
@@ -144,7 +144,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/deals" />
+                    app:layout_constraintTop_toBottomOf="@+id/favourite" />
 
                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/change_country"

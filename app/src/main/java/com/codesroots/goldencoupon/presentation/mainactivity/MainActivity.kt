@@ -44,6 +44,7 @@ import android.app.Dialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.goldencoupon.entites.whatsapp.WhatsAppModel
 import com.codesroots.goldencoupon.helper.*
+import com.codesroots.goldencoupon.presentation.dealsfragment.DealsFragment
 import com.codesroots.goldencoupon.presentation.mainactivity.whatsapp.WhatsAppAdapter
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
@@ -176,9 +177,9 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                         ClickHandler().switchFragment(this@MainActivity, ProductOffersFragment())
 
                     }
-                    R.id.fav -> {
+                    R.id.deals -> {
                         menu.getItem(2).isChecked = true
-                        ClickHandler().checkForToken(context, FavoriteFragment())
+                        ClickHandler().checkForToken(context, DealsFragment())
 
 
                     }
@@ -210,7 +211,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         when (fragmentManager.backStackEntryCount) {
             0 -> bottom_nav_bar.selectedItemId = R.id.homeFragment
             1 -> bottom_nav_bar.selectedItemId = R.id.offer
-            2 -> bottom_nav_bar.selectedItemId = R.id.fav
+            2 -> bottom_nav_bar.selectedItemId = R.id.deals
             3 -> bottom_nav_bar.selectedItemId = R.id.menu
             else ->
                 finish()

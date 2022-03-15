@@ -25,7 +25,7 @@ class PreferenceHelper(private val context: Context) {
                   edit.apply()
               }
     var userName : String?
-        get() = app_prefs!!.getString("userName", "Alaa")
+        get() = app_prefs!!.getString("userName", "")
         set(userName) {
             val edit = app_prefs!!.edit()
 

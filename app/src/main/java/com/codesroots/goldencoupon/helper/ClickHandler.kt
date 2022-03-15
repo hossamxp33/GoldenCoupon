@@ -18,6 +18,7 @@ import com.codesroots.goldencoupon.presentation.chose_language.LanguageActivity
 import com.codesroots.goldencoupon.presentation.country_activity.CountryActivity
 import com.codesroots.goldencoupon.presentation.couponsfragment.CouponsFragment
 import com.codesroots.goldencoupon.presentation.dealsfragment.DealsFragment
+import com.codesroots.goldencoupon.presentation.favfragment.FavoriteFragment
 import com.codesroots.goldencoupon.presentation.forgetfragment.ForgetPasswordFragment
 import com.codesroots.goldencoupon.presentation.mainactivity.MainActivity
 import com.codesroots.goldencoupon.presentation.menufragment.StaticFragment
@@ -25,6 +26,7 @@ import com.codesroots.goldencoupon.presentation.notificationfragment.Notificatio
 import com.codesroots.goldencoupon.presentation.productoffersfragment.mvi.ProductsViewModel
 import com.codesroots.goldencoupon.presentation.sortfragment.SortFragment
 import com.codesroots.goldencoupon.presentation.web_view.WebViewActivity
+import com.codesroots.goldencoupon.presentation.web_view_slider.WebViewSliderActivity
 import com.google.android.play.core.review.ReviewManagerFactory
 import com.google.firebase.auth.FirebaseAuth
 
@@ -71,7 +73,6 @@ class ClickHandler {
     }
 
     fun setClipboard(context: Context, text: String, code: String) {
-        context as MainActivity
 
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB) {
             val clipboard =
@@ -97,6 +98,10 @@ class ClickHandler {
 
     fun switchToDealsFragment(context: Context) {
         switchFragment(context, DealsFragment())
+    }
+
+    fun switchToFavFragment(context: Context) {
+        switchFragment(context, FavoriteFragment())
     }
 
     fun switchToForgetPWFragment(context: Context) {
@@ -157,6 +162,19 @@ class ClickHandler {
         if (!url.isNullOrEmpty()) {
 
             val intent = Intent(context, WebViewActivity::class.java)
+            intent.putExtra("url", url);
+            intent.putExtra("url_en", url_en);
+
+            (context.startActivity(intent))
+        }
+    }
+    fun openWebDealsView(context: Context, url: String?, url_en:String?, code:String?, description:String?) {
+
+
+        if (!url.isNullOrEmpty()) {
+            val intent = Intent(context, WebViewSliderActivity::class.java)
+            intent.putExtra("code",code)
+            intent.putExtra("description",description)
             intent.putExtra("url", url);
             intent.putExtra("url_en", url_en);
 
