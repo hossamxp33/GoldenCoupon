@@ -38,6 +38,7 @@ class LanguageActivity @Inject constructor() : AppCompatActivity(), HasAndroidIn
             next.setText("التالي")
             coloredView(ar_layout)
             ResourceUtil().changeLang("ar", this)
+
             Pref.lang = "ar"
 
 

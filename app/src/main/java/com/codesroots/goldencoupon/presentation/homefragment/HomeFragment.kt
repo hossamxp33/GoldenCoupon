@@ -5,6 +5,7 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +23,7 @@ import com.codesroots.goldencoupon.R
 import com.codesroots.goldencoupon.databinding.HomeFragmentBinding
 import com.codesroots.goldencoupon.entites.brandsmodel.Brand
 import com.codesroots.goldencoupon.helper.BaseApplication
+import com.codesroots.goldencoupon.helper.PreferenceHelper
 import com.codesroots.goldencoupon.presentation.mainactivity.MainActivity
 import com.codesroots.goldencoupon.presentation.homefragment.adapter.BrandsAdapter
 import com.codesroots.goldencoupon.presentation.homefragment.mvi.MainIntent
@@ -117,7 +119,8 @@ open class HomeFragment @Inject constructor() : Fragment() {
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-            sttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault())
+            Log.i("lang", "onCreateView: "+Locale.getDefault().toString())
+            sttIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, (context as MainActivity).preferenceHelper.lang)
             sttIntent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Speak now!")
 
             try {
