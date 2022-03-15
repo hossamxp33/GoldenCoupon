@@ -64,7 +64,7 @@ class WebViewActivity : AppCompatActivity(), HasAndroidInjector {
 
             alertDialog.setButton(AlertDialog.BUTTON_POSITIVE, this.getString(R.string.yes)
             ) { dialog, which ->  ResourceUtil().openWhatsApp(this,
-                "201064033997",  this.getString(R.string.problem)
+                "201068746570",  this.getString(R.string.problem)
             ) }
 
             alertDialog.setButton(AlertDialog.BUTTON_NEGATIVE, this.getString(R.string.no)

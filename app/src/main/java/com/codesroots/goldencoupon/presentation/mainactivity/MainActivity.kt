@@ -179,7 +179,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     }
                     R.id.deals -> {
                         menu.getItem(2).isChecked = true
-                        ClickHandler().checkForToken(context, DealsFragment())
+                        ClickHandler().switchFragment(this@MainActivity, DealsFragment())
 
 
                     }

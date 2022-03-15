@@ -45,7 +45,6 @@ interface APIServices {
     suspend fun getProductData(
         @Path("country_id") country_id: Int?,
         @FieldMap fields: HashMap<String, String>?,
-        @Query("page") page: Int?,
         ): ProductsModel
 
     @GET("items/index/{brandid}.json")

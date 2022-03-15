@@ -11,7 +11,7 @@ interface ProductsDataSource {
     suspend fun getCategoryResponse(): AllCategoryModel
     suspend fun getAllBrandsResponse(): AllBrandsModel
 
-    suspend fun getProductsResponse(page:Int?,country_id: Int?,FilterData:HashMap<String,String>,cat_id: String?): ProductsModel
+    suspend fun getProductsResponse(country_id: Int?,FilterData:HashMap<String,String>,cat_id: String?): ProductsModel
 
 
 }

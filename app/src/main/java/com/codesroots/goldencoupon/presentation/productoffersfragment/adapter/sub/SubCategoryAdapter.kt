@@ -5,6 +5,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -16,6 +17,7 @@ import com.codesroots.goldencoupon.presentation.mainactivity.MainActivity
 import com.codesroots.goldencoupon.presentation.productoffersfragment.ProductOffersFragment
 import com.codesroots.goldencoupon.presentation.productoffersfragment.mvi.MainIntent
 import com.codesroots.goldencoupon.presentation.productoffersfragment.mvi.ProductsViewModel
+import kotlinx.android.synthetic.main.offers_fragment.*
 import kotlinx.coroutines.channels.Channel
 
 
@@ -39,6 +41,7 @@ class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel
 
         holder.binding.Mview.setOnClickListener {
             viewModel!!.filteredData.clear()
+            fragment.progress.isVisible = true
             row_index = position
             val viewState = viewModel?.state?.value
             viewModel?.FilterFileds?.put("Filter[subcat_id]",currentList[position].id.toString())

@@ -31,8 +31,6 @@ sealed class MainIntent(
         override val FilterMap: HashMap<String, String>? = null,
         override val country_id: Int? = null,
         override val sort: String? = "name",
-
-
         ) : MainIntent()
 
     data class FilterDataBySubCategory(
