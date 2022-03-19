@@ -33,6 +33,7 @@ import com.codesroots.goldencoupon.presentation.productoffersfragment.adapter.pr
 import com.codesroots.goldencoupon.presentation.productoffersfragment.adapter.sub.SubCategoryAdapter
 import com.codesroots.goldencoupon.presentation.productoffersfragment.mvi.MainIntent
 import com.codesroots.goldencoupon.presentation.productoffersfragment.mvi.ProductsViewModel
+import kotlinx.android.synthetic.main.bottom_nav_content.*
 import kotlinx.coroutines.flow.collect
 
 import java.util.*
@@ -79,6 +80,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         view.context = context as MainActivity
         view.listener = ClickHandler()
         view.viewModel = viewModel
+        (context as MainActivity).bottom_nav_bar.menu.getItem(1).isChecked = true
 
         view.searchLayout.searchBar.doOnTextChanged { text, start, before, count ->
             viewModel.FilterFileds.put("Filter[name]", text.toString())

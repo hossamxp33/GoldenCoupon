@@ -30,6 +30,18 @@ class DataRepo @Inject constructor(
                      throwable ->  emit(Result.failure(throwable)) }
             .flowOn(ioDispatcher)
 
+    suspend fun getProductsData(country_id: Int?):Flow<Result<ProductsModel>> =
+        flow {
+            emit(Datasources.getProductResponse(country_id))
+             }
+            .map { Result.success(it) }
+            .retry(retries = 4) { t -> (t is IOException).also { if (it) {
+                delay(1000 )
+            }}}
+            .catch {
+                     throwable ->  emit(Result.failure(throwable)) }
+            .flowOn(ioDispatcher)
+
 
      val getAllBrandsResponse:Flow<Result<AllBrandsModel>> =
         flow {
@@ -46,7 +58,7 @@ class DataRepo @Inject constructor(
 
         suspend fun getProductsData(country_id: Int?,sort:String?,FilterData:HashMap<String,String>):Flow<Result<ProductsModel>> =
         flow {
-            emit(Datasources.getProductsResponse(country_id,FilterData,sort))
+            emit(Datasources.getFilterProductsResponse(country_id,FilterData,sort))
              }
             .map { Result.success(it) }
             .retry(retries = 4) { t -> (t is IOException).also { if (it) {

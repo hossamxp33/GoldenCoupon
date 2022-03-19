@@ -24,6 +24,8 @@ suspend fun mapIntentToViewState(
 
     loadAllBrandsData: suspend () -> Flow<Result<AllBrandsModel>> = { Datarepo.getAllBrandsResponse },
 
+    loadProducts: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.country_id!!) },
+
     loadProductsData: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
 
     //getProductsData
@@ -32,6 +34,7 @@ suspend fun mapIntentToViewState(
         loadCategoryData,
         loadProductsData,
         loadAllBrandsData,
+        loadProducts,
         intent)
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
     is MainIntent.SearchByName -> searchByName(intent, intent.Name!!)
@@ -40,6 +43,7 @@ suspend fun mapIntentToViewState(
         loadCategoryData,
         loadProductsData,
         loadAllBrandsData,
+        loadProducts,
         intent,
     )
     is MainIntent.FilterDataBySubCategory ->filterDataBySubCategoryId(intent,intent.subcategory_id!!)
@@ -67,13 +71,16 @@ private suspend fun proceedWithBrandList(
 
 private suspend fun proceedWithInitialize(
     categoryData: suspend () -> Flow<Result<AllCategoryModel>>,
-    productsData: suspend () -> Flow<Result<ProductsModel>>,
+    allProductsData: suspend () -> Flow<Result<ProductsModel>>,
     allBrandData:suspend () -> Flow<Result<AllBrandsModel>>,
+    productsData:suspend () -> Flow<Result<ProductsModel>>,
+
+
     intent: MainIntent,
 ): MainViewState {
     val categoryDataResponse = categoryData()
 
-    val productsDataResponse = productsData()
+    val productsDataResponse = allProductsData()
 val  brandsResponse =  allBrandData()
 
     val productsData = productsDataResponse.first()
