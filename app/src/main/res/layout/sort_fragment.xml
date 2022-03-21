@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:src="@drawable/ic_close"
+        android:id="@+id/close"
         app:layout_constraintBottom_toBottomOf="@+id/recent_location"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

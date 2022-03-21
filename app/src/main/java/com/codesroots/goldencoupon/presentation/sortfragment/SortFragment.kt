@@ -31,13 +31,13 @@ class SortFragment @Inject constructor(var viewModel: ProductsViewModel) :
 
 
     lateinit var sortListAdapter: Sort_List_Adapter
-var sortValue:String? = ""
+    var sortValue:String? = ""
     lateinit var view: SortFragmentBinding
     var selectedSortOption = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         BaseApplication.appComponent.inject(this)
-    }
+     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,14 +50,23 @@ var sortValue:String? = ""
         val viewState = viewModel.state.value
 
         viewModel.intents.trySend(MainIntent.GetBrandList(viewModel.state.value!!))
-        viewModel.filteredData.clear()
+
+        view.close.setOnClickListener {
+            this.dismiss()
+
+
+
+        }
+
         view.ButtonClick.setOnClickListener {
                 if (selectedSortOption == 0) {
                     sortValue = "name"
                 } else if (selectedSortOption == 1) {
                     sortValue = "percentage"
                 }
-                viewModel.intents.trySend(
+            viewModel.filteredData.clear()
+
+            viewModel.intents.trySend(
                     MainIntent.FilterData(
                         viewState!!,
                         viewModel.FilterFileds,

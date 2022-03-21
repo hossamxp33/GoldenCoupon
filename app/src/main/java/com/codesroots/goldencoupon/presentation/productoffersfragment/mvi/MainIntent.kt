@@ -14,6 +14,8 @@ sealed class MainIntent(
     data class InitializeData(
         override val viewState: MainViewState,
         override val sort: String? = null,
+        override val page: Int? = null,
+
         override val cat_id: Int? = null,
         override val country_id: Int? = null,
     ) : MainIntent()
@@ -24,6 +26,11 @@ sealed class MainIntent(
         MainIntent()
 
     data class GetBrandList(override val viewState: MainViewState? = null) : MainIntent()
+
+    data class Paging(override val viewState: MainViewState? = null  ,
+                      override val country_id: Int? = null
+        , override val page: Int? = null,
+    ) : MainIntent()
 
 
     data class FilterData(

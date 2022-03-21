@@ -26,7 +26,7 @@
     <string name="noBrandFound">لا يوجد براندات</string>
     <string name="filter">تصفية</string>
     <string name="copied">تم نسخ الكود</string>
-    <string name="price">"سعر المنتج :\u0020"</string>
+    <string name="price">" نسبة الخصم :\u0020"</string>
     <string name="priceWithCode">"السعر باستخدام الكود:\u0020 "</string>
     <string name="choseCountry">أختار دولتك</string>
     <string name="bestDiscount">Best Discounts</string>
