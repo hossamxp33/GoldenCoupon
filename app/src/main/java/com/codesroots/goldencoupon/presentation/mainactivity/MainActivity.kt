@@ -108,6 +108,8 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         FirebaseMessaging.getInstance()
         FirebaseMessaging.getInstance()
 
+            .subscribeToTopic("1")
+        FirebaseMessaging.getInstance().subscribeToTopic("100")
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

@@ -168,7 +168,7 @@ class ClickHandler {
             (context.startActivity(intent))
         }
     }
-    fun openWebDealsView(context: Context, url: String?, url_en:String?, code:String?, description:String?) {
+    fun openWebDealsView(context: Context, url: String?,code:String?, description:String?) {
 
 
         if (!url.isNullOrEmpty()) {
@@ -176,7 +176,7 @@ class ClickHandler {
             intent.putExtra("code",code)
             intent.putExtra("description",description)
             intent.putExtra("url", url);
-            intent.putExtra("url_en", url_en);
+
 
             (context.startActivity(intent))
         }
