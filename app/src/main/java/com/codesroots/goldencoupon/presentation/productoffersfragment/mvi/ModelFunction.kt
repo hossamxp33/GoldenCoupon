@@ -36,10 +36,8 @@ suspend fun mapIntentToViewState(
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
     is MainIntent.SearchByName -> searchByName(intent, intent.Name!!)
     is MainIntent.GetBrandList ->  proceedWithBrandList(loadAllBrandsData,intent)
-    is MainIntent.FilterData -> proceedWithInitialize(
-        loadCategoryData,
+    is MainIntent.FilterData -> proceedWithFilterData(
         loadProductsData,
-        loadAllBrandsData,
         intent,
     )
     is MainIntent.FilterDataBySubCategory ->filterDataBySubCategoryId(intent,intent.subcategory_id!!)
@@ -64,7 +62,29 @@ private suspend fun proceedWithBrandList(
 
 
 }
+private suspend fun proceedWithFilterData(
+    productsData: suspend () -> Flow<Result<ProductsModel>>,
+    intent: MainIntent,
+): MainViewState {
 
+    val productsDataResponse = productsData()
+
+    val productsData = productsDataResponse.first()
+
+
+    return runCatching {
+        intent.viewState!!.copy(
+            productsData = productsData.getOrThrow(),
+            filteredData = productsData.map { it.brands }.getOrThrow(),
+            error = null,
+            progress = false,
+            noProductsFound = false
+        )
+    }
+        .getOrElse {
+            intent.viewState!!.copy(error = UserError.NetworkError(it), noProductsFound = true)
+        }
+}
 private suspend fun proceedWithInitialize(
     categoryData: suspend () -> Flow<Result<AllCategoryModel>>,
     productsData: suspend () -> Flow<Result<ProductsModel>>,

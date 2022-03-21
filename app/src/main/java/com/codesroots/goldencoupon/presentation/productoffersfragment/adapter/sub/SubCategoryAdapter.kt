@@ -48,7 +48,7 @@ class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel
 
             viewModel!!.intents.trySend(
                 MainIntent.FilterData(
-                    viewState,
+                    viewState?.copy( page = 1),
                     viewModel?.FilterFileds!!,
                     viewState?.country_id
 

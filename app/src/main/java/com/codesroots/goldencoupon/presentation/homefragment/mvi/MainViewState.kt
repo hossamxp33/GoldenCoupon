@@ -9,7 +9,7 @@ data class MainViewState(
     var filteredData: ArrayList<Brand> ?=null,
     val noBrandFound:  Boolean? = null,
     val progress:  Boolean? = null,
-    var IsFave : Boolean ? = false,
+    var IsFave : Boolean ? = null,
     var error:UserError?=null
 
 
