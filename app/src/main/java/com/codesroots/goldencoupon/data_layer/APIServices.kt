@@ -47,6 +47,11 @@ interface APIServices {
         @FieldMap fields: HashMap<String, String>?,
         ): ProductsModel
 
+    @GET("products/index/{country_id}.json")
+    suspend fun getProduct(
+        @Path("country_id") country_id: Int?,
+        ): ProductsModel
+
     @GET("items/index/{brandid}.json")
     suspend fun getCouponsData(@Path("brandid") brandid: Int): Response<CouponsModel>
 

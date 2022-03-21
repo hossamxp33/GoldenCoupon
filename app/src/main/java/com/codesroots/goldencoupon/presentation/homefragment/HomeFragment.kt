@@ -57,6 +57,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
             viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!.copy(progress = true),
                 page))
 
+
         }
     }
 
@@ -79,6 +80,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
 
         view.context = context as MainActivity
 
+        (context as MainActivity).bottom_nav_bar.menu.getItem(0).isChecked = true
 
         brandsRecycleView()
 
@@ -132,7 +134,6 @@ open class HomeFragment @Inject constructor() : Fragment() {
                     Toast.LENGTH_LONG).show()
             }
         }
-
 
 
 
@@ -250,5 +251,8 @@ open class HomeFragment @Inject constructor() : Fragment() {
         shimmer_view_container?.visibility = View.GONE
         shimmer_view_container?.stopShimmerAnimation()
     }
+
+
+
 
 }

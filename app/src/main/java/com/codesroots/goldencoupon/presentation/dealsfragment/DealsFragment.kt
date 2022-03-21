@@ -24,6 +24,7 @@ import com.codesroots.goldencoupon.presentation.dealsfragment.mvi.MainIntent
 
 import com.codesroots.goldencoupon.presentation.homefragment.mvi.UserError
 import com.codesroots.goldencoupon.presentation.mainactivity.MainActivity
+import kotlinx.android.synthetic.main.bottom_nav_content.*
 
 import kotlinx.android.synthetic.main.deals_fragment.*
 import kotlinx.android.synthetic.main.menu_fragment.*
@@ -71,6 +72,7 @@ open class DealsFragment @Inject constructor() : Fragment() {
 
 
 
+        (context as MainActivity).bottom_nav_bar.menu.getItem(2).isChecked = true
 
 
 

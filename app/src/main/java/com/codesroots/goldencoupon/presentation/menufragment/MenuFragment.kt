@@ -75,6 +75,7 @@ open class MenuFragment @Inject constructor() : Fragment() {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()
+        (context as MainActivity).bottom_nav_bar.menu.getItem(3).isChecked = true
 
 // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(requireActivity(), gso);

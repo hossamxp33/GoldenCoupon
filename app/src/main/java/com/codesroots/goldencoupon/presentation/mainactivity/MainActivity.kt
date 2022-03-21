@@ -41,6 +41,8 @@ import kotlinx.android.synthetic.main.activity_main_content.view.*
 
 
 import android.app.Dialog
+import android.os.Handler
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.goldencoupon.entites.whatsapp.WhatsAppModel
 import com.codesroots.goldencoupon.helper.*
@@ -55,11 +57,18 @@ import kotlinx.android.synthetic.main.call_us_dialog.*
 import kotlinx.android.synthetic.main.call_us_dialog.view.*
 import kotlinx.android.synthetic.main.main_frame_content.*
 
+import androidx.core.view.GravityCompat
+
+
+
+
 
 class MainActivity : AppCompatActivity(), HasAndroidInjector {
     var integerDeque: Deque<Int> = LinkedList()
 
     var binding: ActivityMainBinding? = null
+
+    private var isFirstBackPressed = false
 
     lateinit var whatsAppAdapter: WhatsAppAdapter
 
@@ -99,8 +108,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         FirebaseMessaging.getInstance()
         FirebaseMessaging.getInstance()
 
-            .subscribeToTopic("1")
-        FirebaseMessaging.getInstance().subscribeToTopic("100")
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
@@ -170,6 +177,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     R.id.homeFragment -> {
                         menu.getItem(0).isChecked = true
                         ClickHandler().switchFragment(this@MainActivity, HomeFragment())
+
                     }
 
                     R.id.offer -> {
@@ -180,21 +188,17 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
                     R.id.deals -> {
                         menu.getItem(2).isChecked = true
                         ClickHandler().switchFragment(this@MainActivity, DealsFragment())
-
-
                     }
 
                     R.id.menu -> {
                         menu.getItem(3).isChecked = true
                         ClickHandler().switchFragment(this@MainActivity, MenuFragment())
-
                     }
                     else -> {
                         menu.getItem(0).isChecked = true
                         ClickHandler().switchFragment(this@MainActivity, HomeFragment())
                     }
                 }
-
 
             }
 
@@ -207,17 +211,10 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     }
 
     override fun onBackPressed() {
+        if ( bottom_nav_bar.menu.getItem(0).isChecked)
+        moveTaskToBack(true);
+        else
         super.onBackPressed()
-        when (fragmentManager.backStackEntryCount) {
-            0 -> bottom_nav_bar.selectedItemId = R.id.homeFragment
-            1 -> bottom_nav_bar.selectedItemId = R.id.offer
-            2 -> bottom_nav_bar.selectedItemId = R.id.deals
-            3 -> bottom_nav_bar.selectedItemId = R.id.menu
-            else ->
-                finish()
-
-        }
-
     }
 
 //
