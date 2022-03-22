@@ -73,8 +73,6 @@
             android:name="com.google.firebase.messaging.default_notification_channel_id"
             android:value="10001" />
 
-
-
         <service
             android:name=".helper.MyFirebaseMessagingService"
             android:exported="false">

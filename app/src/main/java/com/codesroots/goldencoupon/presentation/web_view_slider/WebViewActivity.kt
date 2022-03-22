@@ -93,19 +93,14 @@ class WebViewSliderActivity : AppCompatActivity(), HasAndroidInjector {
 
         if (preferenceHelper.lang!!.contains("ar") &&  !url.isNullOrEmpty()){
             webview.loadUrl(url)
-            logo.setImageResource(R.drawable.splash_logo_ar)}
-
-        else if (preferenceHelper.lang!!.contains("en") &&  !url_en.isNullOrEmpty()){
-            webview.loadUrl(url_en)
-            logo.setImageResource(R.drawable.splash_logo_english)}
-
-        else if (preferenceHelper.lang!!.contains("en") && !url.isNullOrEmpty())
-            webview.loadUrl(url)
-
-        else
+            logo.setImageResource(R.drawable.splash_logo_ar)
+        } else if (preferenceHelper.lang!!.contains("en") &&  !url_en.isNullOrEmpty()){
+            webview.loadUrl(url!!)
+            logo.setImageResource(R.drawable.splash_logo_english)
+        } else
             WARN_MotionToast("not available",this)
 
-        webView.requestFocus();
+        webView.requestFocus()
         val webSettings = webView!!.getSettings()
         webSettings.javaScriptEnabled = true
         // Force links and redirects to open in the WebView instead of in a browser

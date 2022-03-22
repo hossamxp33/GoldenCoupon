@@ -7,14 +7,14 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:887165944188:android:726b64d00857a2d0dd64f9",
+        "mobilesdk_app_id": "1:887165944188:android:9e3d22c1270a6daddd64f9",
         "android_client_info": {
           "package_name": "com.codesroots.goldencoupon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "887165944188-7jm7lku7ag5r9qjftqhq1i7kp4uo07cs.apps.googleusercontent.com",
+          "client_id": "887165944188-fmsinopfbcg2ttk2qlbul077dpc3alo1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.codesroots.goldencoupon",
