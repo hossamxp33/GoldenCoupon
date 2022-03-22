@@ -24,16 +24,17 @@ suspend fun mapIntentToViewState(
 
     loadAllBrandsData: suspend () -> Flow<Result<AllBrandsModel>> = { Datarepo.getAllBrandsResponse },
 
-    loadProducts: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.country_id!!) },
+    loadProducts: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.country_id!!,intent.page ?: 0,intent.sort ?: "") },
 
-    loadProductsData: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
+    loadFilterProductsData: suspend () -> Flow<Result<ProductsModel>> = {Datarepo.getProductsData(intent.country_id!!,intent.sort!!,intent.FilterMap!!) },
 
     //getProductsData
 ) = when (intent) {
     is MainIntent.InitializeData -> proceedWithInitialize(
         loadCategoryData,
-        loadProductsData,
-        loadAllBrandsData,
+        loadProducts,
+        intent)
+    is MainIntent.Paging -> proceedWithPaging(
         loadProducts,
         intent)
     is MainIntent.ErrorDisplayed -> intent.viewState.copy(error = null)
@@ -41,9 +42,7 @@ suspend fun mapIntentToViewState(
     is MainIntent.GetBrandList ->  proceedWithBrandList(loadAllBrandsData,intent)
     is MainIntent.FilterData -> proceedWithInitialize(
         loadCategoryData,
-        loadProductsData,
-        loadAllBrandsData,
-        loadProducts,
+        loadFilterProductsData,
         intent,
     )
     is MainIntent.FilterDataBySubCategory ->filterDataBySubCategoryId(intent,intent.subcategory_id!!)
@@ -68,12 +67,31 @@ private suspend fun proceedWithBrandList(
 
 
 }
+private suspend fun proceedWithPaging(
+    allBrandData:suspend () -> Flow<Result<ProductsModel>>,
+    intent: MainIntent,
+): MainViewState {
+    val  brandsResponse =  allBrandData()
+    val productsData =   brandsResponse.first()
+    return runCatching {
+        intent.viewState!!.copy(
+            productsData = productsData.getOrThrow(),
+            filteredData =productsData.map { it.brands }.getOrThrow(),
+            error = null,
+            progress = false,
+            noProductsFound = false
+        )
+    }
+        .getOrElse {
+            intent.viewState!!.copy(error = UserError.NetworkError(it), noProductsFound = true)
+        }
+
+
+}
 
 private suspend fun proceedWithInitialize(
     categoryData: suspend () -> Flow<Result<AllCategoryModel>>,
     allProductsData: suspend () -> Flow<Result<ProductsModel>>,
-    allBrandData:suspend () -> Flow<Result<AllBrandsModel>>,
-    productsData:suspend () -> Flow<Result<ProductsModel>>,
 
 
     intent: MainIntent,
@@ -81,17 +99,14 @@ private suspend fun proceedWithInitialize(
     val categoryDataResponse = categoryData()
 
     val productsDataResponse = allProductsData()
-val  brandsResponse =  allBrandData()
 
     val productsData = productsDataResponse.first()
 
 
     val categoryData = categoryDataResponse.first()
-    val allBransData =   brandsResponse.first()
     return runCatching {
         intent.viewState!!.copy(
             productsData = productsData.getOrThrow(),
-            allBrandsData = allBransData.getOrThrow(),
             categoryData = categoryData.getOrThrow(),
             filteredData = productsData.map { it.brands }.getOrThrow(),
             error = null,

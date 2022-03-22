@@ -59,10 +59,10 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         if (savedInstanceState == null) {
             BaseApplication.appComponent.inject(this)
         }
-        viewModel.intents.trySend(MainIntent.FilterData(viewModel.state.value?.copy(
+        viewModel.intents.trySend(MainIntent.InitializeData(viewModel.state.value?.copy(
             progress = true,
-            country_id = Pref.CountryId),
-            viewModel.FilterFileds, Pref.CountryId))
+            country_id = Pref.CountryId)!!,null,
+            0,Pref.CountryId,country_id = Pref.CountryId))
 
 
     }
@@ -93,7 +93,37 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                 )
             )
         }
+        view.productsRecycleView.apply {
+            addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
 
+
+                    val lastVisibleItem =
+                        (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
+                    if (filteredData!=null)
+                        if (lastVisibleItem == productsAdapter.itemCount - 1 && productsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
+
+                            page++
+
+                            viewModel.intents.trySend(MainIntent.Paging(viewModel.state.value?.copy(
+                                progress = true,
+                                page=page,
+                                country_id = Pref.CountryId)!!,
+                                page,Pref.CountryId))
+                            view.progress.isVisible = true
+
+                        }
+
+
+                }
+
+            })
+            layoutManager = LinearLayoutManager(context) // default orientation is vertical
+          //  adapter = productsAdapter;
+            //  isNestedScrollingEnabled = false
+            setHasFixedSize(true)
+        }
         view.searchLayout.microphone.setOnClickListener {
             val sttIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
             sttIntent.putExtra(
@@ -179,8 +209,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
         view.productsRecycleView.apply {
             layoutManager = LinearLayoutManager(context) // default orientation is vertical
             adapter = productsAdapter
-            isNestedScrollingEnabled = false
-            setHasFixedSize(true)
+            //setHasFixedSize(true)
 
         }
 
@@ -191,6 +220,8 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
             viewModel.state.collect {
                 if (it != null) {
                     if (it.error != null) {
+                        view.progress.isVisible = false
+
                         it.error?.let {
                             when (it) {
                                 is UserError.InvalidId -> "Invalid id"
@@ -206,11 +237,11 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                         if (it.progress == true) {
 
                         } else {
+                            view.progress.isVisible = false
 
                             try {
                           viewModel.filteredData.addAll(it.filteredData!!)
 
-                                view.progress.isVisible = false
 
                                 view.brandsData = it.allBrandsData
 

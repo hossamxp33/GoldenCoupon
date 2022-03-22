@@ -44,12 +44,19 @@ interface APIServices {
     @POST("products/index/{country_id}.json")
     suspend fun getProductData(
         @Path("country_id") country_id: Int?,
+
         @FieldMap fields: HashMap<String, String>?,
+        @Query("sort") sort: String?,
+        @Query("direction") direction: String?,
+
         ): ProductsModel
 
     @GET("products/index/{country_id}.json")
     suspend fun getProduct(
         @Path("country_id") country_id: Int?,
+        @Query("page") page: Int?,
+        @Query("sort") sort: String?,
+
         ): ProductsModel
 
     @GET("items/index/{brandid}.json")
