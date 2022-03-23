@@ -213,7 +213,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
     }
 
     override fun onBackPressed() {
-        if ( bottom_nav_bar.menu.getItem(0).isChecked)
+        if (bottom_nav_bar.menu.getItem(0).isChecked&&HomeFragment().isResumed)
         moveTaskToBack(true);
         else
         super.onBackPressed()

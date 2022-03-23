@@ -16,6 +16,7 @@ import com.codesroots.goldencoupon.helper.BaseApplication
 import com.codesroots.goldencoupon.presentation.couponsfragment.adapter.CouponsAdapter
 import com.codesroots.goldencoupon.presentation.couponsfragment.viewmodel.CouponsViewModel
 import com.codesroots.goldencoupon.presentation.mainactivity.MainActivity
+import kotlinx.android.synthetic.main.bottom_nav_content.*
 
 import java.util.*
 import javax.inject.Inject
@@ -38,6 +39,7 @@ open class CouponsFragment @Inject constructor() : Fragment() {
             BaseApplication.appComponent.inject(this)
         }
     }
+
 
     private lateinit var view: CouponsFragmentBinding
 
@@ -62,7 +64,6 @@ open class CouponsFragment @Inject constructor() : Fragment() {
             view.progress.isVisible = false
         })
         myView()
-
         return view.root
     }
 

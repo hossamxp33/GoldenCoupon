@@ -160,8 +160,10 @@ open class HomeFragment @Inject constructor() : Fragment() {
                         (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                  if (filteredData!=null)
                     if (lastVisibleItem == brandsAdapter.itemCount - 1 && brandsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
+                        brandsAdapter.notifyDataSetChanged()
 
                         page++
+
                         viewModel.intents.trySend(MainIntent.Initialize(viewModel.state.value!!,
                             page))
                         view.progress.isVisible = true
@@ -225,7 +227,7 @@ open class HomeFragment @Inject constructor() : Fragment() {
                                 filteredData.addAll(it.filteredData!!)
                                 brandsAdapter.submitList(filteredData)
 
-                                if (it.IsFave == false) {
+                                if (it.IsFave == null) {
                                     brandsAdapter.notifyDataSetChanged()
                                 }
                             } catch (e: Exception) {
