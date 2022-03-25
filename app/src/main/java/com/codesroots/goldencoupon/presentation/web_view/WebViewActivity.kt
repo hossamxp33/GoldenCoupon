@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.web_view.*
 import android.webkit.WebView
 import android.view.View
+import android.webkit.WebSettings
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import com.codesroots.goldencoupon.R
@@ -96,8 +97,17 @@ class WebViewActivity : AppCompatActivity(), HasAndroidInjector {
             WARN_MotionToast("not available",this)
 
         webView.requestFocus();
-        val webSettings = webView!!.getSettings()
-        webSettings.javaScriptEnabled = true
+        val settings = webView!!.getSettings()
+        settings.javaScriptEnabled = true
+        settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        if (Build.VERSION.SDK_INT >= 11){
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+// Enable AppCache
+// Fix for CB-2282
+        settings.setAppCacheMaxSize(5 * 1048576);
+        settings.databaseEnabled = true
         // Force links and redirects to open in the WebView instead of in a browser
         webView!!.webViewClient = WebViewClient()
 
