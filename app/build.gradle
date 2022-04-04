@@ -84,7 +84,7 @@ dependencies {
     /// firebase
     implementation platform('com.google.firebase:firebase-bom:29.1.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+    implementation 'com.google.firebase:firebase-messaging:23.0.2'
 
 
     implementation "androidx.activity:activity-ktx:1.4.0"

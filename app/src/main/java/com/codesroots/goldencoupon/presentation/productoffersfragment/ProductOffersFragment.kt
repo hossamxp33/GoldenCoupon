@@ -110,7 +110,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                                 progress = true,
                                 page=page,
                                 country_id = Pref.CountryId)!!,
-                                page,Pref.CountryId))
+                                Pref.CountryId,  page))
                             view.progress.isVisible = true
 
                         }

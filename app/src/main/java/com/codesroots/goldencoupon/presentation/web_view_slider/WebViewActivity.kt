@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.web_view.*
 import android.webkit.WebView
 import android.view.View
+import android.webkit.WebSettings
 import android.widget.LinearLayout
 import androidx.appcompat.app.AlertDialog
 import com.codesroots.goldencoupon.R
@@ -38,7 +39,15 @@ class WebViewSliderActivity : AppCompatActivity(), HasAndroidInjector {
         webView.webViewClient = WebViewClient()
         webView.settings.setSupportZoom(true)
         webView.settings.javaScriptEnabled = true
-
+        webView.settings.setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.settings.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NORMAL);
+        if (Build.VERSION.SDK_INT >= 11){
+            webView.setLayerType(View.LAYER_TYPE_SOFTWARE, null);
+        }
+// Enable AppCache
+// Fix for CB-2282
+        webView.settings.setAppCacheMaxSize(5 * 1048576);
+        webView.settings.databaseEnabled = true
         backbutton.setOnClickListener {
             finish()
         }

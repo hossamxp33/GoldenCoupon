@@ -86,8 +86,8 @@ class WebViewActivity : AppCompatActivity(), HasAndroidInjector {
             webview.loadUrl(url)
             user_icon.setImageResource(R.drawable.splash_logo_ar)}
 
-        else if (preferenceHelper.lang!!.contains("en") &&  !url_en.isNullOrEmpty()){
-            webview.loadUrl(url_en)
+        else if (preferenceHelper.lang!!.contains("en")){
+            webview.loadUrl(url!!)
             user_icon.setImageResource(R.drawable.splash_logo_english)}
 
         else if (preferenceHelper.lang!!.contains("en") && !url.isNullOrEmpty())

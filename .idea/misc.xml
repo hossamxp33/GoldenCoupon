@@ -86,9 +86,10 @@
         <entry key="app/src/main/res/layout/bottom_nav_content.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/brands_item_adapter.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/category_item_adapter.xml" value="0.19427083333333334" />
-        <entry key="app/src/main/res/layout/country_adapter.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/country_adapter.xml" value="0.25" />
         <entry key="app/src/main/res/layout/coupon_item_adapter.xml" value="0.6986147473050662" />
         <entry key="app/src/main/res/layout/coupons_fragment.xml" value="0.19375" />
+        <entry key="app/src/main/res/layout/deals_adapter.xml" value="0.1" />
         <entry key="app/src/main/res/layout/home_fragment.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/login_fragment.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/main_frame_content.xml" value="0.19010416666666666" />
@@ -102,6 +103,7 @@
         <entry key="app/src/main/res/layout/static_fragment.xml" value="0.19375" />
         <entry key="app/src/main/res/layout/top_bar.xml" value="0.19010416666666666" />
         <entry key="app/src/main/res/layout/web_view.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/web_view_slider.xml" value="0.19375" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.19375" />
       </map>
     </option>
