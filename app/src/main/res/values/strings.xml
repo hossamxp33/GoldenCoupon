@@ -60,6 +60,7 @@
     <string name="no">no</string>
     <string name="report">Report</string>
     <string name="errorincoupon">Is the coupon not working?</string>
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
 
 
 </resources>

@@ -106,7 +106,6 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         mAuth = FirebaseAuth.getInstance()
         FirebaseApp.initializeApp(this)
         FirebaseMessaging.getInstance()
-        FirebaseMessaging.getInstance()
 
             .subscribeToTopic("1")
         FirebaseMessaging.getInstance().subscribeToTopic("100")

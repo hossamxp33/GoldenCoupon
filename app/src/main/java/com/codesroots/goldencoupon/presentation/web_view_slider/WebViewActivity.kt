@@ -103,7 +103,7 @@ class WebViewSliderActivity : AppCompatActivity(), HasAndroidInjector {
         if (preferenceHelper.lang!!.contains("ar") &&  !url.isNullOrEmpty()){
             webview.loadUrl(url)
             logo.setImageResource(R.drawable.splash_logo_ar)
-        } else if (preferenceHelper.lang!!.contains("en") &&  !url_en.isNullOrEmpty()){
+        } else if (preferenceHelper.lang!!.contains("en") ){
             webview.loadUrl(url!!)
             logo.setImageResource(R.drawable.splash_logo_english)
         } else
