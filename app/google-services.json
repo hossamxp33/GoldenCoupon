@@ -1,41 +1,42 @@
 {
   "project_info": {
-    "project_number": "887165944188",
-    "project_id": "golden-coupons-41c80",
-    "storage_bucket": "golden-coupons-41c80.appspot.com"
+    "project_number": "972689363352",
+    "project_id": "golden-coupons-9390f",
+    "storage_bucket": "golden-coupons-9390f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:887165944188:android:9e3d22c1270a6daddd64f9",
+        "mobilesdk_app_id": "1:972689363352:android:f34afb98d83c2719329bed",
         "android_client_info": {
           "package_name": "com.codesroots.goldencoupon"
         }
       },
       "oauth_client": [
         {
-          "client_id": "887165944188-5ic5dosuk39rl9c018pdrcnvnrl48ndb.apps.googleusercontent.com",
+          "client_id": "972689363352-ugt9ftrhvp8murl43llcfddlab88jar2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codesroots.goldencoupon",
+            "certificate_hash": "b55b730052512905a04c5fb3eebf8e65f36fe4e2"
+          }
+        },
+        {
+          "client_id": "972689363352-oj4h4j24hjh7dop600lu9t6jb08m391b.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDYU-Ht4JDRQpY1s5GQRhCwaVDMSHYgFc4"
+          "current_key": "AIzaSyCzBb8AKg0iV7JSsX7VLjQnHBmSfP0rXpw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "887165944188-5ic5dosuk39rl9c018pdrcnvnrl48ndb.apps.googleusercontent.com",
+              "client_id": "972689363352-oj4h4j24hjh7dop600lu9t6jb08m391b.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "887165944188-m2rsvcsvev7k7ik04avkd64beifa39se.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.CodeRoots.AdelAbdallah.GoldenCoupon"
-              }
             }
           ]
         }
