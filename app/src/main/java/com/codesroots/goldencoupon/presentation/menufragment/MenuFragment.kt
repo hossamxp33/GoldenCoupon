@@ -2,7 +2,9 @@ package com.codesroots.goldencoupon.presentation.menufragment
 
 import android.app.ActivityOptions
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,11 +29,16 @@ import com.codesroots.goldencoupon.presentation.menufragment.mvi.StaticPagesView
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.play.core.review.ReviewManagerFactory
 
 import kotlinx.android.synthetic.main.bottom_nav_content.*
 import kotlinx.coroutines.flow.collect
 import java.util.*
 import javax.inject.Inject
+import android.content.ActivityNotFoundException
+
+
+
 
 
 open class MenuFragment @Inject constructor() : Fragment() {
@@ -72,6 +79,28 @@ open class MenuFragment @Inject constructor() : Fragment() {
         view.logout.isVisible = !pref.token.isNullOrEmpty()
         view.username.isVisible = !pref.token.isNullOrEmpty()
 
+        val manager = ReviewManagerFactory.create(context  as MainActivity)
+        val requestReviewFlow = manager.requestReviewFlow()
+
+        view.rateApp.setOnClickListener {
+//            requestReviewFlow.addOnCompleteListener { request ->
+//                if (request.isSuccessful) {
+//                    val reviewInfo = request.result
+//                    val flow = manager.launchReviewFlow(context as MainActivity, reviewInfo)
+//                    flow.addOnCompleteListener {
+//                    }
+//                } else {
+//                    Log.d("Error: ", request.exception.toString())
+//                }
+//            }
+            try {
+                startActivity(Intent(Intent.ACTION_VIEW,
+                    Uri.parse("market://details?id=" + (context as MainActivity).packageName)))
+            } catch (e: ActivityNotFoundException) {
+                startActivity(Intent(Intent.ACTION_VIEW,
+                    Uri.parse("https://play.google.com/store/apps/details?id=" + (context as MainActivity).packageName)))
+            }
+        }
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestEmail()
             .build()

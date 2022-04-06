@@ -51,8 +51,6 @@ class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel
                     viewState?.copy( page = 1),
                     viewModel?.FilterFileds!!,
                     viewState?.country_id
-
-
                 )
             )
 
@@ -70,6 +68,7 @@ class SubCategoryAdapter(var context: Context?, var viewModel: ProductsViewModel
                 ContextCompat
                     .getDrawable(context!!, R.drawable.coupon_bg))
         }
+
     }
 
 }

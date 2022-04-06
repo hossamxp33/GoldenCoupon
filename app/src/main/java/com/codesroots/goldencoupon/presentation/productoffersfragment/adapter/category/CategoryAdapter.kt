@@ -41,10 +41,13 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?,v
         holder.bind(context, currentList[position])
 
         holder.binding.Mview.setOnClickListener {
+            viewModel?.FilterFileds?.put("Filter[subcat_id]","0")
+            fragment.subcategoryAdapter.row_index  = null
+
+            if (row_index != position){
             viewModel!!.filteredData.clear()
             fragment.progress.isVisible = true
             if (!currentList.isNullOrEmpty()) {
-
                 row_index = position
                 val viewState = viewModel?.state?.value
                 viewModel?.FilterFileds?.put("Filter[cat_id]", currentList[position].id.toString())
@@ -57,8 +60,11 @@ class CategoryAdapter(var context: Context?, var viewModel: ProductsViewModel?,v
                 )
                 notifyDataSetChanged()
                 notifyItemChanged(position)
-            } else
+            }
+            else{
                 WARN_MotionToast("", context as MainActivity)
+            }
+            }
         }
 /// Text  underLine  when selected
         if (row_index == position) {
