@@ -102,7 +102,7 @@ open class ProductOffersFragment @Inject constructor() : Fragment() {
                     val lastVisibleItem =
                         (Objects.requireNonNull(recyclerView.layoutManager) as LinearLayoutManager).findLastCompletelyVisibleItemPosition()
                     if (filteredData!=null)
-                        if (lastVisibleItem == productsAdapter.itemCount - 1 && productsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
+                        if (viewModel.FilterFileds.count() == 0 &&   lastVisibleItem == productsAdapter.itemCount - 1 && productsAdapter.itemCount >= 19 && lastVisibleItem != filteredData.size) {
 
                             page++
 
