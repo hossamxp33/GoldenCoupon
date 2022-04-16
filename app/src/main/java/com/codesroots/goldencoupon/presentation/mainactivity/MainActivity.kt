@@ -105,10 +105,7 @@ class MainActivity : AppCompatActivity(), HasAndroidInjector {
         }
         mAuth = FirebaseAuth.getInstance()
         FirebaseApp.initializeApp(this)
-        FirebaseMessaging.getInstance()
-
-            .subscribeToTopic("1")
-        FirebaseMessaging.getInstance().subscribeToTopic("100")
+        FirebaseMessaging.getInstance().subscribeToTopic("test")
 
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()

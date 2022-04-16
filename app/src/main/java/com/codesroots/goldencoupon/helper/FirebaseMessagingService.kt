@@ -21,6 +21,9 @@ import java.lang.Exception
 import java.lang.NullPointerException
 
 
+
+
+
 class FirebaseMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         try {
@@ -65,7 +68,7 @@ class FirebaseMessagingService : FirebaseMessagingService() {
                 this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT
             )
-            val bitmap1 = BitmapFactory.decodeResource(resources, R.drawable.logo)
+            val bitmap1 = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher)
             val channelId = getString(R.string.default_notification_channel_id)
             val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
             val notificationBuilder = NotificationCompat.Builder(this, channelId)
@@ -79,12 +82,9 @@ class FirebaseMessagingService : FirebaseMessagingService() {
                 .setSound(defaultSoundUri)
                 .setContentIntent(pendingIntent)
                 .setPriority(Notification.PRIORITY_HIGH)
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                notificationBuilder.setSmallIcon(R.drawable.logo)
-                notificationBuilder.setLargeIcon(bitmap1)
-            } else {
-                notificationBuilder.setSmallIcon(R.drawable.logo)
-            }
+
+
+
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
 
             // Since android Oreo notification channel is needed.
