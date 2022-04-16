@@ -106,14 +106,17 @@ class Permissions {
 
          if (size != null) {
              NUM_PAGES = size
-         } else {             NUM_PAGES = 0
+
+
+         } else {    NUM_PAGES = 0
          }
         val handler = Handler()
         val Update:Runnable =Runnable {
             if (currentPage == NUM_PAGES) {
                 currentPage = 0
+            }else{
+                (view).pager?.setCurrentItem(currentPage++, true)
             }
-        (view).pager?.setCurrentItem(currentPage++, true)
         }
 
         val swipeTimer = Timer()
@@ -121,16 +124,23 @@ class Permissions {
             override fun run() {
                 handler.post(Update)
             }
-        }, 4000, 10000)
+        }, 1000, 10000)
+
          view. indicator.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {
              override fun onPageSelected(position: Int) {
-                 currentPage = position
 
 
              }
 
-             override fun onPageScrolled(pos: Int, arg1: Float, arg2: Int) {}
-             override fun onPageScrollStateChanged(pos: Int) {}
+             override fun onPageScrolled(pos: Int, arg1: Float, arg2: Int) {
+                 currentPage = pos
+
+
+             }
+             override fun onPageScrollStateChanged(pos: Int) {
+
+
+             }
          })
 
     }
