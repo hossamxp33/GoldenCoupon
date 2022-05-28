@@ -34,10 +34,10 @@ class WhatsAppAdapter(
 
     override fun onBindViewHolder(holder: NotificationViewHolder, position: Int) {
         holder.bind(context, currentList[position])
-        val phone = "2"+ currentList[position].phone
+        val phone =  currentList[position].phone
         holder.binding.Mview.setOnClickListener {
             ResourceUtil().openWhatsApp(context as MainActivity,
-                phone,  (context as MainActivity).getString(R.string.createAcc)
+                phone,  ""
                 )
         }
     }

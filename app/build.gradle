@@ -14,8 +14,8 @@ android {
         applicationId "com.codesroots.goldencoupon"
         minSdk 24
         targetSdk 31
-        versionCode 7
-        versionName "1.5.1"
+        versionCode 9
+        versionName "1.5.3"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
